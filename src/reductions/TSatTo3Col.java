@@ -46,9 +46,9 @@ public class TSatTo3Col {
 	}
 	
 	public static void connectLitteralsEachOthers(ArrayList<String> vars, ArrayList<Edge> edges) {
-		for (int i = 3 ; i < vars.size() ; i+=1) {
+		for (int i = 3 ; i < vars.size() ; i += 2) {
 			String litteral1 = vars.get(i);
-			String litteral2 = vars.get(i);
+			String litteral2 = vars.get(i+1);
 			edges.add(new Edge(getId(vars, litteral1), getId(vars, litteral2)));
 		}
 	}
@@ -62,8 +62,11 @@ public class TSatTo3Col {
 		
 		connectBase(vars, edges);
 		connectLitteralsToBase(vars, edges);
+		connectLitteralsEachOthers(vars, edges);
 		
-		
+		for (Edge e : edges) {
+			System.out.println(e.getVertex1() + " => " + e.getVertex2());
+		}
 		
 		return null;
 	}
