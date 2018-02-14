@@ -53,6 +53,34 @@ public class TSatTo3Col {
 		}
 	}
 	
+	public static void addOrGadget(String clause, ArrayList<String> vars, ArrayList<Edge> edges, int nbGadgets) {
+		int x = vars.size();
+		String [] splittedClause = clause.split(" ");
+		
+		//create vertexs
+		for (int i = 1 ; i <= 6 ; i++) {
+			vars.add(new String("G" + nbGadgets + "_" + i));
+		}
+		
+		//connect litterals to gadget's inputs
+		edges.add(new Edge(getId(vars, splittedClause[0]), getId(vars, "G" + nbGadgets + "_" + 1)));
+		edges.add(new Edge(getId(vars, splittedClause[1]), getId(vars, "G" + nbGadgets + "_" + 2)));
+		edges.add(new Edge(getId(vars, splittedClause[2]), getId(vars, "G" + nbGadgets + "_" + 5)));
+		
+		//connect gadget's vertexs each others
+		edges.add(new Edge(getId(vars, "G" + nbGadgets + "_" + 1), getId(vars, "G" + nbGadgets + "_" + 2)));
+		edges.add(new Edge(getId(vars, "G" + nbGadgets + "_" + 1), getId(vars, "G" + nbGadgets + "_" + 3)));
+		edges.add(new Edge(getId(vars, "G" + nbGadgets + "_" + 2), getId(vars, "G" + nbGadgets + "_" + 3)));
+		edges.add(new Edge(getId(vars, "G" + nbGadgets + "_" + 3), getId(vars, "G" + nbGadgets + "_" + 4)));
+		edges.add(new Edge(getId(vars, "G" + nbGadgets + "_" + 4), getId(vars, "G" + nbGadgets + "_" + 5)));
+		edges.add(new Edge(getId(vars, "G" + nbGadgets + "_" + 4), getId(vars, "G" + nbGadgets + "_" + 6)));
+		edges.add(new Edge(getId(vars, "G" + nbGadgets + "_" + 5), getId(vars, "G" + nbGadgets + "_" + 6)));
+		
+		//connect gadget's output to base
+		edges.add(new Edge(getId(vars, "G" + nbGadgets + "_" + 6), getId(vars, "B")));
+		edges.add(new Edge(getId(vars, "G" + nbGadgets + "_" + 6), getId(vars, "F")));
+	}
+	
 	public static Graph convert (SatFNC sat) {
 		ArrayList<String>  vars    = new ArrayList<String>();
 		loadBase(vars);
@@ -64,11 +92,14 @@ public class TSatTo3Col {
 		connectLitteralsToBase(vars, edges);
 		connectLitteralsEachOthers(vars, edges);
 		
-		for (Edge e : edges) {
-			System.out.println(e.getVertex1() + " => " + e.getVertex2());
+		int nbGadgets = 1;
+		
+		for (String clause : sat.getClauses()) {
+			addOrGadget(clause, vars, edges, nbGadgets);
+			nbGadgets += 1;
 		}
 		
-		return null;
+		return new Graph(vars.size(), edges.size(), edges);
 	}
 	
 	public static void main(String [] args) {
@@ -78,6 +109,7 @@ public class TSatTo3Col {
 		SatFNC Tsat = SatTo3Sat.convert(sat);
 		System.out.print(Tsat.toString());
 		Tsat.exportToDimacs(new File("export.fnc"));
-		convert(Tsat);
+		Graph g = convert(Tsat);
+		System.out.println(g.toString());
 	}
 }

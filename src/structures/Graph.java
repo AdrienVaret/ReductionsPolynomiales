@@ -66,7 +66,7 @@ public class Graph {
 	public String toString() {
 		String str = "p edges " + nbVertex + " " + nbEdges + "\n";
 		for (Edge edge : edges) {
-			str += "e" + edge.getVertex1() + " " + edge.getVertex2() + "\n";
+			str += "e " + edge.getVertex1() + " " + edge.getVertex2() + "\n";
 		}
 		return str;
 	}
