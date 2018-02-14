@@ -45,6 +45,14 @@ public class TSatTo3Col {
 		}
 	}
 	
+	public static void connectLitteralsEachOthers(ArrayList<String> vars, ArrayList<Edge> edges) {
+		for (int i = 3 ; i < vars.size() ; i+=1) {
+			String litteral1 = vars.get(i);
+			String litteral2 = vars.get(i);
+			edges.add(new Edge(getId(vars, litteral1), getId(vars, litteral2)));
+		}
+	}
+	
 	public static Graph convert (SatFNC sat) {
 		ArrayList<String>  vars    = new ArrayList<String>();
 		loadBase(vars);
@@ -53,8 +61,9 @@ public class TSatTo3Col {
 		ArrayList<Edge> edges = new ArrayList<Edge>();
 		
 		connectBase(vars, edges);
-		
 		connectLitteralsToBase(vars, edges);
+		
+		
 		
 		return null;
 	}
