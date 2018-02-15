@@ -111,5 +111,6 @@ public class TSatTo3Col {
 		Tsat.exportToDimacs(new File("export.fnc"));
 		Graph g = convert(Tsat);
 		System.out.println(g.toString());
+		g.exportToDimacs(new File("export.3col"));
 	}
 }

@@ -62,8 +62,7 @@ public class SatTo3Sat {
 						newClause += newLitteral + " 0";
 						clauses.add(newClause);
 						nbLitterals += 1;
-						i += 1;
-						
+						i += 1;			
 					}
 				}
 			}

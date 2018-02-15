@@ -13,13 +13,42 @@ public class Graph {
 	private int nbVertex;
 	private int nbEdges;
 	private ArrayList<Edge> edges;
+	private ArrayList<Integer> edgesList;
 	
 	public Graph(int nbVertex, int nbEdges, ArrayList<Edge> edges) {
 		this.nbEdges = nbEdges;
 		this.nbVertex = nbVertex;
 		this.edges = edges;
+		edgesList = edgesToList();
 	}
 	
+	public int getNbVertex() {
+		return nbVertex;
+	}
+
+
+
+	public int getNbEdges() {
+		return nbEdges;
+	}
+
+	
+	public ArrayList<Integer> edgesToList() {
+		ArrayList <Integer> list = new ArrayList<Integer>();
+		for (Edge edge : edges) {
+			list.add(edge.getVertex1());
+			list.add(edge.getVertex2());
+		}
+		return list;
+	}
+
+
+	public ArrayList<Edge> getEdges() {
+		return edges;
+	}
+
+
+
 	public static Graph importFromDimacs(File file) {
 		int nbEdges = 0, nbVertex = 0;
 		ArrayList<Edge> edges = new ArrayList<Edge>();
