@@ -13,13 +13,13 @@ public class Graph {
 	private int nbVertex;
 	private int nbEdges;
 	private ArrayList<Edge> edges;
-	private ArrayList<Integer> edgesList;
+	//private ArrayList<Integer> edgesList;
 	
 	public Graph(int nbVertex, int nbEdges, ArrayList<Edge> edges) {
 		this.nbEdges = nbEdges;
 		this.nbVertex = nbVertex;
 		this.edges = edges;
-		edgesList = edgesToList();
+		//edgesList = edgesToList();
 	}
 	
 	public int getNbVertex() {
@@ -46,8 +46,6 @@ public class Graph {
 	public ArrayList<Edge> getEdges() {
 		return edges;
 	}
-
-
 
 	public static Graph importFromDimacs(File file) {
 		int nbEdges = 0, nbVertex = 0;

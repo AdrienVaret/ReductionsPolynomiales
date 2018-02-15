@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import reductions.SatTo3Sat;
-
 public class SatFNC {
 
 	private ArrayList<Integer> litterals;
@@ -54,7 +52,7 @@ public class SatFNC {
 		clauses.add(clause);
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
+	
 	public static ArrayList<Integer> litteralsList(ArrayList<String> clauses) {
 		ArrayList<Integer> litterals = new ArrayList<Integer>();
 		for (String clause : clauses) {
@@ -136,12 +134,4 @@ public class SatFNC {
 		return sat;
 	}
 
-	public static void main(String[] args) {
-		SatFNC sat = importFromDimacs(new File("formule.fnc"));
-		// System.out.println(sat.toString());
-		// sat.exportDimacs(new File("export.fnc"));
-		SatFNC Tsat = SatTo3Sat.convert(sat);
-		System.out.print(Tsat.toString());
-		Tsat.exportToDimacs(new File("export.fnc"));
-	}
 }

@@ -54,7 +54,6 @@ public class TSatTo3Col {
 	}
 	
 	public static void addOrGadget(String clause, ArrayList<String> vars, ArrayList<Edge> edges, int nbGadgets) {
-		int x = vars.size();
 		String [] splittedClause = clause.split(" ");
 		
 		//create vertexs
