@@ -23,8 +23,7 @@ public class Main {
 		System.out.println("# @authors : VARET Adrien\n"
 				         + "#            ENTAKLI Romain\n"
 				         + "#            D'ARRIGO Vincent");
-		System.out.println("###");
-		
+		System.out.println("###");	
 	}
 	
 	public static void main (String [] args) {
