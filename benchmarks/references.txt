@@ -1,0 +1,2 @@
+Beijing (Pékin) : SAT competition 1996
+http://www.cs.ubc.ca/~hoos/SATLIB/Benchmarks/SAT/Bejing/Bejing.tar.gz

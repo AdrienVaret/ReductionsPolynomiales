@@ -16,7 +16,7 @@ public class SatTo3Sat {
 			int nbLitteralsClause = splittedClause.length - 1; //THE END 0
 			// a b c => a b c
 			if (nbLitteralsClause == 3) {
-				clauses.add(clause);
+				clauses.add(clause + " 0");
 			}
 			// a b => a b a
 			else if (nbLitteralsClause < 3 && nbLitteralsClause > 0) {
@@ -28,7 +28,7 @@ public class SatTo3Sat {
 						newClause += splittedClause[0] + " ";
 					}
 				}
-				newClause += " 0";
+				newClause += /*" 0"*/"0";
 				clauses.add(newClause);
 			}
 			/*
@@ -39,12 +39,13 @@ public class SatTo3Sat {
 			 */
 			else {	
 				int i = 0;
-				int newLitteral = sat.getNbLitterals() + 1;
+				//int newLitteral = sat.getNbLitterals() + 1;
+				int newLitteral = nbLitterals+1;
 				while (i < nbLitteralsClause) {
 					//generate first clause
 					if (i == 0) {
-						String newClause = new String(splittedClause[0] + " " + splittedClause[1] + " ");
-						newClause += newLitteral + " 0";
+						String newClause = new String(splittedClause[0] + " " + splittedClause[1] + " " + newLitteral + " 0");
+						//newClause += newLitteral + " 0";
 						clauses.add(newClause);
 						nbLitterals += 1;
 						i += 2;
@@ -57,9 +58,9 @@ public class SatTo3Sat {
 					}
 					//general case
 					else {
-						String newClause = "-" + newLitteral + " " + splittedClause[i] + " ";
+						String newClause = "-" + newLitteral + " " + splittedClause[i] /*+ " "*/;
 						newLitteral += 1;
-						newClause += newLitteral + " 0";
+						newClause += " " + newLitteral + " 0";
 						clauses.add(newClause);
 						nbLitterals += 1;
 						i += 1;			

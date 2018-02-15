@@ -112,6 +112,7 @@ public class SatFNC {
 		} catch (IOException e) {
 			System.out.println("Error while load file");
 		}
+		
 		return new SatFNC(nbLitterals, nbClauses, clauses, litteralsList(clauses));
 	}
 
