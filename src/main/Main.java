@@ -2,6 +2,12 @@ package main;
 
 import java.io.File;
 
+import reductions.SatTo3Sat;
+import reductions.TColToSat;
+import reductions.TSatTo3Col;
+import structures.Graph;
+import structures.SatFNC;
+
 public class Main {
 
 	public static void displayUsage() {
@@ -18,11 +24,20 @@ public class Main {
 			File outputFile = new File (args[3]);
 			
 			if (inputFormat.equals("SAT") && outputFormat.equals("3SAT")) {
-				
+				SatFNC sat = SatFNC.importFromDimacs(inputFile);
+				SatFNC Tsat = SatTo3Sat.convert(sat);
+				Tsat.exportToDimacs(outputFile);
+				System.out.println("polynomial reduction written at " + outputFile.getAbsolutePath());
 			} else if (inputFormat.equals("3COL") && outputFormat.equals("SAT")) {
-				
+				Graph graph = Graph.importFromDimacs(inputFile);
+				SatFNC sat  = TColToSat.convert(graph);
+				sat.exportToDimacs(outputFile);
+				System.out.println("polynomial reduction written at " + outputFile.getAbsolutePath());
 			} else if (inputFormat.equals("3SAT") && outputFormat.equals("3COL")) {
-				
+				SatFNC Tsat = SatFNC.importFromDimacs(inputFile);
+				Graph graph = TSatTo3Col.convert(Tsat);
+				graph.exportToDimacs(outputFile);
+				System.out.println("polynomial reduction written at " + outputFile.getAbsolutePath());
 			} else {
 				displayUsage();
 			}
