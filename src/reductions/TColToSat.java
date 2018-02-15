@@ -2,7 +2,6 @@ package reductions;
 
 import java.io.File;
 import java.util.ArrayList;
-
 import structures.Edge;
 import structures.Graph;
 import structures.SatFNC;
@@ -10,7 +9,6 @@ import structures.VertexLitterals;
 
 public class TColToSat {
 
-	
 	public static int getNbVariables(Graph graph){
 		return 3 * graph.getNbVertex();
 	}
@@ -19,7 +17,7 @@ public class TColToSat {
 		return (4 * graph.getNbVertex()) + (3 * graph.getNbEdges()); 
 	}
 	
-	public static void clausesPlacement(Graph graph, SatFNC sat){ /* CREE 4 * nbSommets clauses */
+	public static void clausesPlace(Graph graph, SatFNC sat){ /* CREE 4 * nbSommets clauses */
 		for(int i = 0 ; i < getNbVariables(graph) ; i += 3){
 			
 			int var1 = (i)+1;
@@ -44,11 +42,10 @@ public class TColToSat {
 		return sommetsVariables;
 	}
 	
-	public static void clausesAretes(Graph graph, SatFNC sat){/* CREE 3 * nbAretes clauses */
-		//ArrayList<Integer> graphArray = graphe.getDimacs();
+	@SuppressWarnings("unused")
+	public static void clausesEdges(Graph graph, SatFNC sat){
 		VertexLitterals[] sommetsVariables = remplirVariableSommets(graph);
 		
-		@SuppressWarnings("unused")
 		int i = 0;
 		for (Edge edge : graph.getEdges()) {
 			int a = edge.getVertex1();
@@ -66,8 +63,8 @@ public class TColToSat {
 	
 	public static SatFNC convert(Graph graph) {
 		SatFNC sat = new SatFNC(getNbVariables(graph), getNbClauses(graph), new ArrayList<String>());
-		clausesPlacement(graph, sat);
-		clausesAretes(graph, sat);
+		clausesPlace(graph, sat);
+		clausesEdges(graph, sat);
 		return sat;
 	}
 	
