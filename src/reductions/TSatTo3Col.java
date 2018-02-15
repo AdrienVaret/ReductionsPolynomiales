@@ -102,14 +102,13 @@ public class TSatTo3Col {
 	}
 	
 	public static void main(String [] args) {
-		SatFNC sat = SatFNC.importFromDimacs(new File("formule.fnc"));
-		System.out.println(sat.toString());
-		sat.exportToDimacs(new File("export.fnc"));
-		SatFNC Tsat = SatTo3Sat.convert(sat);
-		System.out.print(Tsat.toString());
-		Tsat.exportToDimacs(new File("export.fnc"));
-		Graph g = convert(Tsat);
-		System.out.println(g.toString());
-		g.exportToDimacs(new File("export.3col"));
-	}
+	    SatFNC sat = SatFNC.importFromDimacs(new File("formule.fnc"));
+	    System.out.println(sat.toString());
+	    sat.exportToDimacs(new File("export.fnc"));
+	    SatFNC Tsat = SatTo3Sat.convert(sat);
+	    System.out.print(Tsat.toString());
+	    Tsat.exportToDimacs(new File("export.fnc"));
+	    Graph g = convert(Tsat);
+	    System.out.println(g.toString());
+	  }
 }

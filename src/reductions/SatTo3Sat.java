@@ -71,7 +71,4 @@ public class SatTo3Sat {
 		return new SatFNC(nbLitterals, clauses.size(), clauses);
 	}
 	
-	public static void main(String [] args) {
-		
-	}
 }

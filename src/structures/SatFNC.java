@@ -23,6 +23,7 @@ public class SatFNC {
 		this.nbLitterals = nbLitterals;
 		this.nbClauses = nbClauses;
 		this.clauses = clauses;
+		litterals = litteralsList(clauses);
 	}
 
 	public SatFNC(int nbLitterals, int nbClauses, ArrayList<String> clauses, ArrayList<Integer> litterals) {
@@ -127,7 +128,7 @@ public class SatFNC {
 
 	public String toString() {
 		String sat = new String();
-		sat += "p fnc " + nbLitterals + " " + nbClauses + "\n";
+		sat += "p cnf " + nbLitterals + " " + nbClauses + "\n";
 		for (String clause : clauses) {
 			sat += clause + "\n";
 		}
