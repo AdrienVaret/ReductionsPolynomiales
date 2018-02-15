@@ -25,7 +25,6 @@ public class SatFNC {
 		this.nbLitterals = nbLitterals;
 		this.nbClauses = nbClauses;
 		this.clauses = clauses;
-		this.litterals = litteralsList(clauses);
 	}
 
 	public SatFNC(int nbLitterals, int nbClauses, ArrayList<String> clauses, ArrayList<Integer> litterals) {

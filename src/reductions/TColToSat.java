@@ -1,5 +1,6 @@
 package reductions;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import structures.Edge;
@@ -50,8 +51,10 @@ public class TColToSat {
 		@SuppressWarnings("unused")
 		int i = 0;
 		for (Edge edge : graph.getEdges()) {
+			int a = edge.getVertex1();
+			int b = edge.getVertex2();
 			VertexLitterals src  = sommetsVariables[edge.getVertex1()-1];
-			VertexLitterals dest = sommetsVariables[edge.getVertex2()-2] ;
+			VertexLitterals dest = sommetsVariables[edge.getVertex2()-1] ;
 			
 			sat.addClause(-src.var1() + " " + -dest.var1() + " 0");
 			sat.addClause(-src.var2() + " " + -dest.var2() + " 0");
@@ -60,21 +63,17 @@ public class TColToSat {
 			i += 2;
 		}
 	}
-	/*
-		for(int i = 0 ; i < (2*graphe.getNbAretes()) ; i += 2){
-			SommetVariable origine = sommetsVariables[graphArray.get(i)-1];
-			SommetVariable destination = sommetsVariables[graphArray.get(i+1)-1];
-			
-			sat.ajouterClause(new String(-origine.var1() + " " + -destination.var1()));
-			sat.ajouterClause(new String(-origine.var2() + " " + -destination.var2()));
-			sat.ajouterClause(new String(-origine.var3() + " " + -destination.var3()));
-		}
-	*/
 	
 	public static SatFNC convert(Graph graph) {
 		SatFNC sat = new SatFNC(getNbVariables(graph), getNbClauses(graph), new ArrayList<String>());
 		clausesPlacement(graph, sat);
 		clausesAretes(graph, sat);
-		return null;
+		return sat;
+	}
+	
+	public static void main(String [] args) {
+		Graph graph = Graph.importFromDimacs(new File("graphe.3col"));
+		SatFNC sat = convert(graph);
+		System.out.println(sat.toString());
 	}
 }
