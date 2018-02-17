@@ -1,0 +1,18 @@
+# Beijing (SAT Competition 1996)
+
+	# SAT => 3-SAT
+	
+		#2bitadd_10.cnf
+		- 590 littéraux
+		- 1422 clauses
+		- UNSAT
+		- petites clauses (taille maximale d'une clause = 5)
+		- |C| / |x| = 2.410169492
+		
+		- Temps d'executions calculé en faisant la moyenne sur 10 executions
+		
+		SOLVEUR     	temps SAT  		temps 3-SAT  		Conclusion
+		glucose        	   8.54s     		7.9s      		+ (*1.08)
+		lingeling          INF               INF               
+		minisat            22.08s           48.52s         - (*0.45507)
+		picosat          7.7005s            1.770s         + (*4.35)

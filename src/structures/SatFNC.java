@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SatFNC {
 
@@ -56,24 +58,31 @@ public class SatFNC {
 	
 	public static ArrayList<Integer> litteralsList(ArrayList<String> clauses) {
 		ArrayList<Integer> litterals = new ArrayList<Integer>();
+		
 		for (String clause : clauses) {
-			String [] splittedLine = clause.split(" ");
-			for (int i = 0 ; i < splittedLine.length - 1 ; i++) {
-				String litteral = splittedLine[i];
-				if (!litterals.contains(Integer.parseInt(litteral)) && !litterals.contains(-Integer.parseInt(litteral))) {
-					if (Integer.parseInt(litteral) < 0)
-						litterals.add(-Integer.parseInt(litteral));
-					else 
-						litterals.add(Integer.parseInt(litteral));
-				}
+			String [] splittedClause = clause.split(" ");
+			for (int i = 0 ; i < splittedClause.length-1 ; i++) {
+				int litteral = Integer.parseInt(splittedClause[i]);
+				
+				if (litteral > 0)
+					litterals.add(Integer.parseInt(splittedClause[i]));
+				else 
+					litterals.add(-Integer.parseInt(splittedClause[i]));
 			}
 		}
+		
+		Set<Integer> hs = new HashSet<Integer>();
+		hs.addAll(litterals);
+		litterals.clear();
+		litterals.addAll(hs);
+		
 		Collections.sort(litterals, new Comparator<Integer>() {
 	        public int compare(Integer a, Integer b)
 	        {
 	            return  a.compareTo(b);
 	        }
 	    });
+		
 		return litterals;
 	}
 
@@ -81,6 +90,7 @@ public class SatFNC {
 		int nbLitterals = 0;
 		int nbClauses = 0;
 		ArrayList<String> clauses = new ArrayList<String>();
+		ArrayList<Integer> litterals = new ArrayList<Integer>();
 		try {
 			@SuppressWarnings("resource")
 			BufferedReader reader = new BufferedReader(new FileReader(f));
@@ -104,6 +114,9 @@ public class SatFNC {
 						}
 					} else if (inClauses) {
 						clauses.add(currentLine);
+						for (int i = 0 ; i < splittedLine.length-1 ; i++) {
+							litterals.add(Integer.parseInt(splittedLine[i]));
+						}
 					}
 				}
 			}
@@ -113,7 +126,19 @@ public class SatFNC {
 			System.out.println("Error while load file");
 		}
 		
-		return new SatFNC(nbLitterals, nbClauses, clauses, litteralsList(clauses));
+		Set<Integer> hs = new HashSet<Integer>();
+		hs.addAll(litterals);
+		litterals.clear();
+		litterals.addAll(hs);
+		
+		Collections.sort(litterals, new Comparator<Integer>() {
+	        public int compare(Integer a, Integer b)
+	        {
+	            return  a.compareTo(b);
+	        }
+	    });
+		
+		return new SatFNC(nbLitterals, nbClauses, clauses, /*litteralsList(clauses)*/ litterals);
 	}
 
 	public void exportToDimacs(File f) {
