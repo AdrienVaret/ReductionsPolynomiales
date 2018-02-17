@@ -1,6 +1,7 @@
 package structures;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -142,13 +143,40 @@ public class SatFNC {
 	}
 
 	public void exportToDimacs(File f) {
+		
+		BufferedWriter writer = null;
+		
 		try {
+			/*
 			FileWriter writer = new FileWriter(f);
 			writer.write(toString());
 			writer.flush();
 			writer.close();
+			*/
+			writer = new BufferedWriter(new FileWriter(f));
+			//writer.write(toString());
+			
+			writer.write("p cnf " + nbLitterals + " " + nbClauses + "\n");
+			
+			for (String clause : clauses) {
+				writer.write(clause + "\n");
+			}
+			
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+
+			try {
+
+				if (writer != null)
+					writer.close();
+
+				if (writer != null)
+					writer.close();
+				
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 		}
 	}
 
