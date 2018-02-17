@@ -16,7 +16,7 @@ public class SatTo3Sat {
 			int nbLitteralsClause = splittedClause.length - 1; //THE END 0
 			// a b c => a b c
 			if (nbLitteralsClause == 3) {
-				clauses.add(clause + " 0");
+				clauses.add(clause);
 			}
 			// a b => a b a
 			else if (nbLitteralsClause < 3 && nbLitteralsClause > 0) {
