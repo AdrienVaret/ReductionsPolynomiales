@@ -1,12 +1,14 @@
 package main;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import reductions.SatTo3Sat;
 import reductions.TColToSat;
 import reductions.TSatTo3Col;
 import structures.Graph;
 import structures.SatFNC;
+import structures.Edge;
 
 public class Main {
 
@@ -24,6 +26,19 @@ public class Main {
 				         + "#            ENTAKLI Romain\n"
 				         + "#            D'ARRIGO Vincent");
 		System.out.println("###");	
+	}
+	
+	public static void test3ColToXCSP3(){
+		
+		ArrayList<Edge> edges = new ArrayList<Edge>();
+		edges.add(new Edge(0, 1)); edges.add(new Edge(0, 4)); edges.add(new Edge(1, 2));
+		edges.add(new Edge(2, 3)); edges.add(new Edge(3, 4)); edges.add(new Edge(0, 5));
+		edges.add(new Edge(1, 6)); edges.add(new Edge(2, 7)); edges.add(new Edge(3, 8));
+		edges.add(new Edge(4, 9)); edges.add(new Edge(5, 7)); edges.add(new Edge(7, 9));
+		edges.add(new Edge(9, 6)); edges.add(new Edge(6, 8)); edges.add(new Edge(8, 5));
+		
+		Graph g = new Graph(10, edges.size(), edges);
+		System.out.println(g.TreeColToXCSP3());
 	}
 	
 	public static void main (String [] args) {
