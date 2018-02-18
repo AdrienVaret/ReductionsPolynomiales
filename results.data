@@ -1,0 +1,11 @@
+#YEAR SAT COMPETITION 2009
+	#BENCHMARK bioinfo
+		#REDUCTION SAT TO 3SAT
+			#FILE q_query_2_L324_coli.cnf q_query_2_L324_coli_3sat.cnf UNSAT
+				#INITIAL nbVariables nbClauses nbClausesUnitaires nbClausesBinaires nbClausesTernaires nbClausesSup4 ratio 
+				#FINAL nbVariables nbClauses nbClausesUnitaires nbClausesBinaires nbClausesTernaires nbClausesSup4 ratio
+					#RESULT glucose 16.332 28.632 0.57
+					#RESULT ling 11.226 11.557 0.97
+					#RESULT minisat 18.456 32.67 0.56
+					#RESULT picosat 3.493 5.718 0.6 
+				
