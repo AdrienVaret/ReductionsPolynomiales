@@ -9,139 +9,138 @@ import java.util.ArrayList;
 
 public class Reader {
 
-	public static String getRef(String [] strings) {
-		return strings[0];
-	}
-	
-	public static ArrayList<String> read(File f){
+	public static ArrayList<String> read (File f){
 		ArrayList<String> lines = new ArrayList<String>();
-		
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(f));
-			String currentLine = null;
-			while ((currentLine = reader.readLine()) != null) {
-				lines.add(currentLine);
+			String line;
+			while ((line = reader.readLine()) != null) {
+				lines.add(line);
 			}
+			reader.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return lines;
 	}
 	
-	public static String getName(String [] strings) {
-		String name = new String();
-		
-		for (int i = 1 ; i < strings.length ; i++)
-			name += strings[i] + " ";
-		
-		return name;
+	public static boolean isComment(String [] splittedLine) {
+		return (splittedLine[0].equals("c"));
 	}
 	
-	public static FileInstance.State getState(String satisfiability){
-		if (satisfiability.equals("SAT")) return FileInstance.State.SAT;
-		else if (satisfiability.equals("UNSAT")) return FileInstance.State.UNSAT;
-		return FileInstance.State.UNSAT;
+	public static boolean isData(String [] splittedLine) {
+		return (splittedLine[0].equals("d"));
 	}
 	
-	public static ArrayList<Year> getData (File f){
+	public static boolean isInfo(String [] splittedLine) {
+		return (splittedLine[0].equals("i"));
+	}
+	
+	public static boolean isResult(String [] splittedLine) {
+		return (splittedLine[0].equals("r"));
+	}
+	
+	public static boolean isIntro(String [] splittedLine) {
+		return (splittedLine[0].equals("b"));
+	}
+	
+	@SuppressWarnings("unused")
+	public static ArrayList<Data> getData(File f){
+		
 		ArrayList<String> lines = read(f);
-		ArrayList<Year> data = new ArrayList<Year>();
+		String filename;
+
+		int nbSatSolvers, nb3ColSolvers, nbCSPSolvers;
+		ArrayList<Data> datas = new ArrayList<Data>();
 		
 		int i = 0;
-		String [] splittedLine;
 		
 		while (i < lines.size()) {
-			Year year = null;
-			splittedLine = lines.get(i).split(" ");
+			String [] splittedLine = lines.get(i).split(" ");
 			
-			if (getRef(splittedLine).equals("#YEAR")) {
-				year = new Year(getName(splittedLine));
+			String competitionName = null, benchmarkName = null, reductionName = null, satisfiability = null, initialFile = null, finalFile = null;
+			
+			int nbInitialVar = 0, nbInitialClauses = 0, nbInitialUnitaryClauses = 0, nbInitialBinaryClauses = 0, 
+			    nbInitialTernaryClauses = 0, nbInitialLongClauses = 0;
+			
+			int nbFinalVar = 0, nbFinalClauses = 0, nbFinalUnitaryClauses = 0, nbFinalBinaryClauses = 0, 
+		        nbFinalTernaryClauses = 0, nbFinalLongClauses = 0;
+			
+			ArrayList<ResultSolver> results = new ArrayList<ResultSolver>();
+			
+			if (isIntro(splittedLine)) {
+				filename      = splittedLine[1];
+				nbSatSolvers  = Integer.parseInt(splittedLine[2]);
+				nb3ColSolvers = Integer.parseInt(splittedLine[3]);
+				nbCSPSolvers  = Integer.parseInt(splittedLine[4]);
 				i += 1;
 				splittedLine = lines.get(i).split(" ");
-				Benchmark benchmark = null;
+			}
 				
-				if (getRef(splittedLine).equals("#BENCHMARK")) {
-					benchmark = new Benchmark(getName(splittedLine));
+			if (isData(splittedLine)) {
+				competitionName = splittedLine[1];
+				benchmarkName   = splittedLine[2];
+				reductionName   = splittedLine[3];
+				satisfiability  = splittedLine[4];
+				initialFile     = splittedLine[5];
+				finalFile       = splittedLine[6];
+				i += 1;
+				splittedLine = lines.get(i).split(" ");
+			}
+			
+			if (isInfo(splittedLine)) {
+				nbInitialVar            = Integer.parseInt(splittedLine[1]);
+				nbInitialClauses        = Integer.parseInt(splittedLine[2]);
+				nbInitialUnitaryClauses = Integer.parseInt(splittedLine[3]);
+				nbInitialBinaryClauses  = Integer.parseInt(splittedLine[4]);
+				nbInitialTernaryClauses = Integer.parseInt(splittedLine[5]);
+				nbInitialLongClauses    = Integer.parseInt(splittedLine[6]);
+				
+				i += 1;
+				splittedLine = lines.get(i).split(" ");
+						
+				if (isInfo(splittedLine)) {
+					nbFinalVar            = Integer.parseInt(splittedLine[1]);
+					nbFinalClauses        = Integer.parseInt(splittedLine[2]);
+					nbFinalUnitaryClauses = Integer.parseInt(splittedLine[3]);
+					nbFinalBinaryClauses  = Integer.parseInt(splittedLine[4]);
+					nbFinalTernaryClauses = Integer.parseInt(splittedLine[5]);
+					nbFinalLongClauses    = Integer.parseInt(splittedLine[6]);
+						
 					i += 1;
 					splittedLine = lines.get(i).split(" ");
-					Reduction reduction = null;
-					
-					if (getRef(splittedLine).equals("#REDUCTION")) {
-						String reductionName = getName(splittedLine);
-						reduction = new Reduction(reductionName);
+						
+					while (isResult(splittedLine)) {
+							
+						String solverName  = splittedLine[1];
+						double initialTime = Double.parseDouble(splittedLine[2]);
+						double finalTime   = Double.parseDouble(splittedLine[3]);
+							
+						ResultSolver result = new ResultSolver(solverName, initialTime, finalTime);
+						
+						datas.add(new Data(competitionName, reductionName, satisfiability, initialFile,
+							      finalFile, nbInitialVar, nbInitialClauses, nbInitialUnitaryClauses,
+								  nbInitialBinaryClauses, nbInitialTernaryClauses, nbInitialLongClauses,
+								  nbFinalVar, nbFinalClauses, nbFinalUnitaryClauses, nbFinalBinaryClauses,
+								  nbFinalTernaryClauses, nbFinalLongClauses, result, benchmarkName));
+						
 						i += 1;
+						if (i >= lines.size()) break;
 						splittedLine = lines.get(i).split(" ");
-						FileInstance fileInstance = null;
-						if (getRef(splittedLine).equals("#FILE")) {
-							Instance initialInstance = null;
-							Instance finalInstance = null;
-							
-							String initialName    = splittedLine[1];
-							String finalName      = splittedLine[2];
-							String satisfiability = splittedLine[3];
-							
-							i += 1;
-							splittedLine = lines.get(i).split(" ");
-							if (getRef(splittedLine).equals("#INITIAL")){
-							
-								if (reductionName.equals("SAT TO 3SAT ")) {
-									int nbVariables = Integer.parseInt(splittedLine[1]);
-									int nbClauses = Integer.parseInt(splittedLine[2]);
-									int nbUnitaryClauses = Integer.parseInt(splittedLine[3]);
-									int nbBinaryClauses = Integer.parseInt(splittedLine[4]);
-									int nbTernaryClauses = Integer.parseInt(splittedLine[5]);
-									int nbLongClauses = Integer.parseInt(splittedLine[6]);
-									initialInstance = new InstanceSAT(initialName, nbVariables, nbClauses, nbUnitaryClauses,
-											                          nbBinaryClauses, nbTernaryClauses, nbLongClauses);
-									
-									i += 1;
-									splittedLine = lines.get(i).split(" ");
-									
-									if (getRef(splittedLine).equals("#FINAL")){
-										nbVariables = Integer.parseInt(splittedLine[1]);
-										nbClauses = Integer.parseInt(splittedLine[2]);
-										nbUnitaryClauses = Integer.parseInt(splittedLine[3]);
-										nbBinaryClauses = Integer.parseInt(splittedLine[4]);
-										nbTernaryClauses = Integer.parseInt(splittedLine[5]);
-										nbLongClauses = Integer.parseInt(splittedLine[6]);
-										finalInstance = new InstanceSAT(initialName, nbVariables, nbClauses, nbUnitaryClauses,
-												                          nbBinaryClauses, nbTernaryClauses, nbLongClauses);
-										
-										i += 1;
-										splittedLine = lines.get(i).split(" ");
-									}
-								}
-								
-								ArrayList<Result> results = new ArrayList<Result>();
-								while (getRef(splittedLine).equals("#RESULT")) {
-									String solver = splittedLine[1];
-									double initialTime = Double.parseDouble(splittedLine[2]);
-									double finalTime = Double.parseDouble(splittedLine[3]);
-									results.add(new Result(solver, initialTime, finalTime));
-									i += 1;
-									if ( i < lines.size()) {
-										splittedLine = lines.get(i).split(" ");
-									} else {
-										break;
-									}
-								}
-								
-								fileInstance = new FileInstance(getState(satisfiability), initialInstance, finalInstance, results);
-							}
-							reduction.getInstances().add(fileInstance);
-						}
-						benchmark.getReductions().add(reduction);
-					}
-					
-					year.getBenchmarks().add(benchmark);
+					}	
 				}
-				data.add(year);
 			}
-		}	
-		return data;
+			
+			
+	
+		}
+		return datas;
+	}
+	
+	public static void main(String [] args) {
+		ArrayList<Data> datas = getData(new File("results.data"));
+		System.out.println("end");
 	}
 }

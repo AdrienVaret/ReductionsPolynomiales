@@ -1,11 +1,8 @@
-#YEAR SAT COMPETITION 2009
-	#BENCHMARK bioinfo
-		#REDUCTION SAT TO 3SAT
-			#FILE q_query_2_L324_coli.cnf q_query_2_L324_coli_3sat.cnf UNSAT
-				#INITIAL nbVariables nbClauses nbClausesUnitaires nbClausesBinaires nbClausesTernaires nbClausesSup4 ratio 
-				#FINAL nbVariables nbClauses nbClausesUnitaires nbClausesBinaires nbClausesTernaires nbClausesSup4 ratio
-					#RESULT glucose 16.332 28.632 0.57
-					#RESULT ling 11.226 11.557 0.97
-					#RESULT minisat 18.456 32.67 0.56
-					#RESULT picosat 3.493 5.718 0.6 
-				
+b results.data 4 1 1
+d SAT_COMPETITION_2009 bioinfo SAT_TO_3SAT UNSAT q_query_2_L324_coli.cnf q_query_2_L324_coli_3sat.cnf
+i 617854 2745225 63819 860549 1288709 1456516
+i 1260013 3387384 0 0 3387384 0
+r glucose 16.332 28.632
+r lingeling 11.226 11.557
+r minisat 18.456 32.67
+r picosat 3.493 5.718
