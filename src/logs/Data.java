@@ -46,7 +46,7 @@ public class Data {
 		this.initialNbBinaryClauses = initialNbBinaryClauses;
 		this.initialNbTernaryClauses = initialNbTernaryClauses;
 		this.initialNbLongClauses = initialNbLongClauses;
-		this.initialRatio = initialNbClauses / initialNbVariables;
+		this.initialRatio = (double)initialNbClauses / (double)initialNbVariables;
 		this.finalNbVariables = finalNbVariables;
 		this.finalNbClauses = finalNbClauses;
 		this.finalNbUnaryClauses = finalNbUnaryClauses;

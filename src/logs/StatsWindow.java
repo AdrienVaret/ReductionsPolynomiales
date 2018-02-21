@@ -1,6 +1,8 @@
 package logs;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -11,7 +13,6 @@ import javax.swing.JTable;
 public class StatsWindow {
 	
 	private JFrame frame;
-	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -43,13 +44,17 @@ public class StatsWindow {
 		frame = new JFrame();
 		frame.setTitle("Polynomials Reductions Statistics");
 		frame.setBounds(100, 100, 1000, 800);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setSize(dim);
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[grow]"));
 		
+		
 		ArrayList<Data> datas = Reader.getData(new File("results.data"));
-		//table = new JTable();
 		Table table = new Table(datas);
 		frame.getContentPane().add(table, "cell 0 0,grow");
+		
 	}
 
 }

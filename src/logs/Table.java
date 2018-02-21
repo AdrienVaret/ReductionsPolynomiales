@@ -1,6 +1,7 @@
 package logs;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -31,14 +32,15 @@ public class Table extends JPanel{
 		DefaultTableModel model = new DefaultTableModel(data,header);
 		JTable table = new JTable(model);
 		
-        table.setPreferredScrollableViewportSize(new Dimension(1000,800));
-        table.setFillsViewportHeight(true);
+        table.setPreferredScrollableViewportSize(new Dimension(1200,650));
 
-        //JScrollPane js=new JScrollPane(table);
-        JScrollPane js = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        table.setFillsViewportHeight(true);
+		
+        JScrollPane js = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-       // js.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        js.setSize(1200, 900);
+      
+        js.setSize(500, 500);
+ 
         js.setVisible(true);
         add(js);
 	}
