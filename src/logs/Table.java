@@ -32,10 +32,11 @@ public class Table extends JPanel{
 		DefaultTableModel model = new DefaultTableModel(data,header);
 		JTable table = new JTable(model);
 		
-        table.setPreferredScrollableViewportSize(new Dimension(1200,650));
-
+        table.setPreferredScrollableViewportSize(new Dimension(1200,600));
         table.setFillsViewportHeight(true);
-		
+        
+        setColumnsWidth(table);
+        
         JScrollPane js = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
       
@@ -43,6 +44,19 @@ public class Table extends JPanel{
  
         js.setVisible(true);
         add(js);
+	}
+	
+	public void setColumnsWidth(JTable table) {
+		table.getColumnModel().getColumn(0).setPreferredWidth(170);
+		table.getColumnModel().getColumn(1).setPreferredWidth(80);
+		table.getColumnModel().getColumn(2).setPreferredWidth(80);
+		table.getColumnModel().getColumn(3).setPreferredWidth(100);
+		table.getColumnModel().getColumn(4).setPreferredWidth(200);
+		//5, 6, 7, 8, 9, 10 OK
+		table.getColumnModel().getColumn(11).setPreferredWidth(150);
+		table.getColumnModel().getColumn(12).setPreferredWidth(200);
+		//13 .. 22 OK
+		table.getColumnModel().getColumn(23).setPreferredWidth(150);
 	}
 	
 	public void setData() {

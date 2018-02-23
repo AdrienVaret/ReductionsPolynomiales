@@ -53,7 +53,7 @@ public class Data {
 		this.finalNbBinaryClauses = finalNbBinaryClauses;
 		this.finalNbTernaryClauses = finalNbTernaryClauses;
 		this.finalNbLongClauses = finalNbLongClauses;
-		this.finalRatio = finalNbClauses / finalNbVariables;
+		this.finalRatio = (double)finalNbClauses / (double)finalNbVariables;
 		this.result = result;
 		this.benchmarkName = benchmarkName;
 	}
