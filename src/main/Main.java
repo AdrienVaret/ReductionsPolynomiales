@@ -32,7 +32,7 @@ public class Main {
 		System.out.println("# Polynomials reduction related to SAT");
 		System.out.println("# @authors : VARET Adrien\n"
 				         + "#            ENTAKLI Romain\n"
-				         + "#            D'ARRIGO Vincent");
+				         + "#            D'ARRIGO Valentin");
 		System.out.println("###");	
 	}
 	
