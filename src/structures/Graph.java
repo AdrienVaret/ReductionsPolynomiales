@@ -13,12 +13,23 @@ public class Graph {
 	private int nbVertex;
 	private int nbEdges;
 	private ArrayList<Edge> edges;
+	private int k; //IMPLIED, used for Vertex Cover problem
 	//private ArrayList<Integer> edgesList;
+	
 	
 	public Graph(int nbVertex, int nbEdges, ArrayList<Edge> edges) {
 		this.nbEdges = nbEdges;
 		this.nbVertex = nbVertex;
 		this.edges = edges;
+		k = -1;
+		//edgesList = edgesToList();
+	}
+	
+	public Graph(int nbVertex, int nbEdges, ArrayList<Edge> edges, int k) {
+		this.nbEdges = nbEdges;
+		this.nbVertex = nbVertex;
+		this.edges = edges;
+		this.k = k;
 		//edgesList = edgesToList();
 	}
 	
@@ -47,6 +58,10 @@ public class Graph {
 		return edges;
 	}
 
+	public int getK() {
+		return k;
+	}
+	
 	public static Graph importFromDimacs(File file) {
 		int nbEdges = 0, nbVertex = 0;
 		ArrayList<Edge> edges = new ArrayList<Edge>();
@@ -91,7 +106,8 @@ public class Graph {
 	}
 	
 	public String toString() {
-		String str = "p edges " + nbVertex + " " + nbEdges + "\n";
+		String str = "c k = " + k + "[-1 : undefined]\n";
+		str += "p edges " + nbVertex + " " + nbEdges + "\n";
 		for (Edge edge : edges) {
 			str += "e " + edge.getVertex1() + " " + edge.getVertex2() + "\n";
 		}

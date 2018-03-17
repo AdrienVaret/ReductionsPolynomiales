@@ -21,6 +21,7 @@ public class TSatTo3Col {
 			vars.add(Integer.toString(litteral));
 			vars.add(Integer.toString(-litteral));
 		}
+		System.out.println();
 	}
 	
 	public static int getId(ArrayList<String> vars, String var) {
@@ -102,13 +103,8 @@ public class TSatTo3Col {
 	}
 	
 	public static void main(String [] args) {
-	    SatFNC sat = SatFNC.importFromDimacs(new File("formule.fnc"));
-	    System.out.println(sat.toString());
-	    sat.exportToDimacs(new File("export.fnc"));
-	    SatFNC Tsat = SatTo3Sat.convert(sat);
-	    System.out.print(Tsat.toString());
-	    Tsat.exportToDimacs(new File("export.fnc"));
-	    Graph g = convert(Tsat);
+	    SatFNC sat = SatFNC.importFromDimacs(new File("3sat.fnc"));
+	    Graph g = convert(sat);
 	    System.out.println(g.toString());
 	  }
 }

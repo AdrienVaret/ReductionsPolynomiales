@@ -116,7 +116,13 @@ public class SatFNC {
 					} else if (inClauses) {
 						clauses.add(currentLine);
 						for (int i = 0 ; i < splittedLine.length-1 ; i++) {
-							litterals.add(Integer.parseInt(splittedLine[i]));
+							//experimental !
+							if (Integer.parseInt(splittedLine[i]) < 0)
+								litterals.add(-Integer.parseInt(splittedLine[i]));
+							else
+								litterals.add(Integer.parseInt(splittedLine[i])); //que ca avant
+							
+							
 						}
 					}
 				}

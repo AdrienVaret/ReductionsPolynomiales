@@ -5,15 +5,25 @@ import java.io.File;
 import reductions.SatTo3Sat;
 import reductions.TColToSat;
 import reductions.TSatTo3Col;
+import reductions.TSatToVertexCover;
 import structures.Graph;
 import structures.SatFNC;
 
 public class Main {
 
 	public static void displayUsage() {
-		System.out.println("# Invalid command.");
 		System.out.println("# USAGE: java -jar Converter $PIn $POut inputFile outputFile");
-		System.out.println("# $P = { SAT | 3SAT | 3COL | CSP | CLIQUE }");
+		System.out.println("# $P(In|Out) = { SAT | 3SAT | 3COL | CSP | CLIQUE | VERTEX_COVER }");
+		System.out.println("###");
+		System.out.println("# Reductions possibles : ");
+		System.out.println("# * SAT TO 3-SAT");
+		System.out.println("# * 3-COL TO SAT");
+		System.out.println("# * 3-SAT TO 3-COL");
+		System.out.println("# * 3-SAT TO VERTEX_COVER");
+		System.out.println("# * SAT TO 3-SAT");
+		System.out.println("# * 3-COL TO CSP");
+		System.out.println("# * SAT TO 3-COL");
+		System.out.println("# * SAT TO VERTEX_COVER");
 		System.out.println("###");
 	}
 	 
@@ -59,7 +69,15 @@ public class Main {
 				System.out.println("# 3-SAT to 3-COL réduction");
 				System.out.println("# input "  + inputFile.getAbsolutePath());
 				System.out.println("# output " + outputFile.getAbsolutePath());
+			} else if (inputFormat.equals("3SAT") && outputFormat.equals("VERTEX_COVER")) {
+				SatFNC TSat = SatFNC.importFromDimacs(inputFile);
+				Graph graph = TSatToVertexCover.convert(TSat);
+				graph.exportToDimacs(outputFile);
+				System.out.println("# 3-SAT to VERTEX_COVER réduction");
+				System.out.println("# input "  + inputFile.getAbsolutePath());
+				System.out.println("# output " + outputFile.getAbsolutePath());
 			} else {
+				System.out.println("# Invalid command.");
 				displayUsage();
 			}
 			

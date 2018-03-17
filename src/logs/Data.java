@@ -1,7 +1,5 @@
 package logs;
 
-import java.util.ArrayList;
-
 public class Data {
 
 	private String competitionYear;

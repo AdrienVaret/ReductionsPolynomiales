@@ -2,25 +2,15 @@ package logs;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Menu;
-import java.awt.MenuBar;
-import java.awt.MenuItem;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
-
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JTable;
-
-import logs.Lister.Filter;
-import logs.Lister.SortType;
-import logs.Lister.Sorter;
 
 public class StatsWindow {
 	

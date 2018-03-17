@@ -138,9 +138,4 @@ public class Reader {
 		}
 		return datas;
 	}
-	
-	public static void main(String [] args) {
-		ArrayList<Data> datas = getData(new File("results.data"));
-		System.out.println("end");
-	}
 }
