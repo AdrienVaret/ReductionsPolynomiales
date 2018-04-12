@@ -2,10 +2,16 @@ package main;
 
 import java.io.File;
 
+import reductions.CSPToSat;
 import reductions.SatTo3Sat;
+import reductions.SatToClique;
+import reductions.SatToCliqueBis;
+import reductions.SatToCliqueThread;
 import reductions.TColToSat;
 import reductions.TSatTo3Col;
+import reductions.TSatToCliqueThread;
 import reductions.TSatToVertexCover;
+import structures.BinCSP;
 import structures.Graph;
 import structures.SatFNC;
 
@@ -24,6 +30,8 @@ public class Main {
 		System.out.println("# * 3-COL TO CSP");
 		System.out.println("# * SAT TO 3-COL");
 		System.out.println("# * SAT TO VERTEX_COVER");
+		System.out.println("# * CSP TO SAT [DIRECT_ENCODING]");
+		System.out.println("# * CSP TO SAT [SUPPORT_ENCODING]");
 		System.out.println("###");
 	}
 	 
@@ -40,11 +48,16 @@ public class Main {
 
 		displayStart();
 		
-		if (args.length == 4) {
+		if (args.length >= 4) {
 			String inputFormat = args[0];
 			String outputFormat = args[1];
 			File inputFile = new File(args[2]);
 			File outputFile = new File (args[3]);
+			
+			String encoding = new String("");
+			if (args.length > 4) {
+				encoding = args[4];
+			}
 			
 			if (inputFormat.equals("SAT") && outputFormat.equals("3SAT")) {
 				SatFNC sat = SatFNC.importFromDimacs(inputFile);
@@ -69,6 +82,7 @@ public class Main {
 				System.out.println("# 3-SAT to 3-COL réduction");
 				System.out.println("# input "  + inputFile.getAbsolutePath());
 				System.out.println("# output " + outputFile.getAbsolutePath());
+			
 			} else if (inputFormat.equals("3SAT") && outputFormat.equals("VERTEX_COVER")) {
 				SatFNC TSat = SatFNC.importFromDimacs(inputFile);
 				Graph graph = TSatToVertexCover.convert(TSat);
@@ -76,17 +90,40 @@ public class Main {
 				System.out.println("# 3-SAT to VERTEX_COVER réduction");
 				System.out.println("# input "  + inputFile.getAbsolutePath());
 				System.out.println("# output " + outputFile.getAbsolutePath());
+			
+			} else if (inputFormat.equals("SAT") && outputFormat.equals("CLIQUE")) {
+				SatFNC sat = SatFNC.importFromDimacs(inputFile);
+				Graph graph = SatToCliqueBis.convert(sat);
+				graph.exportToDimacs(outputFile);
+				System.out.println("# SAT to CLIQUE réduction");
+				System.out.println("# input "  + inputFile.getAbsolutePath());
+				System.out.println("# output " + outputFile.getAbsolutePath());
+			
+			} else if (inputFormat.equals("3SAT") && outputFormat.equals("CLIQUE")) {
+				SatFNC sat = SatFNC.importFromDimacs(inputFile);
+				Graph graph = TSatToCliqueThread.convert(sat);
+				graph.exportToDimacs(outputFile);
+				System.out.println("# 3SAT to CLIQUE réduction");
+				System.out.println("# input "  + inputFile.getAbsolutePath());
+				System.out.println("# output " + outputFile.getAbsolutePath());
+				
+			} else if (inputFormat.equals("CSP") && outputFormat.equals("SAT") && encoding.equals("DIRECT")) {
+				BinCSP csp = BinCSP.importFromXML(inputFile.getAbsolutePath());
+				SatFNC sat = CSPToSat.directEncoding(csp);
+				sat.exportToDimacs(outputFile);
+				System.out.println("# CSP to SAT réduction [DIRECT_ENCODING]");
+				System.out.println("# input "  + inputFile.getAbsolutePath());
+				System.out.println("# output " + outputFile.getAbsolutePath());
+			
 			} else {
 				System.out.println("# Invalid command.");
 				displayUsage();
+			
 			}
 			
 			System.out.println("###");
-			
 		} else {
 			displayUsage();
-		}
-		
-	}
-	
+		}	
+	}	
 }

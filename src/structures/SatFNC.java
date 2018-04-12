@@ -62,13 +62,15 @@ public class SatFNC {
 		
 		for (String clause : clauses) {
 			String [] splittedClause = clause.split(" ");
-			for (int i = 0 ; i < splittedClause.length-1 ; i++) {
-				int litteral = Integer.parseInt(splittedClause[i]);
+			if (!splittedClause[0].equals("c")) {
+				for (int i = 0 ; i < splittedClause.length-1 ; i++) {
+					int litteral = Integer.parseInt(splittedClause[i]);
 				
-				if (litteral > 0)
-					litterals.add(Integer.parseInt(splittedClause[i]));
-				else 
-					litterals.add(-Integer.parseInt(splittedClause[i]));
+					if (litteral > 0)
+						litterals.add(Integer.parseInt(splittedClause[i]));
+					else 
+						litterals.add(-Integer.parseInt(splittedClause[i]));
+				}
 			}
 		}
 		
@@ -120,9 +122,7 @@ public class SatFNC {
 							if (Integer.parseInt(splittedLine[i]) < 0)
 								litterals.add(-Integer.parseInt(splittedLine[i]));
 							else
-								litterals.add(Integer.parseInt(splittedLine[i])); //que ca avant
-							
-							
+								litterals.add(Integer.parseInt(splittedLine[i])); //que ca avant		
 						}
 					}
 				}
