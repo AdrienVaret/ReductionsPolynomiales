@@ -16,7 +16,7 @@ public class TColToCSP {
 	 * retourne une chaine de caractère representant un fichier au format XCSP3
 	 * correspodant au problème 3-col du graphe
 	 * */
-	public String TreeColToXCSP3(Graph g){
+	public static String TreeColToXCSP3(Graph g){
 		StringBuilder str = new StringBuilder();
 		str.append("<instance  format=\"XCSP3\" type=\"CSP\">\r\n");
 		appendVariablesFor3ColToXCSP(str, g);
@@ -29,7 +29,7 @@ public class TColToCSP {
 	 * ecrit un fichier au format XCSP3 correspodant au problème 3-col du graphe
 	 * vers le fichier f dans le répertoire courrant
 	 */
-	public void export3ColToXCSP3(File f, Graph g) {
+	public static void export3ColToXCSP3(File f, Graph g) {
 		try {
 			FileWriter writer = new FileWriter(f);
 			writer.write(TreeColToXCSP3(g));
@@ -43,14 +43,14 @@ public class TColToCSP {
 	/*
 	 * ajoute la valise <var> correspondant au sommet à la chaine de carractère
 	 * */
-	private void appendVarFor3ColToXCSP(StringBuilder str, int vertex){
+	private static void appendVarFor3ColToXCSP(StringBuilder str, int vertex){
 		str.append("\t\t<var id=\"v"+vertex+"\"> 0 1 2 </var>\r\n");
 	}
 	
 	/*
 	 * ajoute la valise <variables> correspondant aux sommets à la chaine de carractère
 	 * */
-	private void appendVariablesFor3ColToXCSP(StringBuilder str, Graph g){
+	private static void appendVariablesFor3ColToXCSP(StringBuilder str, Graph g){
 		str.append("\t<variables>\r\n");
 		
 		for (int i =0; i < g.getNbVertex(); i++)
@@ -62,7 +62,7 @@ public class TColToCSP {
 	/*
 	 * ajoute la valise <extension> correspondant a une arête à la chaine de carractère
 	 * */
-	private void appendExtensionFor3ColToXCSP(StringBuilder str, Edge edge){
+	private static void appendExtensionFor3ColToXCSP(StringBuilder str, Edge edge){
 		str.append("\t\t<extension>\r\n");
 		
 		str.append("\t\t\t<list>v"+edge.getVertex1() + " v" + edge.getVertex2() +"</list>\r\n");
@@ -75,7 +75,7 @@ public class TColToCSP {
 	/*
 	 * ajoute la valise <constraints> correspondant aux arêtes à la chaine de carractère
 	 * */
-	private void appendConstraintsFor3ColToXCSP(StringBuilder str, Graph g){
+	private static void appendConstraintsFor3ColToXCSP(StringBuilder str, Graph g){
 		str.append("\t<constraints>\r\n");
 		
 		for (Edge edge : g.getEdges())

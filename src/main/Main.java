@@ -90,6 +90,7 @@ public class Main {
 				System.out.println("# 3-SAT to VERTEX_COVER réduction");
 				System.out.println("# input "  + inputFile.getAbsolutePath());
 				System.out.println("# output " + outputFile.getAbsolutePath());
+<<<<<<< HEAD
 			
 			} else if (inputFormat.equals("SAT") && outputFormat.equals("CLIQUE")) {
 				SatFNC sat = SatFNC.importFromDimacs(inputFile);
@@ -115,6 +116,14 @@ public class Main {
 				System.out.println("# input "  + inputFile.getAbsolutePath());
 				System.out.println("# output " + outputFile.getAbsolutePath());
 			
+=======
+			} else if (inputFormat.equals("3COL") && outputFormat.equals("CSP")) {
+				Graph graph = Graph.importFromDimacs(inputFile);
+				TColToCSP.export3ColToXCSP3(outputFile, graph);
+				System.out.println("# 3COL to CSP");
+				System.out.println("# input "  + inputFile.getAbsolutePath());
+				System.out.println("# output " + outputFile.getAbsolutePath());
+>>>>>>> master
 			} else {
 				System.out.println("# Invalid command.");
 				displayUsage();

@@ -65,22 +65,21 @@ public class Graph {
 	public static Graph importFromDimacs(File file) {
 		int nbEdges = 0, nbVertex = 0;
 		ArrayList<Edge> edges = new ArrayList<Edge>();
+		String currentLine;
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			
-			String currentLine;
-			boolean firstLine = true;
+			do{
+				currentLine = reader.readLine();
+			}while(!currentLine.startsWith("p"));
+			
+			String [] splittedString = currentLine.split(" ");
+			nbVertex = Integer.parseInt(splittedString[2]);
+			nbEdges  = Integer.parseInt(splittedString[3]);
 			
 			while((currentLine = reader.readLine()) != null) {
-				String [] splittedString = currentLine.split(" ");
-				
-				if (firstLine) {
-					nbVertex = Integer.parseInt(splittedString[2]);
-					nbEdges  = Integer.parseInt(splittedString[3]);
-					firstLine = false;
-				} else {
+				splittedString = currentLine.split(" ");
 					edges.add(new Edge(Integer.parseInt(splittedString[1]), Integer.parseInt(splittedString[2])));
-				}
 			}
 			
 			reader.close();
