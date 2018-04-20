@@ -6,11 +6,9 @@ import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.traversal.DocumentTraversal;
 import org.w3c.dom.traversal.NodeFilter;
 import org.w3c.dom.traversal.NodeIterator;
@@ -78,13 +76,9 @@ public class BinCSP {
 		return relations;
 	}
 
-
-
 	public ArrayList<Constraint> getConstraints() {
 		return constraints;
 	}
-
-
 
 	public static Domain getDomain(String name, ArrayList<Domain> domains) {
 		for (Domain domain : domains) {
@@ -124,26 +118,82 @@ public class BinCSP {
 	}
 	
 	//parse domain x..y OR x y z
-	public static ArrayList<String> parseDomain(String domain){
+	public static Domain parseDomain(String domain, String name, int nbValues){
 		ArrayList<String> values = new ArrayList<String>();
+		
+		int maxValue = Integer.MIN_VALUE;
+		int minValue = Integer.MAX_VALUE;
 		
 		String [] splittedDomain = domain.split(Pattern.quote(".."));
 		if (splittedDomain.length > 1) { // format x..y
 			for (int i = Integer.parseInt(splittedDomain[0]) ; i <= Integer.parseInt(splittedDomain[1]) ; i++) {
 				values.add(Integer.toString(i));
+				if (i > maxValue) maxValue = i;
+				if (i < minValue) minValue = i;
 			}
 		} else {
 			splittedDomain = domain.split(" ");
 			for (int i = 0 ; i < splittedDomain.length ; i++) {
 				values.add(splittedDomain[i]);
+				if (Integer.parseInt(splittedDomain[i]) > maxValue)
+					maxValue = Integer.parseInt(splittedDomain[i]);
+				
+				if (Integer.parseInt(splittedDomain[i]) < minValue)
+					minValue = Integer.parseInt(splittedDomain[i]);
 			}
 		}
-		return values;
+		
+		return new Domain(name,
+	               nbValues,
+	               values, maxValue, minValue);
 		
 	}
 	
-	public static BinCSP importFromXML(String filename) {
+	public static void shiftDomains(BinCSP csp) {
+		int steps[] = new int [csp.getNbDomaines()];
+		
+		int i = 0;
+		for (Domain domain : csp.getDomains()) {
+			if (domain.getMinValue() > 0) {
+				int j = 0;
+				for (String value : domain.getValues()) {
+					String newValue = Integer.toString(Integer.parseInt(value) - domain.getMinValue());
+					domain.getValues().set(j, new String(newValue));
+					steps[i] = domain.getMinValue();
+					j++;
+				}
+			}
+			i = i+1;
+		}
+		
+		//Provisoire : marche uniquement pour un domain unique
+		
+		for (Relation relation : csp.getRelations()) {
+			i = 0;
+			for (Couple couple : relation.getCouples()) {
+				String v1 = Integer.toString(Integer.parseInt(couple.getValue1()) - steps[0]);
+				String v2 = Integer.toString(Integer.parseInt(couple.getValue2()) - steps[0]);
+				relation.getCouples().set(i, new Couple(v1,v2));
+				i++;
+			}
+		}
+		
+		/*
+		for (Constraint constraint : csp.getConstraints()) {
+			int d1 = Integer.parseInt(constraint.getV1().getDomain().getName().substring(1));
+			int d2 = Integer.parseInt(constraint.getV2().getDomain().getName().substring(1));
+			
+			i = 0;
+			for (Couple couple : constraint.getRelation().getCouples()) {
+				String v1 = Integer.toString(Integer.parseInt(couple.getValue1()) - steps[d1]);
+				String v2 = Integer.toString(Integer.parseInt(couple.getValue2()) - steps[d2]);
+				constraint.getRelation().getCouples().set(i, new Couple(v1,v2));
+			}
+		}*/
+	}
 	
+	public static BinCSP importFromXML(String filename) {
+		
 		ArrayList<Domain> domains         = new ArrayList<Domain>();
 		ArrayList<Variable> variables     = new ArrayList<Variable>();
 		ArrayList<Relation> relations     = new ArrayList<Relation>();
@@ -173,11 +223,10 @@ public class BinCSP {
 						break;
 						
 					case "domain" :
-							ArrayList<String> values = 
-									parseDomain(((Element) n).getFirstChild().getTextContent());
-							domains.add(new Domain(((Element) n).getAttribute("name"),
-									               Integer.parseInt(((Element) n).getAttribute("nbValues")),
-									               values));
+							 domains.add( parseDomain(((Element) n).getFirstChild().getTextContent(),
+											          ((Element) n).getAttribute("name"),
+											          Integer.parseInt(((Element) n).getAttribute("nbValues"))));
+							
 						break;
 				
 					case "variable" :
@@ -225,12 +274,17 @@ public class BinCSP {
 			e.printStackTrace();
 		}
 		
-		return new BinCSP(nbDomains, nbVariables, nbRelations, nbConstraints, domains, 
+		BinCSP csp = new BinCSP(nbDomains, nbVariables, nbRelations, nbConstraints, domains, 
 				variables, relations, constraints);
+		
+		shiftDomains(csp);
+		
+		return csp;
 	}
 	
 	public static void main(String [] args) {
-		BinCSP csp = importFromXML("cspsupporttest.xml");
+		@SuppressWarnings("unused")
+		BinCSP csp = importFromXML("test.xml");
 		System.out.println("");
 	}
 }

@@ -35,4 +35,8 @@ public class Relation {
 	public String getName() {
 		return name;
 	}
+	
+	public void setCouples(ArrayList<Couple> couples) {
+		this.couples = couples;
+	}
 }

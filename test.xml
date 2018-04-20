@@ -11,10 +11,10 @@
 </variables>
 <relations nbRelations="2">
 <relation name="R0" arity="2" nbTuples="2" semantics="conflicts">
-0 0|1 1
+1 1|2 2
 </relation>
 <relation name="R1" arity="2" nbTuples="2" semantics="conflicts">
-2 2
+3 3
 </relation>
 </relations>
 <constraints nbConstraints="2">
