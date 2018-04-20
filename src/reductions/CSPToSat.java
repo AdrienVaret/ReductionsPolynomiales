@@ -1,11 +1,15 @@
 package reductions;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import structures.BinCSP;
 import structures.Constraint;
 import structures.Couple;
 import structures.Domain;
+import structures.Relation.TypeRelation;
 import structures.SatFNC;
 import structures.Variable;
 
@@ -33,8 +37,6 @@ public class CSPToSat {
 				}
 			}
 		}
-		
-		clauses.add("c encoding constraitns");
 		
 		/* encoding constraints */
 		for (Constraint constraint : csp.getConstraints()) {
@@ -65,7 +67,6 @@ public class CSPToSat {
 						}*/
 					}
 				}
-				//v2IndexBase * v2.getDomain().getSize() + Integer.parseInt(couple.getValue2()) + 1;
 				String clause = new String();
 				clause += "-" + (v1IndexBase * v1.getDomain().getSize() + Integer.parseInt(firstValue1) + 1) + " ";
 				for (String value : values1) {
@@ -85,6 +86,8 @@ public class CSPToSat {
 	public static SatFNC directEncoding(BinCSP csp) {
 		ArrayList<String> clauses = new ArrayList<String>();
 		int litteral = 1;
+		
+		boolean support = false;
 		
 		/* encoding variables and domains */
 		for (Variable variable : csp.getVariables()) {
@@ -109,22 +112,70 @@ public class CSPToSat {
 		for (Constraint constraint : csp.getConstraints()) {
 			Variable v1 = constraint.getV1();
 			Variable v2 = constraint.getV2();
+			ArrayList<String> values1 = new ArrayList<String>();
+			ArrayList<String> values2 = new ArrayList<String>();
 			int v1IndexBase = Integer.parseInt(v1.getName().substring(1));
-			int v2IndexBase = Integer.parseInt(v2.getName().substring(1)); 
+			int v2IndexBase = Integer.parseInt(v2.getName().substring(1)); 		
 			
-			for (Couple couple : constraint.getRelation().getCouples()) {
-				int v1Index = v1IndexBase * v1.getDomain().getSize() + Integer.parseInt(couple.getValue1()) + 1;
-				int v2Index = v2IndexBase * v2.getDomain().getSize() + Integer.parseInt(couple.getValue2()) + 1;
-				clauses.add(-v1Index + " " + -v2Index + " 0");
+			if (constraint.getRelation().getType().equals(TypeRelation.R_CONFLICT)) {
+				for (Couple couple : constraint.getRelation().getCouples()) {
+					int v1Index = v1IndexBase * v1.getDomain().getSize() + Integer.parseInt(couple.getValue1()) + 1;
+					int v2Index = v2IndexBase * v2.getDomain().getSize() + Integer.parseInt(couple.getValue2()) + 1;
+					clauses.add(-v1Index + " " + -v2Index + " 0");
+				}
+			} else {
+				support = true;
+				for (Couple c1 : constraint.getRelation().getCouples()) {
+					int v1Index = v1IndexBase * v1.getDomain().getSize() + Integer.parseInt(c1.getValue1()) + 1;
+					int v2Index = v2IndexBase * v2.getDomain().getSize() + Integer.parseInt(c1.getValue2()) + 1;
+					ArrayList<String> allowedValues1 = new ArrayList<String>();
+					ArrayList<String> allowedValues2 = new ArrayList<String>();
+					for (Couple c2 : constraint.getRelation().getCouples()) {
+						if (c2.getValue1().equals(c1.getValue1())) {
+							allowedValues1.add(c2.getValue2());
+						}
+						if (c2.getValue2().equals(c1.getValue2())) {
+							allowedValues2.add(c2.getValue1());
+						}
+					}
+					ArrayList<String> forbiddenValues1 = (ArrayList<String>) v1.getDomain().getValues().clone();
+					forbiddenValues1.removeAll(allowedValues1);
+				
+					for (String value : forbiddenValues1) {
+						v2Index =  v2IndexBase * v2.getDomain().getSize() + Integer.parseInt(value) + 1;
+						clauses.add("-" + v1Index + " -" + v2Index + " 0");
+					}
+				
+					ArrayList<String> forbiddenValues2 = (ArrayList<String>) v2.getDomain().getValues().clone();
+					forbiddenValues2.removeAll(allowedValues2);
+					
+					for (String x : v1.getDomain().getValues()) {
+						for (String y : v1.getDomain().getValues()) {
+							if (!x.equals(c1.getValue1())) {
+								v1Index = v1IndexBase * v1.getDomain().getSize() + Integer.parseInt(x) + 1;
+								v2Index = v2IndexBase * v2.getDomain().getSize() + Integer.parseInt(y) + 1;
+								clauses.add("-" + v1Index + " -" + v2Index + " 0");
+							}
+						}
+					}
+				}
 			}
 		}
+		
+		//delete duplicates
+	/*	if (support) {
+			Set<String> hs = new HashSet<>();
+			hs.addAll(clauses);
+			clauses.clear();
+			clauses.addAll(hs);
+		}*/
 		
 		return new SatFNC(litteral - 1, clauses.size(), clauses);
 	}
 	
 	public static void main(String [] args) {
-		BinCSP csp = BinCSP.importFromXML("test3col.xml");
-		SatFNC sat = supportEncoding(csp);
+		BinCSP csp = BinCSP.importFromXML("test.xml");
+		SatFNC sat = directEncoding(csp);
 		System.out.println(sat.toString());
 	}
 }

@@ -18,7 +18,7 @@ import structures.SatFNC;
 public class Main {
 
 	public static void displayUsage() {
-		System.out.println("# USAGE: java -jar Converter $PIn $POut inputFile outputFile");
+		System.out.println("# USAGE: java -jar Converter $PIn $POut inputFile outputFile [SUPPORT | DIRECT]");
 		System.out.println("# $P(In|Out) = { SAT | 3SAT | 3COL | CSP | CLIQUE | VERTEX_COVER }");
 		System.out.println("###");
 		System.out.println("# Reductions possibles : ");
@@ -115,6 +115,14 @@ public class Main {
 				System.out.println("# input "  + inputFile.getAbsolutePath());
 				System.out.println("# output " + outputFile.getAbsolutePath());
 			
+			} else if (inputFormat.equals("CSP") && outputFormat.equals("SAT") && encoding.equals("SUPPORT")) {
+				BinCSP csp = BinCSP.importFromXML(inputFile.getAbsolutePath());
+				SatFNC sat = CSPToSat.supportEncoding(csp);
+				sat.exportToDimacs(outputFile);
+				System.out.println("# CSP to SAT réduction [SUPPORT_ENCODING]");
+				System.out.println("# input "  + inputFile.getAbsolutePath());
+				System.out.println("# output " + outputFile.getAbsolutePath());
+				
 			} else {
 				System.out.println("# Invalid command.");
 				displayUsage();

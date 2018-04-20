@@ -123,16 +123,21 @@ public class BinCSP {
 		return couples;
 	}
 	
-	//parse domain x..y
+	//parse domain x..y OR x y z
 	public static ArrayList<String> parseDomain(String domain){
 		ArrayList<String> values = new ArrayList<String>();
 		
 		String [] splittedDomain = domain.split(Pattern.quote(".."));
-		
-		for (int i = Integer.parseInt(splittedDomain[0]) ; i <= Integer.parseInt(splittedDomain[1]) ; i++) {
-			values.add(Integer.toString(i));
+		if (splittedDomain.length > 1) { // format x..y
+			for (int i = Integer.parseInt(splittedDomain[0]) ; i <= Integer.parseInt(splittedDomain[1]) ; i++) {
+				values.add(Integer.toString(i));
+			}
+		} else {
+			splittedDomain = domain.split(" ");
+			for (int i = 0 ; i < splittedDomain.length ; i++) {
+				values.add(splittedDomain[i]);
+			}
 		}
-		
 		return values;
 		
 	}
@@ -217,6 +222,7 @@ public class BinCSP {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			e.printStackTrace();
 		}
 		
 		return new BinCSP(nbDomains, nbVariables, nbRelations, nbConstraints, domains, 
@@ -224,7 +230,7 @@ public class BinCSP {
 	}
 	
 	public static void main(String [] args) {
-		BinCSP csp = importFromXML("test3col.xml");
-		System.out.println(".");
+		BinCSP csp = importFromXML("cspsupporttest.xml");
+		System.out.println("");
 	}
 }
