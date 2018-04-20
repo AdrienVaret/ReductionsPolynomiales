@@ -83,6 +83,11 @@ public class CSPToSat {
 		return new SatFNC(csp.getNbVariables() * csp.getDomains().get(0).getSize(), clauses.size(), clauses);
 	}
 	
+	public static int getId(Variable variable, int value) {
+		int base = Integer.parseInt(variable.getName().substring(1));
+		return (base * (variable.getDomain().getMaxValue()+1) + value + 1);
+	}
+	
 	public static SatFNC directEncoding(BinCSP csp) {
 		ArrayList<String> clauses = new ArrayList<String>();
 		int litteral = 1;
@@ -119,15 +124,19 @@ public class CSPToSat {
 			
 			if (constraint.getRelation().getType().equals(TypeRelation.R_CONFLICT)) {
 				for (Couple couple : constraint.getRelation().getCouples()) {
-					int v1Index = v1IndexBase * v1.getDomain().getSize() + Integer.parseInt(couple.getValue1()) + 1;
-					int v2Index = v2IndexBase * v2.getDomain().getSize() + Integer.parseInt(couple.getValue2()) + 1;
+					//int v1Index = v1IndexBase * v1.getDomain().getSize() + Integer.parseInt(couple.getValue1()) + 1;
+					//int v2Index = v2IndexBase * v2.getDomain().getSize() + Integer.parseInt(couple.getValue2()) + 1;
+					int v1Index = getId(v1, Integer.parseInt(couple.getValue1()));
+					int v2Index = getId(v2, Integer.parseInt(couple.getValue2()));
 					clauses.add(-v1Index + " " + -v2Index + " 0");
 				}
 			} else {
 				support = true;
 				for (Couple c1 : constraint.getRelation().getCouples()) {
-					int v1Index = v1IndexBase * v1.getDomain().getSize() + Integer.parseInt(c1.getValue1()) + 1;
-					int v2Index = v2IndexBase * v2.getDomain().getSize() + Integer.parseInt(c1.getValue2()) + 1;
+					//int v1Index = v1IndexBase * v1.getDomain().getSize() + Integer.parseInt(c1.getValue1()) + 1;
+					//int v2Index = v2IndexBase * v2.getDomain().getSize() + Integer.parseInt(c1.getValue2()) + 1;
+					int v1Index = getId(v1, Integer.parseInt(c1.getValue1()));
+					int v2Index = getId(v2, Integer.parseInt(c1.getValue2()));
 					ArrayList<String> allowedValues1 = new ArrayList<String>();
 					ArrayList<String> allowedValues2 = new ArrayList<String>();
 					for (Couple c2 : constraint.getRelation().getCouples()) {

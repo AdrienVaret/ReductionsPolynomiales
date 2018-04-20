@@ -164,10 +164,10 @@ public class BinCSP {
 				}
 			}
 			i = i+1;
+			domain.setMaxValue(domain.getMaxValue() - domain.getMinValue());
 		}
 		
 		//Provisoire : marche uniquement pour un domain unique
-		
 		for (Relation relation : csp.getRelations()) {
 			i = 0;
 			for (Couple couple : relation.getCouples()) {
@@ -177,19 +177,6 @@ public class BinCSP {
 				i++;
 			}
 		}
-		
-		/*
-		for (Constraint constraint : csp.getConstraints()) {
-			int d1 = Integer.parseInt(constraint.getV1().getDomain().getName().substring(1));
-			int d2 = Integer.parseInt(constraint.getV2().getDomain().getName().substring(1));
-			
-			i = 0;
-			for (Couple couple : constraint.getRelation().getCouples()) {
-				String v1 = Integer.toString(Integer.parseInt(couple.getValue1()) - steps[d1]);
-				String v2 = Integer.toString(Integer.parseInt(couple.getValue2()) - steps[d2]);
-				constraint.getRelation().getCouples().set(i, new Couple(v1,v2));
-			}
-		}*/
 	}
 	
 	public static BinCSP importFromXML(String filename) {

@@ -38,6 +38,10 @@ public class Domain {
 		return name;
 	}
 	
+	public void setMaxValue(int maxValue) {
+		this.maxValue = maxValue;
+	}
+	
 	public void setValues(ArrayList<String> values) {
 		this.values = values;
 	}
