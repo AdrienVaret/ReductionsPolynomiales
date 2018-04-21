@@ -4,9 +4,7 @@ import java.io.File;
 
 import reductions.CSPToSat;
 import reductions.SatTo3Sat;
-import reductions.SatToClique;
 import reductions.SatToCliqueBis;
-import reductions.SatToCliqueThread;
 import reductions.TColToSat;
 import reductions.TSatTo3Col;
 import reductions.TSatToCliqueThread;
@@ -42,6 +40,38 @@ public class Main {
 				         + "#            ENTAKLI Romain\n"
 				         + "#            D'ARRIGO Valentin");
 		System.out.println("###");	
+	}
+	
+	public static void displaySATInfos(SatFNC sat) {
+		System.out.println("@nb_variables : " + sat.getNbLitterals());
+		System.out.println("@nb_clauses : " + sat.getNbClauses());
+		
+		int nbUnitaryClauses = 0;
+		int nbBinaryClauses  = 0;
+		int nbTernaryClauses = 0;
+		int nbLongClauses    = 0;
+		
+		for (String clause : sat.getClauses()) {
+			String [] splittedClause = clause.split(" ");
+			if (splittedClause.length - 1 == 1) nbUnitaryClauses ++;
+			else if (splittedClause.length - 1 == 2) nbBinaryClauses ++;
+			else if (splittedClause.length - 1 == 3) nbTernaryClauses ++;
+			else nbLongClauses ++;
+		}
+		
+		System.out.println("@nb_unitary_clauses : " + nbUnitaryClauses);
+		System.out.println("@nb_binary_clauses : "  + nbBinaryClauses);
+		System.out.println("@nb_ternary_clauses : " + nbTernaryClauses);
+		System.out.println("@nb_long_clauses : "    + nbLongClauses);
+		
+		System.out.println("@ratio_cx : " + (float)sat.getNbClauses() / (float)sat.getNbLitterals());
+	}
+	
+	public static void displayCSPInfos(BinCSP csp) {
+		System.out.println("# @nb_variables : "   + csp.getNbVariables());
+		System.out.println("# @nb_constraints : " + csp.getNbConstraints());
+		System.out.println("# @nb_domains : "     + csp.getNbDomaines());
+		System.out.println("# @nb_relations : "   + csp.getNbRelations());
 	}
 	
 	public static void main (String [] args) {
@@ -113,7 +143,9 @@ public class Main {
 				sat.exportToDimacs(outputFile);
 				System.out.println("# CSP to SAT réduction [DIRECT_ENCODING]");
 				System.out.println("# input "  + inputFile.getAbsolutePath());
+				displayCSPInfos(csp);
 				System.out.println("# output " + outputFile.getAbsolutePath());
+				displaySATInfos(sat);
 			
 			} else if (inputFormat.equals("CSP") && outputFormat.equals("SAT") && encoding.equals("SUPPORT")) {
 				BinCSP csp = BinCSP.importFromXML(inputFile.getAbsolutePath());
@@ -121,7 +153,9 @@ public class Main {
 				sat.exportToDimacs(outputFile);
 				System.out.println("# CSP to SAT réduction [SUPPORT_ENCODING]");
 				System.out.println("# input "  + inputFile.getAbsolutePath());
+				displayCSPInfos(csp);
 				System.out.println("# output " + outputFile.getAbsolutePath());
+				displaySATInfos(sat);
 				
 			} else {
 				System.out.println("# Invalid command.");

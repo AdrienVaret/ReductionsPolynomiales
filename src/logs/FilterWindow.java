@@ -92,6 +92,9 @@ public class FilterWindow {
 	private JCheckBox bReduction = new JCheckBox("Reduction");
 	private JCheckBox bFinalFile = new JCheckBox("Final File");
 	private JButton btnDefaultList;
+	private JLabel lblInstancesTypes;
+	private JCheckBox chckbxSat;
+	private JCheckBox chckbxCsp;
 
 	/**
 	 * Create the application.
@@ -99,6 +102,8 @@ public class FilterWindow {
 	public FilterWindow(StatsWindow oldFrame) {
 		this.oldFrame = oldFrame;
 		initialize();
+		chckbxSat.setSelected(true);
+		chckbxCsp.setSelected(true);
 	}
 
 	
@@ -196,6 +201,12 @@ public class FilterWindow {
 		
 		if (bSolverName.isSelected())
 			newDatas = Lister.filter(newDatas, Filter.SOLVER_NAME, fSolverName.getText(), null);
+		
+		if (chckbxCsp.isSelected())
+			newDatas = Lister.filter(newDatas, Filter.INST_CSP, null, null);
+		
+		if (chckbxSat.isSelected())
+			newDatas = Lister.filter(newDatas, Filter.INST_SAT, null, null);
 		
 		StatsWindow window = new StatsWindow(newDatas, oldFrame.initialsData);
 		window.frame.setVisible(true);
@@ -312,6 +323,9 @@ public class FilterWindow {
 		frame.getContentPane().add(iNbClausesMax, "cell 2 5,growx");
 		iNbClausesMax.setColumns(10);
 		
+		lblInstancesTypes = new JLabel("Initial Instances Types");
+		frame.getContentPane().add(lblInstancesTypes, "cell 3 5 2 1,alignx center");
+		
 		bFinalClauses = new JCheckBox("Final nb Clauses");
 		frame.getContentPane().add(bFinalClauses, "cell 5 5");
 		
@@ -333,6 +347,12 @@ public class FilterWindow {
 		iUClausesMax = new JTextField();
 		iUClausesMax.setColumns(10);
 		frame.getContentPane().add(iUClausesMax, "cell 2 6,growx");
+		
+		chckbxSat = new JCheckBox("SAT");
+		frame.getContentPane().add(chckbxSat, "cell 3 6");
+		
+		chckbxCsp = new JCheckBox("CSP");
+		frame.getContentPane().add(chckbxCsp, "cell 4 6");
 		
 		bFinalUClauses = new JCheckBox("Final nb U Clauses");
 		frame.getContentPane().add(bFinalUClauses, "cell 5 6");

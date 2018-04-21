@@ -1,4 +1,4 @@
-b results.data 4 1 1
+b results.data 5 1 1
 d SAT_COMPETITION_2009 bioinfo SAT_TO_3SAT UNSAT q_query_2_L324_coli.cnf q_query_2_L324_coli_3sat.cnf
 i 617854 2745225 63819 860549 1288709 1456516
 i 1260013 3387384 0 0 3387384 0
@@ -6,3 +6,36 @@ r glucose 16.332 28.632
 r lingeling 11.226 11.557
 r minisat 18.456 32.67
 r picosat 3.493 5.718
+r cadical 16.332 27.614
+d CPAI08 coloring CSP_TO_SAT_DIRECT UNSAT normalized-myciel-5g-5-ext.xml normalized-myciel-5g-5-ext.cnf
+i 47 236 1 1 0 0
+i 235 1697 0 1650 0 47
+r glucose 14.316 24.876
+r lingeling 14.316 56.50
+r minisat 14.316 16.824
+r picosat 14.316 115.508
+r cadical 14.316 27.863
+d CPAI08 coloring CSP_TO_SAT_DIRECT SAT normalized-le-450-5a-5-ext.xml normalized-le-450-5a-5-ext.cnf
+i 450 5714 1 1 0 0
+i 2250 33520 0 33070 0 450
+r glucose 8.152 0.34
+r lingeling 8.152 0.33
+r minisat 8.152 0.076
+r picosat 8.152 0.036
+r cadical 8.152 0.057
+d CPAI08 coloring CSP_TO_SAT_DIRECT UNSAT normalized-le-450-5a-4-ext.xml normalized-le-450-5a-4-ext.cnf
+i 450 5714 1 1 0 0
+i 1800 26006 0 25556 0 450
+r glucose 2.096 0.051
+r lingeling 2.096 0.018
+r minisat 2.096 0.042
+r picosat 2.096 0.016
+r cadical 2.096 0.042
+d CPAI08 geom CSP_TO_SAT_DIRECT UNSAT normalized-geo50-20-d4-75-94_ext.xml normalized-geo50-20-d4-75-94_ext.cnf
+i 50 496 1 496 0 0
+i 1000 59157 0 59107 0 50
+r glucose 47.836 343.7
+r lingeling 47.836 900
+r minisat 47.836 857.016
+r picosat 47.836 900
+r cadical 47.836 243.624

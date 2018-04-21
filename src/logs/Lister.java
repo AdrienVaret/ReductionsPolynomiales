@@ -10,7 +10,7 @@ public class Lister {
 		COMPETITION, BENCHMARK, SAT, I_FILE, F_FILE, REDUCTION, I_VARS, F_VARS,
 		I_CLAUSES, I_UCLAUSES, I_BCLAUSES, I_TCLAUSES, I_LCLAUSES, I_RATIO_CX, I_TIME, I_RATIO, F_RATIO_CX,
 		F_CLAUSES, F_UCLAUSES, F_BCLAUSES, F_TCLAUSES, F_LCLAUSES, F_RATIO, F_TIME, 
-		RATIO_TIME, SOLVER_NAME;
+		RATIO_TIME, SOLVER_NAME, INST_CSP, INST_SAT;
 	}
 	
 	public enum Sorter {
@@ -34,6 +34,22 @@ public class Lister {
 		ArrayList<Data> newDatas = new ArrayList<Data>();
 		
 		switch (filter) {
+			case INST_CSP :
+				for (Data data : oldDatas) {
+					String [] splittedReduction = data.getReductionName().split("_");
+					if (splittedReduction[0].equals("CSP"))
+						newDatas.add(data);
+				}
+				return newDatas;
+				
+			case INST_SAT : 
+				for (Data data : oldDatas) {
+					String [] splittedReduction = data.getReductionName().split("_");
+					if (splittedReduction[0].equals("SAT"))
+						newDatas.add(data);
+				}
+				return newDatas;
+				
 			/*
 			 * maxValue ignored
 			 */

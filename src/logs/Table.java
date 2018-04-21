@@ -75,7 +75,14 @@ public class Table extends JPanel{
 			data [i][8]  = Integer.toString(d.getInitialNbBinaryClauses());
 			data [i][9]  = Integer.toString(d.getInitialNbTernaryClauses());
 			data [i][10] = Integer.toString(d.getInitialNbLongClauses());
-			data [i][11] = Double.toString(d.getInitialRatio());
+			
+			
+			String [] splittedReduction = data[i][3].split("_");
+			if (splittedReduction[0].equals("SAT")) {
+				data [i][11] = Double.toString(d.getInitialRatio());
+			} else {
+				data [i][11] = "NULL";
+			}
 			
 			data [i][12] = d.getFinalFile();
 			data [i][13] = Integer.toString(d.getFinalNbVariables());

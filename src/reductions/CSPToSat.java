@@ -13,8 +13,10 @@ import structures.Relation.TypeRelation;
 import structures.SatFNC;
 import structures.Variable;
 
+@SuppressWarnings("unused")
 public class CSPToSat {
 
+	@SuppressWarnings("unused")
 	public static SatFNC supportEncoding(BinCSP csp) {
 		ArrayList<String> clauses = new ArrayList<String>();
 		int litteral = 1;
@@ -88,6 +90,7 @@ public class CSPToSat {
 		return (base * (variable.getDomain().getMaxValue()+1) + value + 1);
 	}
 	
+	@SuppressWarnings({ "unused", "unchecked" })
 	public static SatFNC directEncoding(BinCSP csp) {
 		ArrayList<String> clauses = new ArrayList<String>();
 		int litteral = 1;
