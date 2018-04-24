@@ -9,102 +9,85 @@ import structures.SatFNC;
 
 public class TSatTo3Col {
 
-	
-	public static void loadBase(ArrayList<String> vars) {
-		vars.add("T"); //1
-		vars.add("F"); //2
-		vars.add("B"); //3
-	}
-	
-	public static void loadLitterals(ArrayList<String> vars, SatFNC sat) {
+	public static int connectLitterals(SatFNC sat, ArrayList<Edge> edges){
+		int maxLitteral = 0;
 		for (Integer litteral : sat.getLitterals()) {
-			vars.add(Integer.toString(litteral));
-			vars.add(Integer.toString(-litteral));
+			if (litteral > maxLitteral) maxLitteral = litteral;
+			edges.add(new Edge(litteral, -litteral));
 		}
-		System.out.println();
-	}
-	
-	public static int getId(ArrayList<String> vars, String var) {
-		int i = 1;
-		for (String string : vars) {
-			if (var.equals(string)) return i;
-			i++;
-		}
-		return -1;
-	}
-	
-	public static void connectBase(ArrayList<String> vars, ArrayList<Edge> edges) {
-		edges.add(new Edge(getId(vars, "T"), getId(vars, "F")));
-		edges.add(new Edge(getId(vars, "F"), getId(vars, "B")));
-		edges.add(new Edge(getId(vars, "B"), getId(vars, "T")));
-	}
-	
-	public static void connectLitteralsToBase(ArrayList<String> vars, ArrayList<Edge> edges) {
-		for (int i = 3 ; i < vars.size() ; i++) {
-			String litteral = vars.get(i);
-			edges.add(new Edge(getId(vars, litteral), getId(vars, "B")));
-		}
-	}
-	
-	public static void connectLitteralsEachOthers(ArrayList<String> vars, ArrayList<Edge> edges) {
-		for (int i = 3 ; i < vars.size() ; i += 2) {
-			String litteral1 = vars.get(i);
-			String litteral2 = vars.get(i+1);
-			edges.add(new Edge(getId(vars, litteral1), getId(vars, litteral2)));
-		}
-	}
-	
-	public static void addOrGadget(String clause, ArrayList<String> vars, ArrayList<Edge> edges, int nbGadgets) {
-		String [] splittedClause = clause.split(" ");
-		
-		//create vertexs
-		for (int i = 1 ; i <= 6 ; i++) {
-			vars.add(new String("G" + nbGadgets + "_" + i));
-		}
-		
-		//connect litterals to gadget's inputs
-		edges.add(new Edge(getId(vars, splittedClause[0]), getId(vars, "G" + nbGadgets + "_" + 1)));
-		edges.add(new Edge(getId(vars, splittedClause[1]), getId(vars, "G" + nbGadgets + "_" + 2)));
-		edges.add(new Edge(getId(vars, splittedClause[2]), getId(vars, "G" + nbGadgets + "_" + 5)));
-		
-		//connect gadget's vertexs each others
-		edges.add(new Edge(getId(vars, "G" + nbGadgets + "_" + 1), getId(vars, "G" + nbGadgets + "_" + 2)));
-		edges.add(new Edge(getId(vars, "G" + nbGadgets + "_" + 1), getId(vars, "G" + nbGadgets + "_" + 3)));
-		edges.add(new Edge(getId(vars, "G" + nbGadgets + "_" + 2), getId(vars, "G" + nbGadgets + "_" + 3)));
-		edges.add(new Edge(getId(vars, "G" + nbGadgets + "_" + 3), getId(vars, "G" + nbGadgets + "_" + 4)));
-		edges.add(new Edge(getId(vars, "G" + nbGadgets + "_" + 4), getId(vars, "G" + nbGadgets + "_" + 5)));
-		edges.add(new Edge(getId(vars, "G" + nbGadgets + "_" + 4), getId(vars, "G" + nbGadgets + "_" + 6)));
-		edges.add(new Edge(getId(vars, "G" + nbGadgets + "_" + 5), getId(vars, "G" + nbGadgets + "_" + 6)));
-		
-		//connect gadget's output to base
-		edges.add(new Edge(getId(vars, "G" + nbGadgets + "_" + 6), getId(vars, "B")));
-		edges.add(new Edge(getId(vars, "G" + nbGadgets + "_" + 6), getId(vars, "F")));
+		return maxLitteral;
 	}
 	
 	public static Graph convert (SatFNC sat) {
-		ArrayList<String>  vars    = new ArrayList<String>();
-		loadBase(vars);
-		loadLitterals(vars, sat);
 		
-		ArrayList<Edge> edges = new ArrayList<Edge>();
+		ArrayList<Integer> endGadgets = new ArrayList<Integer>();
+		ArrayList<Edge> edges = new ArrayList<Edge>();	
+		int nbVertexs = 0;
 		
-		connectBase(vars, edges);
-		connectLitteralsToBase(vars, edges);
-		connectLitteralsEachOthers(vars, edges);
-		
-		int nbGadgets = 1;
-		
-		for (String clause : sat.getClauses()) {
-			addOrGadget(clause, vars, edges, nbGadgets);
-			nbGadgets += 1;
+		//connect litterals to their negation
+		int maxLitteral = 0;
+		for (Integer litteral : sat.getLitterals()) {
+			if (litteral > maxLitteral) maxLitteral = litteral;
+			edges.add(new Edge(litteral, -litteral));
+			nbVertexs += 2;
 		}
 		
-		return new Graph(vars.size(), edges.size(), edges);
+		//define T, F, N
+		int b = maxLitteral + 1;
+		int t = maxLitteral + 2;
+		int f = maxLitteral + 3;
+		nbVertexs += 3;
+		
+		//connect T, F, N
+		edges.add(new Edge(b, t));
+		edges.add(new Edge(t, f));
+		edges.add(new Edge(f, b));
+		
+		//connect litterals to N
+		for (Integer litteral : sat.getLitterals()) {
+			edges.add(new Edge(b, litteral));
+			edges.add(new Edge(b, -litteral));
+		}
+		
+		maxLitteral += 3;
+		
+		for (String clause : sat.getClauses()) {
+			//create gadget
+			// 1 - 2
+			edges.add(new Edge(maxLitteral + 1, maxLitteral + 2));
+			// 1 - 3
+			edges.add(new Edge(maxLitteral + 1, maxLitteral + 3));
+			// 2 - 3
+			edges.add(new Edge(maxLitteral + 2, maxLitteral + 3));
+			// 3 - 4
+			edges.add(new Edge(maxLitteral + 3, maxLitteral + 4));
+			// 3 - 5
+			edges.add(new Edge(maxLitteral + 3, maxLitteral + 5));
+			// 4 - 5
+			edges.add(new Edge(maxLitteral + 4, maxLitteral + 5));
+			
+			String [] splittedClause = clause.split(" ");
+			edges.add(new Edge(Integer.parseInt(splittedClause[0]), maxLitteral + 1));
+			edges.add(new Edge(Integer.parseInt(splittedClause[1]), maxLitteral + 2));
+			edges.add(new Edge(Integer.parseInt(splittedClause[2]), maxLitteral + 4));
+			
+			endGadgets.add(maxLitteral + 5);
+			
+			nbVertexs += 5;
+			maxLitteral += 5;
+		}
+		
+		for (Integer vertex : endGadgets) {
+			edges.add(new Edge(vertex, b));
+			edges.add(new Edge(vertex, f));
+		}
+		
+		return new Graph(nbVertexs, edges.size(), edges, 3);
 	}
 	
 	public static void main(String [] args) {
-	    SatFNC sat = SatFNC.importFromDimacs(new File("3sat.fnc"));
-	    Graph g = convert(sat);
-	    System.out.println(g.toString());
-	  }
+		 SatFNC sat = SatFNC.importFromDimacs(new File("3sat.fnc"));
+		 Graph g = convert(sat);
+		 System.out.println(g.toString());
+	}
 }

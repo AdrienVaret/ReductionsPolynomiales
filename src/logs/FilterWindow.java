@@ -111,6 +111,12 @@ public class FilterWindow {
 		
 		ArrayList<Data> newDatas = oldFrame.datas;
 		
+		if (chckbxCsp.isSelected() && !chckbxSat.isSelected())
+			newDatas = Lister.filter(newDatas, Filter.INST_CSP, null, null);
+		
+		if (chckbxSat.isSelected() && !chckbxCsp.isSelected())
+			newDatas = Lister.filter(newDatas, Filter.INST_SAT, null, null);
+		
 		if (bCompetition.isSelected())
 			newDatas = Lister.filter(newDatas, Filter.COMPETITION, fCompetition.getText(), null);
 	
@@ -201,12 +207,6 @@ public class FilterWindow {
 		
 		if (bSolverName.isSelected())
 			newDatas = Lister.filter(newDatas, Filter.SOLVER_NAME, fSolverName.getText(), null);
-		
-		if (chckbxCsp.isSelected())
-			newDatas = Lister.filter(newDatas, Filter.INST_CSP, null, null);
-		
-		if (chckbxSat.isSelected())
-			newDatas = Lister.filter(newDatas, Filter.INST_SAT, null, null);
 		
 		StatsWindow window = new StatsWindow(newDatas, oldFrame.initialsData);
 		window.frame.setVisible(true);

@@ -39,3 +39,19 @@ r lingeling 47.836 900
 r minisat 47.836 857.016
 r picosat 47.836 900
 r cadical 47.836 243.624
+d CPAI08 geom CSP_TO_SAT_DIRECT SAT normalized-geo50-20-d4-75-19_ext.xml normalized-geo50-20-d4-75-19_ext.cnf
+i 50 498 1 498 0 0
+i 1000 59246 0 59196 0 50
+r glucose 33.764 78.876
+r lingeling 33.764 108.638
+r minisat 33.764 16.892
+r picosat 33.764 900
+r caldical 33.764 78.252
+d CPAI08 geom CSP_TO_SAT_DIRECT SAT normalized-geo50-20-d4-75-46_ext.xml normalized-geo50-20-d4-75-46_ext.cnf
+i 50 433 1 433 0 0
+i 1000 52787 0 52737 0 50
+r glucose 3.328 53.025
+r lingeling 3.328 85.552
+r minisat 3.328 17.536
+r picosat 3.328 87.054
+r cadical 3.328 77.600

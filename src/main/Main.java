@@ -32,7 +32,7 @@ public class Main {
 		System.out.println("# * CSP TO SAT [SUPPORT_ENCODING]");
 		System.out.println("###");
 	}
-	 
+	
 	public static void displayStart() {
 		System.out.println("###");
 		System.out.println("# Polynomials reduction related to SAT");
@@ -40,6 +40,12 @@ public class Main {
 				         + "#            ENTAKLI Romain\n"
 				         + "#            D'ARRIGO Valentin");
 		System.out.println("###");	
+	}
+	
+	public static void displayGraphInfos(Graph graph) {
+		System.out.println("# @nb_vertexs : "      + graph.getNbVertex());
+		System.out.println("# @nb_edges : "        + graph.getNbEdges());
+		System.out.println("# @k [-1:not_used] : " + graph.getK());
 	}
 	
 	public static void displaySATInfos(SatFNC sat) {
@@ -59,10 +65,10 @@ public class Main {
 			else nbLongClauses ++;
 		}
 		
-		System.out.println("@nb_unitary_clauses : " + nbUnitaryClauses);
-		System.out.println("@nb_binary_clauses : "  + nbBinaryClauses);
-		System.out.println("@nb_ternary_clauses : " + nbTernaryClauses);
-		System.out.println("@nb_long_clauses : "    + nbLongClauses);
+		System.out.println("# @nb_unitary_clauses : " + nbUnitaryClauses);
+		System.out.println("# @nb_binary_clauses : "  + nbBinaryClauses);
+		System.out.println("# @nb_ternary_clauses : " + nbTernaryClauses);
+		System.out.println("# @nb_long_clauses : "    + nbLongClauses);
 		
 		System.out.println("@ratio_cx : " + (float)sat.getNbClauses() / (float)sat.getNbLitterals());
 	}
@@ -95,7 +101,9 @@ public class Main {
 				Tsat.exportToDimacs(outputFile);
 				System.out.println("# SAT to 3-SAT réduction");
 				System.out.println("# input "  + inputFile.getAbsolutePath());
+				displaySATInfos(sat);
 				System.out.println("# output " + outputFile.getAbsolutePath());
+				displaySATInfos(sat);
 				
 			} else if (inputFormat.equals("3COL") && outputFormat.equals("SAT")) {
 				Graph graph = Graph.importFromDimacs(inputFile);
@@ -103,7 +111,9 @@ public class Main {
 				sat.exportToDimacs(outputFile);
 				System.out.println("# 3-COL to SAT réduction");
 				System.out.println("# input "  + inputFile.getAbsolutePath());
+				displayGraphInfos(graph);
 				System.out.println("# output " + outputFile.getAbsolutePath());
+				displaySATInfos(sat);
 				
 			} else if (inputFormat.equals("3SAT") && outputFormat.equals("3COL")) {
 				SatFNC Tsat = SatFNC.importFromDimacs(inputFile);
@@ -111,31 +121,39 @@ public class Main {
 				graph.exportToDimacs(outputFile);
 				System.out.println("# 3-SAT to 3-COL réduction");
 				System.out.println("# input "  + inputFile.getAbsolutePath());
+				displaySATInfos(Tsat);
 				System.out.println("# output " + outputFile.getAbsolutePath());
-			
+				displayGraphInfos(graph);
+				
 			} else if (inputFormat.equals("3SAT") && outputFormat.equals("VERTEX_COVER")) {
 				SatFNC TSat = SatFNC.importFromDimacs(inputFile);
 				Graph graph = TSatToVertexCover.convert(TSat);
 				graph.exportToDimacs(outputFile);
 				System.out.println("# 3-SAT to VERTEX_COVER réduction");
 				System.out.println("# input "  + inputFile.getAbsolutePath());
+				displaySATInfos(TSat);
 				System.out.println("# output " + outputFile.getAbsolutePath());
-			
+				displayGraphInfos(graph);
+				
 			} else if (inputFormat.equals("SAT") && outputFormat.equals("CLIQUE")) {
 				SatFNC sat = SatFNC.importFromDimacs(inputFile);
 				Graph graph = SatToCliqueBis.convert(sat);
 				graph.exportToDimacs(outputFile);
 				System.out.println("# SAT to CLIQUE réduction");
 				System.out.println("# input "  + inputFile.getAbsolutePath());
+				displaySATInfos(sat);
 				System.out.println("# output " + outputFile.getAbsolutePath());
-			
+				displayGraphInfos(graph);
+					
 			} else if (inputFormat.equals("3SAT") && outputFormat.equals("CLIQUE")) {
 				SatFNC sat = SatFNC.importFromDimacs(inputFile);
 				Graph graph = TSatToCliqueThread.convert(sat);
 				graph.exportToDimacs(outputFile);
 				System.out.println("# 3SAT to CLIQUE réduction");
 				System.out.println("# input "  + inputFile.getAbsolutePath());
+				displaySATInfos(sat);
 				System.out.println("# output " + outputFile.getAbsolutePath());
+				displayGraphInfos(graph);
 				
 			} else if (inputFormat.equals("CSP") && outputFormat.equals("SAT") && encoding.equals("DIRECT")) {
 				BinCSP csp = BinCSP.importFromXML(inputFile.getAbsolutePath());

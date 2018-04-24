@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -24,9 +26,11 @@ public class StatsWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					boolean exists = true;
 					ArrayList<Data> datas = Reader.getData(new File("results.data"));
 					StatsWindow window = new StatsWindow(datas, datas);
 					window.frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -59,7 +63,7 @@ public class StatsWindow {
 		JMenuBar menuBar = new JMenuBar();
 		JMenuItem menuFilter = new JMenuItem("Filter");
 		JMenuItem menuSort   = new JMenuItem("Sort");
-		JMenuItem menuStat   = new JMenuItem("Statistics");
+		JMenuItem menuOpenFile   = new JMenuItem("Open file");
 	
 		
 		
@@ -77,9 +81,25 @@ public class StatsWindow {
 			}
 		});
 		
+		menuOpenFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				final JFileChooser fc = new JFileChooser();
+				int returnVal = fc.showOpenDialog(fc);
+
+		        if (returnVal == JFileChooser.APPROVE_OPTION) {
+		            File file = fc.getSelectedFile();
+		            System.out.println(file.getName());
+		            ArrayList<Data> datas = Reader.getData(file);
+		            StatsWindow window = new StatsWindow(datas, datas);
+		            window.frame.setVisible(true);
+		            StatsWindow.this.frame.setVisible(false);
+		        }
+			}
+		});
+		
 		menuBar.add(menuSort);
 		menuBar.add(menuFilter);
-		menuBar.add(menuStat);
+		menuBar.add(menuOpenFile);
 		
 		frame.setJMenuBar(menuBar);
 		
