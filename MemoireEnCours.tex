@@ -1,0 +1,544 @@
+\documentclass{article}           %% ceci est un commentaire (apres le caractere %)
+\usepackage[latin1]{inputenc}     %% adapte le style article aux conventions francophones
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}          %% permet d'utiliser les caractères accentués
+\usepackage{indentfirst}
+\usepackage[dvips]{graphicx}      %% permet d'importer des graphiques au format .EPS (postscript)
+\usepackage{fancybox}		   		   %% package utiliser pour avoir un encadré 3D des images
+\usepackage{makeidx}              	   %% permet de générer un index automatiquement
+\usepackage{multicol}
+\usepackage{caption}
+\setlength{\columnseprule}{0.5pt}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{chngpage}
+\usepackage{amssymb,enumitem}
+\usepackage{lscape}
+\title{Incidence des réductions polynomiales pour la résolution d'instances SAT difficiles}     %% \title est une macro, entre { } figure son premier argument
+\author{VARET Adrien - ENTAKLI Romain - D'ARRIGO Valentin}        %% idem
+
+\newcommand{\poubelle}[1]{}
+\makeindex		    %% macro qui permet de générer l'index
+\bibliographystyle{prsty}	  %% le style utilisé pour créer la bibliographie
+\begin{document}                  %% signale le début du document
+\maketitle                        %% produire à cet endroit le titre de l'article à partir des informations fournies ci-dessus (title, author)
+
+\begin{abstract} La réduction polynomiale est un outil particulièrement important en théorie de la complexité, au regard notamment de l'analyse de problèmes en vue de déterminer la classe de complexité à laquelle ils appartiennent. Cet outil a particulièrement été étudié au niveau théorique, mais il semblerait qu'au niveau pratique, ce type d'étude ait beaucoup moins été développé. L'objet de ce projet porte sur cette seconde question. Depuis une dizaine d'années, des progrès spectaculaires ont été réalisés pour la résolution pratique du problème de la satisfiabilité (SAT), à tel point que de nombreuses instances industrielles, issues de problèmes réels donc, sont exprimées dans les termes d'instances SAT, et sont résolues très efficacement par les solveurs de l'état de l'art. Il n'en demeure pas moins vrai que certaines instances sont toujours extrêmement difficiles à résoudre. Nous focaliserons d'ailleurs cette étude sur ce type d'instances. Il s'agit ici d'étudier certaines transformations polynomiales et d'analyser leur incidence sur la résolution pratique de ces instances difficiles. La question étant de savoir si des transformations permettent de réduire la difficulté et dans quelles proportions. Nous étudierons notamment les réductions, qui, partant d'une instance SAT quelconque, permettent d'exprimer celles-ci sous forme 3-SAT, sous forme d'instances de la 3-COLORATION (de graphes), de CSP (CSP correspond aux "Constraint Satisfaction Problems" et constitue une généralisation de SAT), voire des retraductions vers le formalisme SAT.
+\newline
+\hspace*{0.6cm}Depuis le début de l'informatique, on cherche sans cesse à essayer d?optimiser les algorithmes le plus possible afin que ces derniers soient le plus rapide possible. Mais à l'heure d'aujourd?hui, on pourrait être tenté de penser que cette recherche frénétique d?optimisation soit devenu obsolète. En effet, de nos jours, même les machines dites 'bas de gamme' sont considérées comme puissantes en comparaison avec les machines d'il y a dix ans. Cette hausse exponentielle des capacités des machines a également pour conséquence la résolution de certains problèmes qui ne pouvaient être traités auparavant ainsi que le traitement d'instances beaucoup plus grandes.
+\newpage
+\hspace*{0.6cm}Néanmoins, cette recherche d'optimisation n'est toujours pas obsolète. En effet afin de répondre à certaines problématiques dans le monde de la recherche, ou encore à des problèmes concrets, on cherche à résoudre des problèmes dits 'difficiles' avec des instances de très grande taille qui sont très lourds à résoudre, même pour les machines actuelles.
+\newline
+\hspace*{0.6cm}Notre sujet de TER portera donc sur une partie de cette recherche d'optimisation et sera fortement associé à l'UE sur la théorie de la complexité que nous avons étudié lors du précédent semestre.
+Dans ce compte-rendu, nous effectuerons une approche pratique et théorique sur notre sujet, puis nous détaillerons et commenterons les résultats obtenus.
+\newline
+\newline
+\hspace*{0.6cm}Ce projet fait partie de l'UE "TER" du Master 1 Informatique de l'Université d'Aix-Marseille (AMU). Il est encadré par les enseignants chercheurs suivants :
+\begin{center}
+JEGOU Phillipe et OSTROWSKI Richard
+\end{center}
+
+\end{abstract}
+\newpage
+
+\tableofcontents                  %% produire à cet endroit la table des matières		
+
+\newpage
+\section{Recherche bibliographique}            %% un titre de niveau 1 qui sera inclus dans la table des matières
+A travers cette section, nous allons étudier les réductions polynomiales lors de compétitions SAT. Ces compétitions s'organisent sous forme de concours, dans lesquels plusieurs équipes s'affrontent. Le challenge est de pouvoir fournir plusieurs solveurs, capables de résoudre des fichiers contenant des clauses et instances, qui se comptent en milliers, voire en millions.
+\newline 
+
+\setlength{\parindent}{3ex}La recherche bibliographique s'est orientée grâce à la \textbf {compétition organisée en 2017}\footnote{https://baldur.iti.kit.edu/sat-competition-2017/}. Ainsi, tout les solveurs et résultats qui seront présentés dans cette partie concerneront l'issue de cette compétition, sauf indication contraire.
+
+\subsection{L'environnement d'une compétition}
+Les compétitions SAT durent environ sur une période de un mois (autour de Mai). Les candidatures ouvrent et les équipes peuvent inscrire leurs membres. Ils ont ensuite un mois pour produire ce qui est requis par les règles de la compétition. Les résultats sont alors annoncés annuellement lors de la SAT Conference, organisée généralement fin Août. En voici les principales règles\footnote{https://baldur.iti.kit.edu/sat-competition-2017/index.php?cat=rules} :
+\newline
+
+\setlength{\parindent}{3ex}
+Le code source de tout solveur SAT doit être mis à disposition des jurys (déposé sous licence, permettant l'utilisation de ces derniers dans le domaine de la recherche), à l'exception des solveurs de type NoLimits.
+
+\setlength{\parindent}{3ex}Une à deux page(s) de description du solveur doit(vent) être fourni(s) afin d'en faire une bonne utilisation.
+Les auteurs et co-auteurs d'un solveur, dans une description doivent correspondre aux auteurs inscrits sur le site d'admission.
+\setlength{\parindent}{10ex}Les solveurs SAT doivent être conformes à la norme DIMACS (voir la compétition 2009 pour plus de détails).
+
+\setlength{\parindent}{3ex}La visualisation graphique des modèles (en cas d'instances satisfaisables) doit être obligatoire (sauf pour les solveurs No-Limits). En parallèle, toute formule dite UNSAT se doit d'être amenée d'une preuve.
+
+\setlength{\parindent}{3ex}Chaque équipe participante doit soumettre 20 nouvelles instances benchmarks. 10 d'entre-elles se doivent d'être "intéressantes" : ni trop faciles (Solvables par MiniSat en moins d'une minute), ni trop difficiles (non solvables par un des solveurs des participants en plus d'une heure).
+\newpage
+
+\subsection{Les différents types de solveurs}
+Lors de compétitions, plusieurs types de solveurs doivent/peuvent être réalisés par les équipes concurrentes. En voici la liste principale : 
+\newline
+\begin{multicols}{2}
+\begin{itemize}
+\item Agile Solvers
+\item Incremental Solvers
+\item Main Solvers
+\item NoLimits Solvers
+\item Parralel Solvers
+\item Random Solvers
+\end{itemize}
+\end{multicols}
+\begin{itemize}[label=\textbullet, font=\LARGE \color{blue}]
+\item Les solveurs Agiles suivent la piste de simples solveurs SAT de façon rapide et avec une faible surchage, adaptés à la résolution d'instances SAT pas trop dures. $ (exemple : Glucose) $
+\item Les solveurs Incrémentaux génèrent des instances SAT de façon incrémentielle $ (exemple : Candy-Incremental)$
+\item Les solveurs Main suivent la piste des solveurs séquentiels SAT $(exemple : Maple-LCM)$
+\item Les solveurs NoLimits sont dit solveurs à carte blanche. En effet, les modalités de rendu de ces solveurs sont différentes des autres types de solveurs. Ici, le code source \& les certificats de solutions ne sont pas obligatoirement requis). Seuls de nouveaux benchmarks jamais étudiés les années précédentes seront utilisés dans cette catégorie.$(exemple : Cadical)$
+\item Les solveurs Parallèles suivent la piste des solveurs SAT parallèles conçus pour les ordinateurs possédants plusieurs processeurs ou noyaux de processeurs. (utilisation de threads...). $(exemple : painless)$
+\item Les solveurs Random suivent la piste des solveurs de type Main tout en générant des instances satisfaisables de façon aléatoire. $(exemple : Score2SAT$)
+\end{itemize}
+
+\subsection{Zoom sur types de solveurs SAT }
+\title{ \textbf{1.3.1 $ - $ Le solveur parallèle Glucose}\footnote{http://www.labri.fr/perso/lsimon/glucose/}}
+\newline
+\newline
+\hspace*{0.6cm}Le solveur Glucose est un solveur basé sur un schéma de scores (présenté pour la première fois en 2009). il résout les clauses en déterminant si elles sont satisfaisables ou non. Depuis 2014, Glucose se caractérise comme étant un solveur travaillant en parallèle.
+\hspace*{0.6cm} Lors de compétitions, Glucose à remporté les prix suivants (les plus récents) :
+\begin{enumerate}
+\item Certified UNSAT, Applications - 2nde Place, 2015
+\item Parallel SAT+UNSAT Applications - 4ème place, 2015
+\end{enumerate}
+\hspace*{0.6cm} Au classement général, le solveur Glucose développé par Gilles Audemard (CRIL\footnote{http://www.cril.univ-artois.fr/}) et Laurent Simon (LaBRI\footnote{http://www.labri.fr/}) a été classé meilleur solveur parallèle de la SAT Race 2015 (et troisième dans la catégorie 'résolution incrémentale').
+Il est bon à noter que Glucose 3.0 se base en grande partie sur le Solveur MiniSat\footnote{http://minisat.se/}.
+
+\hspace{0.6cm} Aujourd'hui, Glucose est l'un des solveurs les plus reconnus en France (étant produit essentiellement par des francophones). Il utilise essentiellement les méthodes de résolutions d'instances (DPLL, propagation unitaire et valuation partielle notamment).
+\newline
+
+\title{ \textbf{1.3.2 $ - $ Le solveur CaDiCal }\footnote{http://fmv.jku.at/cadical/}}
+\newline
+Le but du développement de CaDiCal était en premier lieu d'obtenir un solveur CDCL (Conflict-Driven Clause Learning), facile d'utilisation et de compréhension. Le but était de simplifier radicalement le design et les structures internes des données, mais actuellement, ce but n'est atteint que partiellement. Cependant, ce solveur reste performant quant à ses résultats lors de compétitions :
+\begin{enumerate}
+\item Certified SAT+UNSAT, Applications - 1ère Place, 2017
+\item Parallel SAT+UNSAT Applications - 3ème place, 2017
+\end{enumerate}
+\newpage
+
+\newpage
+
+\section{Approche théorique et définitions utiles}
+\subsection{La logique propositionnelle et le problème SAT}
+Soit $ V $ un ensemble de variables propositionnelles. On définit l'ensemble des formules propositionnelles sur $ V $ de la façon suivante : 
+\begin{enumerate}
+\item toute variable $ x  \in V $ est une formule.
+\item si  $ \Phi $ et $ \Psi $ et sont des formules, alors $ \Phi \vee \Psi $, $ \Phi \wedge \Psi $, $ \Phi \Rightarrow \Psi $  et $ \lnot \Phi $ sont des formules.
+\end{enumerate}
+
+	Ces formules peuvent être évaluées (à vrai ou à faux) en associant une valeur de vérité à chaque variable. Ainsi étant donné une formule $ \Phi $  et une interprétation $  I: V \rightarrow {0,1}$ , on définit $ \Phi(I) $ comme étant la valeur de vérité obtenue en remplaçant dans $ \Phi $ chaque variable par son interprétation et en appliquant les règles usuelles de la logique booléenne. Si $ \Phi(I) = 1 $ on dit que  $ I $ satisfait $ \Phi $ ou que $ I $ est un modèle de $ \Phi $ . On note $mod(\Phi) $ l'ensemble des modèles de $ \Phi $.
+
+	Le problème SAT est un problème de décision qui prend en entrée une formule propositionnelle et détermine si cette formule est ou non satisfaisable, on peut le définir de la façon suivante : 
+	\newline
+ 	\hspace*{3.0cm}\textbf{entrée }: une formule propositionnelle 
+ 	\newline
+	\hspace*{3.0cm}\textbf{question : } est-elle satisfaisable (oui ou non)?
+	\newline
+
+\subsection{La réduction polynomiale : définition}
+Soient $ \pi_1 $ et $\pi_2 $ deux problèmes de décision. Une réduction polynomiale de   $ \pi_1 $ à $\pi_2 $ est une application $ r : I(\pi_1) \rightarrow I(\pi_2) $ telle que :
+
+$ \forall x \in I(\pi_1) : x \in I^+(\pi_1) \Leftrightarrow r(x) \in I^+(\pi_2) $
+
+$ r $ est calculable en temps polynomial.
+\newpage
+\section{Approche pratique : les réductions polynomiales}
+Cette partie explique en détail l'intégralité des travaux que nous avons effectué. Par rapport aux outils utilisés, tous les programmes implémentés ont été codés en Java. Les formules propositionnelles\footnote{Format DIMACS CNF : http://people.sc.fsu.edu/~jburkardt/data/cnf/cnf.html} et les graphes\footnote{Format DIMACS pour graphe : http://people.sc.fsu.edu/~jburkardt/data/cnf/cnf.html} sont modélisés sous le format DIMACS les instances des problèmes CSP sont modélisées sous le format XCSP\footnote{Site officiel de XCSP : http://www.xcsp.org/).}
+
+\subsection{SAT vers 3-SAT}
+Pour transformer une instance de SAT en une instance de 3-SAT, il faut parcourir l'ensemble des clauses de l'instance initiale et appliquer une des modifications suivantes en fonction de la taille de la clause :
+\begin{itemize}
+\item Si la clause initiale est de longueur 1, l'unique littéral présent dans la clause initiale sera triplé dans la clause finale, par exemple, la clause $x$ deviendra $x \lor x \lor x.$
+
+\item Si la clause initiale est de longueur 2, la nouvelle clause contiendra les deux littéraux de la clause initiale, puis on lui ajoutera un des deux littéraux. Par exemple, la clause $x \lor y $ peut devenir $x \lor y \lor x.$
+
+\item Si la clause initiale est de longueur 3, elle correspond déjà au spécificités de 3-SAT et n'est pas modifiée.
+
+\item Si la clause est de longueur supérieure à 3, alors on va tout d'abord créer une  première clause contenant les deux premiers littéraux de la clause initiale suivi d'un littéral intermédiaire (noté a) instancié à vrai. On va ensuite créer une seconde clause contenant a ainsi que le troisième littéral de la clause initiale, suivi d'un autre littéral intermédiaire. On va répéter cette opération jusqu'à ce qu'il reste un ou deux littéraux non traités, la dernière clause sera composée d'un littéral intermédiaire instancié à faux ainsi que du ou des deux derniers littéraux de la clause initiale. Par exemple la clause $v \lor w \lor x \lor y \lor z $ donnera l'ensemble de clauses suivant : \newline 
+\begin{center}
+ 
+\end{center}
+\end{itemize}
+\subsection{3-SAT vers 3-COLORATION}
+Pour effectuer cette réduction polynomiale, on doit transformer une instance de 3-SAT en un graphe. Soit $\phi$ une formule propositionnelle instance de 3-SAT, on va tout d'abord créer deux sommets pour chaque variable $x$ de  $\phi$ , un pour son affectation à vrai et un autre pour son affectation à faux, une arête va relier chaque nouveau couple de sommet créé de cette manière. Par la suite, on notera $V_1$ cet ensemble de sommets.
+\newpage
+	Ensuite, il faut créer trois sommets particuliers appelés Vrai, Faux et Neutre (par la suite, on les notera respectivement $T, F, N$). On va ensuite relier le sommet $N $ à tous les sommets de $V_1.$
+
+Maintenant, il faut encore modéliser les contraintes pour chaque clause, pour cela, on va définir un gadget $OR$ qui est de la forme suivante : 
+\newline
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale=0.5]{ORgraph.eps} 
+\caption{Schéma d'un gadget OR}
+\end{center}
+\end{figure}
+
+Il faut maintenant parcourir l'ensemble des clauses de $ \phi $  puis pour chaque clause, créer un gadget $OR$ et connecter aux trois sommets d'entrée (coloriés en bleu) aux sommets de$ V_1 $ associés aux littéraux présents dans la clause, puis connecter le sommets de sortie (colorié en rouge) aux sommets $ F $ et $ N$ décrits précédemment.
+Par exemple, la formule $ phi $  ayant pour ensemble de clause $ \left\{ a \lor b \lor \neg c ; \neg b \lor c\right\} $ deviendra le graphe suivant : 
+\newline
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.3]{Graph2.eps} 
+\caption{Transformation de $ \phi $ en instance $ 3 $- $COL $ }
+\end{center}
+\end{figure}
+
+\subsection{3-COL vers CSP}
+La transformation 3-COL vers CSP est relativement triviale.
+Prenons un graphe. A chaque sommet du graphe on fait correspondre une variable dans l'instance de CSP. 
+Chaque domaine des variables valent $ \left\{0, 1, 2\right\}$, chaque nombre correspond à une couleur.
+Puis pour chaque arête du graphe G on ajoute la même contrainte entre les deux sommets. Cette contrainte vaut 
+\begin{center}
+$ \left\{(0,1), (0, 2), (1, 0), (1, 2), (2, 0), (2, 1) \right\}.$ 
+\end{center}
+
+On peut aussi définir cette contrainte par les valeurs que le couple ne doit pas prendre, ce qui rend la contrainte plus concise. On a donc $\left\{(0, 0), (1, 1), (2, 2)\right\}$
+\newline
+\begin{itemize}
+\item Exemple :
+\end{itemize}
+Soit G une clique de trois sommets.
+\newline
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.3]{GraphRedu3.eps} 
+\caption{Graphe G à 3 sommets }
+\end{center}
+\end{figure}
+\newline
+L'instance CSP correspondante est la suivante:
+\newline
+\hspace*{0.6cm} $ X : $ $ <a, b, c>$ \newline
+\hspace*{0.6cm} $ D : $ $ <D_a = D_b = D_c = \left\{0, 1, 2\right\} >$ \newline
+\hspace*{0.6cm} $C : $ $ <C_{ab}, C_{ac}, C_{bc}>$ \newline
+\hspace*{0.6cm} $R : $ $ <RC_{ab}  = RC_{bc} = RC_{ac} = \left\{(0,1), (0,2), (1,0), (1,2), (2,0), (2,1)\right\}> $
+
+\subsection{3-SAT vers VERTEX-COVER}
+Soit  $ \phi $ l'instance initiale de 3-SAT. On va tout d'abord récupérer l'ensemble des variables de $ \phi $  et pour chacune d'elles, on va créer deux sommets, un pour l'affectation positive de la variable, un autre pour l'affectation négative. Ces deux sommets seront ensuite reliés par une arête. On note $V_1$ l'ensemble des sommets créés de cette manière.
+
+	Ensuite, il faut parcourir l'ensemble des clauses de $\phi$  puis créer un sommet pour chaque littéral, chacun reliés entre eux (comme $\phi$ est une instance de 3-SAT, on obtient donc un triangle par clause). Pour chaque sommet créé de cette manière, on va également créer une arête le reliant à son équivalent de $V_1$. Pour ce problème de couverture on fixe $k$ au nombre de clauses de $\phi$.
+\newpage
+\hspace*{0.6cm}Par exemple, pour la formule  $\phi$ ayant l'ensemble de clauses suivant : $\left\{a\lor b \lor \neg c, \neg a \lor \neg b \lor c, a \lor \neg b \lor \neg c\right\}$, on obtiendrait le graphe suivant : 
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.3]{GrapheReduc4.eps} 
+\caption{Transformation de $\phi$ en une instance de $VERTEX$-$COVER (k=3)$ }
+\end{center}
+\end{figure}
+
+\subsection{SAT vers CLIQUE}
+Soit $ \phi $  l'instance initiale de SAT. On va parcourir l'ensemble des clauses de $\phi$ et pour chaque littéral, on va créer un nouveau sommet. Ensuite, on va connecter chaque sommet créé de cette manière à tous les autres sommets des autres clauses n'étant pas associés à sa négation. Comme pour la transformation précédente, on va fixer $k$ au nombre de clause de $\phi$ .
+\newline
+\hspace*{0.3cm}Par exemple, soit $\phi$  l'instance de SAT possédant l'ensemble de clauses suivant : $\left\{a \lor b, \neg a \lor b,  \neg a \lor \neg b \right\}$, si l'on applique la transformation décrite ci-dessus à $\phi$ , on obtient le graphe suivant : 
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.3]{GrapheClique.eps} 
+\caption{Transformation de $\phi$ en une instance de $CLIQUE (k=3)$ }
+\end{center}
+\end{figure}
+
+\subsection{CSP binaire vers SAT}
+Les transformations de CSP vers SAT sont particulières car il en existe plusieurs, nous avons décidé d'en implémenter deux : le direct encoding et le support encoding.
+\newpage
+La première étape est commune aux deux transformations, pour chaque variable CSP $x$, on va créer $n$ variables propositionnelles ($n$ étant la taille du domaine de $x$) qui vont modéliser toutes les valeurs que peut prendre $x$. On doit maintenant modéliser les deux faits suivants :
+\newline
+\begin{itemize}
+\item Une variable doit prendre au moins une valeur
+\item Une variable doit prendre au plus une valeur \newline
+\end{itemize}
+
+Le premier fait peut être modélisé par la simple clause $x_1 \lor ...x_n.$ Pour le second fait, il faut créer $\frac{n-(n-1)}{2}$ clauses de deux négations entre deux variables différentes.
+\newline
+Pour la seconde étape, cela va dépendre de la transformation utilisée. Le direct encoding va encoder les couples interdits, alors que le support encoding va encoder les couples autorisés. Pour illustrer, prenons le CSP suivant : 
+\newline
+\hspace*{0.6cm} $ X : $ $ <a, b>$ \newline
+\hspace*{0.6cm} $ D : $ $ <D_a = D_b = \left\{0, 1, 2\right\} >$ \newline
+\hspace*{0.6cm} $C : $ $ <C_{ab}>$ \newline
+\hspace*{0.6cm} $R : $ $ <RC_{ab} = \left\{(0,0), (1,1), (2,2)\right\}> $
+\begin{center}
+Les couples présents dans la relation modélisent les couples interdits.
+\end{center}
+Si on applique le direct encoding à ce CSP, nous obtenons la formule suivante
+\begin{multicols}{2}
+$ a_0 \lor a_1 \lor a_2 $ \newline
+\hspace*{0.3cm}$ \neg a_0 \lor \neg a_1 $ \newline
+\hspace*{0.3cm}$ \neg a_0 \lor \neg a_2 $ \newline
+\hspace*{0.3cm}$ \neg a_1 \lor \neg a_2 $ \newline
+\hspace*{0.3cm}$ b_0 \lor b_1 \lor b_2 $ \newline
+\hspace*{0.3cm}$ \neg b_0 \lor \neg b_1 $ \newline
+\hspace*{0.3cm}$ \neg b_0 \lor \neg b_2 $ \newline
+\hspace*{0.3cm}$ \neg b_1 \lor \neg b_2 $ \newline
+\hspace*{0.3cm}$ \neg a_0 \lor \neg b_0 $ \newline
+\hspace*{0.3cm}$ \neg a_1 \lor \neg b_1 $ \newline
+\hspace*{0.3cm}$ \neg a_2 \lor \neg b_2 $ \newline
+\end{multicols}
+En revanche, si l'on applique le support encoding à ce CSP, nous obtenons la formule suivante : 
+\begin{multicols}{2}
+$ a_0 \lor a_1 \lor a_2 $ \newline
+\hspace*{0.3cm}$ \neg a_0 \lor \neg a_1 $ \newline
+\hspace*{0.3cm}$ \neg a_0 \lor \neg a_2 $ \newline
+\hspace*{0.3cm}$ \neg a_1 \lor \neg a_2 $ \newline
+\hspace*{0.3cm}$ b_0 \lor b_1 \lor b_2 $ \newline
+\hspace*{0.3cm}$ \neg b_0 \lor \neg b_1 $ \newline
+\hspace*{0.3cm}$ \neg b_0 \lor \neg b_2 $ \newline
+\hspace*{0.3cm}$ \neg b_1 \lor \neg b_2 $ \newline
+\hspace*{0.3cm}$ \neg a_0 \lor  b_1 \lor b_2 $ \newline
+\hspace*{0.3cm}$ \neg a_1 \lor  b_0 \lor b_2 $ \newline
+\hspace*{0.3cm}$ \neg a_2 \lor  b_0 \lor b_1 $ \newline
+\hspace*{0.3cm}$ \neg b_0 \lor  a_1 \lor a_2 $ \newline
+\hspace*{0.3cm}$ \neg b_1 \lor  a_0 \lor a_2 $ \newline
+\hspace*{0.3cm}$ \neg b_2 \lor  a_0 \lor a_1 $ \newline
+\end{multicols}
+\newpage
+
+\subsection{SAT vers CSP}
+Il faut savoir qu'une FNC (forme normale conjonctive) est insatisfaite s'il y a au moins une de ses clauses qui est insatisfaite. Ainsi, il existe une seule interprétation possible afin de rendre une clause instatisfaite. \newline
+Par exemple, la clause $ \neg a \lor b \lor c $ à une seule interprétation qui la rend insatisfaite. Il s'agit de : $a$=$1$, $b$=$c$=$0$.
+\newline
+\hspace*{0.3cm}Sachant cela, pour faire une telle réduction, il faut pour chaque variable de l'instance SAT créer une variable dans l'instance CSP. Elles ont toutes pour domaine  $\left\{0, 1 \right\} $.
+
+\hspace*{0.3cm}Il faut ensuite créer une nouvelle contrainte pour chaque clause de l'instance SAT. Cette contrainte porte sur l'ensemble des variables de la clause.
+
+\hspace*{0.3cm}Cette contrainte va forcer les variable à ne pas prendre les valeurs qui seront susceptibles de rendre la clause insatisfaisable.
+\newline
+Traitons cette réduction sur un exemple précis. Soit $ \phi $ l'instance SAT suivante :
+\begin{figure}[!h]
+\begin{center}
+\hspace*{2.5cm}$ a \lor b \lor c $
+\newline
+\hspace*{2.5cm}$ a \lor b \lor \neg c $
+\newline
+\hspace*{2.5cm}$ b \lor \neg c $
+\newline
+\hspace*{2.5cm}$ a \lor c \lor \neg a $
+\newline
+\end{center}
+\end{figure}
+
+Sa réduction vers CSP sera donc
+\newline
+\hspace*{0.6cm} $ X : $ $ <a, b, c>$ \newline
+\hspace*{0.6cm} $ D : $ $ <D_a = D_b = \left\{0, 1 \right\} >$ \newline
+\hspace*{0.6cm} $C : $ $ <C_{abc}, C_{bc}, C_{aca} >$ \newline
+\hspace*{0.6cm} $R : $ $ <RC_{abc} = \left\{(0,0,0), (0,0,1)\right\}RC_{bc} = \left\{(0,1)\right\} RC_{aca} = \left\{(0,0,1)\right\} >$
+\newpage
+\section{Phases de tests de benchmarks et résultats}               %% un autre titre
+\index{conclusion}                 %% inclure le mot conclusion dans l'index
+\index{LaTeX}                      %% inclure le mot LaTeX dans l'index
+En conclusion, \LaTeX\ est 
+particulièrement bien adapté pour 
+rédiger de longs documents.
+\begin{tabular}{|*{2}{c|}l r|}
+   \hline
+   une & deux & trois & quatre \\
+   case centrée & encore centrée & à gauche & à droite \\
+   \hline
+   six & sept & huit & neuf \\
+   \hline
+ \end{tabular}
+
+\section{Conclusion}					 
+On conclue lol
+\newpage
+
+\section{ANNEXES}
+Ici, sommaire des annexes en détaillant comment fonctionnent les tableaux
+\newpage
+\begin{landscape}
+\begin{adjustwidth}{-2em}{-8em}
+\begin{center}
+\begin{tabular}{| c | c | c | c | c | }
+	\hline
+   \textbf{Numéro test} & \textbf{Benchmark} & \textbf{SAT} & \textbf{Réduction} & \textbf{Compétition} \\
+   \hline
+   ID\_101 & bioinfo & UNSAT & SAT TO 3 SAT & SAT COMPETITION 2009 \\
+   \hline
+   ID\_102 & bioinfo & UNSAT & SAT TO 3 SAT & SAT COMPETITION 2009 \\
+   \hline
+   ID\_103 & bioinfo & UNSAT & SAT TO 3 SAT & SAT COMPETITION 2009 \\
+   \hline
+   ID\_104 & bioinfo & UNSAT & SAT TO 3 SAT & SAT COMPETITION 2009 \\
+   \hline
+   ID\_105 & bioinfo & UNSAT & SAT TO 3 SAT & SAT COMPETITION 2009 \\
+   \hline
+   ID\_106 & coloring & UNSAT & CSP TO SAT & CPAI08 \\
+   \hline
+   ID\_107 & coloring & UNSAT & CSP TO SAT & CPAI08 \\
+   \hline
+   ID\_108 & coloring & UNSAT & CSP TO SAT & CPAI08 \\
+   \hline
+   ID\_109 & coloring & UNSAT & CSP TO SAT & CPAI08 \\
+   \hline
+   ID\_110 & coloring & UNSAT & CSP TO SAT & CPAI08 \\
+   \hline
+   ID\_111 & coloring & SAT & CSP TO SAT & CPAI08 \\
+   \hline
+   ID\_112 & coloring & SAT & CSP TO SAT & CPAI08 \\
+   \hline
+   ID\_113 & coloring & SAT & CSP TO SAT & CPAI08 \\
+   \hline
+   ID\_114 & coloring & SAT & CSP TO SAT & CPAI08 \\
+   \hline
+   ID\_115 & coloring & SAT & CSP TO SAT & CPAI08 \\
+   \hline
+   ID\_116 & coloring & UNSAT & CSP TO SAT & CPAI08 \\
+   \hline
+   ID\_117 & coloring & UNSAT & CSP TO SAT & CPAI08 \\
+   \hline
+   ID\_118 & coloring & UNSAT & CSP TO SAT & CPAI08 \\
+   \hline
+   ID\_119 & coloring & UNSAT & CSP TO SAT & CPAI08 \\
+   \hline
+   ID\_120 & coloring & UNSAT & CSP TO SAT & CPAI08 \\
+   \hline
+   ID\_121 & geom & UNSAT & CSP TO SAT & CPAI08 \\
+   \hline
+    ID\_122 & geom & UNSAT & CSP TO SAT & CPAI08 \\
+   \hline
+    ID\_123 & geom & UNSAT & CSP TO SAT & CPAI08 \\
+   \hline
+    ID\_124 & geom & UNSAT & CSP TO SAT & CPAI08 \\
+   \hline
+    ID\_125 & geom & UNSAT & CSP TO SAT & CPAI08 \\
+   \hline
+   
+ \end{tabular}
+ \poubelle{\captionof{table}{Identification des tests de façon générale} }
+ \vspace{3\baselineskip}
+ 
+ 
+ \begin{tabular}{| c | c | c | c | c | c | c | c | c |}
+	\hline
+	\textbf{Numéro test} & \textbf{Initial File} & \textbf{Initial Variables} & \textbf{Initial Contrainst} & \textbf{Initial Domains} & \textbf{Initial Relations} & \textbf{Tclauses} & \textbf{LClauses} & \textbf{Ratio}\\
+	\hline
+	ID\_101 & q\_query\_2\_L324\_coli.cnf & 617854 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_102 & q\_query\_2\_L324\_coli.cnf & 617854 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_103 & q\_query\_2\_L324\_coli.cnf & 617854 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_104 & q\_query\_2\_L324\_coli.cnf & 617854 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_105 & q\_query\_2\_\L324\_coli.cnf & 617854 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_106 & normalized-myciel-5g-5-ext.xml & 47 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_107 & normalized-myciel-5g-5-ext.xml & 47 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_108 & normalized-myciel-5g-5-ext.xml & 47 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_109 & normalized-myciel-5g-5-ext.xml & 47 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_110 & normalized-myciel-5g-5-ext.xml & 47 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_111 & normalized-le-450-5a-5-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_112 & normalized-le-450-5a-5-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_113 & normalized-le-450-5a-5-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_114 & normalized-le-450-5a-5-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_115 & normalized-le-450-5a-5-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_116 & normalized-le-450-5a-4-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_117 & normalized-le-450-5a-4-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_118 & normalized-le-450-5a-4-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_119 & normalized-le-450-5a-4-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_120 & normalized-le-450-5a-4-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_121 & normalized-geo50-20-d4-75-94\_ext.xml & 50 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_122 & normalized-geo50-20-d4-75-94\_ext.xml & 50 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_123 & normalized-geo50-20-d4-75-94\_ext.xml & 50 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_124 & normalized-geo50-20-d4-75-94\_ext.xml & 50 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_125 & normalized-geo50-20-d4-75-94\_ext.xml & 50 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+\end{tabular}
+\captionof{table}{Identification des tests par leur initial files \& values} 
+\vspace{3\baselineskip}
+
+
+
+
+\begin{tabular}{| c | c | c | c | c | c | c | c | c | c |}
+\hline
+	\textbf{Numéro test} & \textbf{Final File} & \textbf{Final Variables} & \textbf{Final Clauses} & \textbf{Final Constraint} & \textbf{Final Domains} & \textbf{Final Relations} & \textbf{TClauses} & \textbf{LClauses} & \textbf{Ratio} \\
+	\hline
+	ID\_101 & q\_query\_2\_L324\_coli.cnf & 617854 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_102 & q\_query\_2\_L324\_coli.cnf & 617854 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_103 & q\_query\_2\_L324\_coli.cnf & 617854 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_104 & q\_query\_2\_L324\_coli.cnf & 617854 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_105 & q\_query\_2\_\L324\_coli.cnf & 617854 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_106 & normalized-myciel-5g-5-ext.xml & 47 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_107 & normalized-myciel-5g-5-ext.xml & 47 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_108 & normalized-myciel-5g-5-ext.xml & 47 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_109 & normalized-myciel-5g-5-ext.xml & 47 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_110 & normalized-myciel-5g-5-ext.xml & 47 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_111 & normalized-le-450-5a-5-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_112 & normalized-le-450-5a-5-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_113 & normalized-le-450-5a-5-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_114 & normalized-le-450-5a-5-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_115 & normalized-le-450-5a-5-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_116 & normalized-le-450-5a-4-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_117 & normalized-le-450-5a-4-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_118 & normalized-le-450-5a-4-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_119 & normalized-le-450-5a-4-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_120 & normalized-le-450-5a-4-ext.xml & 450 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_121 & normalized-geo50-20-d4-75-94\_ext.xml & 50 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_122 & normalized-geo50-20-d4-75-94\_ext.xml & 50 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_123 & normalized-geo50-20-d4-75-94\_ext.xml & 50 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_124 & normalized-geo50-20-d4-75-94\_ext.xml & 50 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+	ID\_125 & normalized-geo50-20-d4-75-94\_ext.xml & 50 & 4 & 5 & 6 & 7 & 8 & 9 \\
+	\hline
+\end{tabular}
+\captionof{table}{Identification des tests par leur final files \& values} 
+\vspace{3\baselineskip}
+
+
+
+
+\end{center}
+\begin{center}
+\begin{tabular}{| c | c | c | c | c |}
+\hline
+\textbf{Numéro test} & \textbf{Solver} & \textbf{Initial Time} & \textbf{Final Time} & \textbf{Ratio} \\
+\hline
+1 & 2 & 3 & 4 & 5 \\
+\hline
+\end{tabular}
+\captionof{table}{Identification des tests de façon générale} 
+\end{center}
+
+\end{adjustwidth}
+
+\end{landscape}
+\end{document} 
