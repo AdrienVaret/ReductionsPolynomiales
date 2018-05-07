@@ -9,9 +9,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.traversal.DocumentTraversal;
 import org.w3c.dom.traversal.NodeFilter;
 import org.w3c.dom.traversal.NodeIterator;
+
+import reductions.CSPToSat;
+import structures.Relation.TypeRelation;
 
 public class BinCSP {
 
@@ -269,9 +273,128 @@ public class BinCSP {
 		return csp;
 	}
 	
+	public static BinCSP importFromXCSP3Rand(String filename) {
+		
+		ArrayList<Domain> domains         = new ArrayList<Domain>();
+		ArrayList<Variable> variables     = new ArrayList<Variable>();
+		ArrayList<Relation> relations     = new ArrayList<Relation>();
+		ArrayList<Constraint> constraints = new ArrayList<Constraint>();
+		
+		Document document = null;
+		DocumentBuilderFactory factory = null;
+		
+		int nbVariables = 0;
+		int nbDomains = 0;
+		int nbRelations = 0;
+		int nbConstraints = 0;
+		
+		ArrayList<CoupleVariables> couplesVariables = new ArrayList<CoupleVariables>();
+		
+		try {
+			factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			document = builder.parse(filename);
+			DocumentTraversal traversal = (DocumentTraversal) document;
+			NodeIterator iterator = traversal.createNodeIterator(
+					document.getDocumentElement(), NodeFilter.SHOW_ELEMENT, null, true);
+			
+			for (Node n = iterator.nextNode(); n != null; n = iterator.nextNode()) {
+				switch  (((Element) n).getTagName()) {
+					case "array" :
+						String baseName = ((Element) n).getAttribute("id");
+						String baseSize = ((Element) n).getAttribute("size");
+						int size = Integer.parseInt(baseSize.split(Pattern.quote("["))[1].split(Pattern.quote("]"))[0]);
+						String domain = ((Element) n).getFirstChild().getTextContent();
+						String [] splittedDomain = domain.split(Pattern.quote(".."));
+						int domainSize = 0;
+						ArrayList<String> values = new ArrayList<String>();
+						
+						for (int i = 0 ; i < splittedDomain.length ; i++) {
+							splittedDomain[i] = splittedDomain[i].replaceAll(Pattern.quote(" "), "");
+						}
+						
+						for (int i = Integer.parseInt(splittedDomain[0]) ; i <= Integer.parseInt(splittedDomain[1]) ; i++) {
+							values.add(Integer.toString(i));
+							domainSize ++;
+						}
+						
+						domains.add(new Domain("D0", domainSize, values, Integer.parseInt(splittedDomain[1]), 
+								Integer.parseInt(splittedDomain[0])));
+						
+						for (int i = 0 ; i < size ; i++) {
+							variables.add(new Variable("V" + i, domains.get(0)));
+						}
+						
+						break;
+						
+					case "extension" : 
+						break;
+						
+					case "list" : 
+						String strVariables = ((Element)n).getFirstChild().getTextContent();
+						strVariables = strVariables.replaceAll(Pattern.quote(" "), "");
+						strVariables = strVariables.replaceAll(Pattern.quote("]x["), " ");
+						strVariables = strVariables.replaceAll(Pattern.quote("x["), "");
+						strVariables = strVariables.replaceAll(Pattern.quote("]"), "");
+						
+						String [] splittedVariables = strVariables.split(" ");
+						int v1 = Integer.parseInt(splittedVariables[0]);
+						int v2 = Integer.parseInt(splittedVariables[1]);
+						couplesVariables.add(new CoupleVariables(variables.get(v1), variables.get(v2)));
+						break;
+						
+					case "conflicts" : 
+						String strCouples = ((Element) n).getFirstChild().getTextContent();
+						strCouples = strCouples.replaceAll(Pattern.quote(")("), " ");
+						strCouples = strCouples.replaceAll(Pattern.quote("("), "");
+						strCouples = strCouples.replaceAll(Pattern.quote(")"), "");
+						strCouples = strCouples.replaceFirst(Pattern.quote(" "), "");
+						
+						String [] splittedCouples = strCouples.split(" ");
+						ArrayList<Couple> couples = new ArrayList<Couple>();
+						for (int j = 0 ; j < splittedCouples.length ; j++) {
+							String [] couple = splittedCouples[j].split(Pattern.quote(","));
+							couples.add(new Couple(couple[0], couple[1]));
+						}
+						
+						Relation relation = new Relation("R" + relations.size(), 
+								TypeRelation.R_CONFLICT, couples.size(), couples);
+						
+						relations.add(relation);
+						break;
+						
+				}
+			}
+			for (int i = 0 ; i < couplesVariables.size() ; i++) {
+				Constraint constraint = new Constraint("C" + i, couplesVariables.get(i).getV1(),
+						                               couplesVariables.get(i).getV2(),
+						                               relations.get(i));
+				constraints.add(constraint);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return new BinCSP(domains.size(), variables.size(), relations.size(), constraints.size(), domains,
+			variables, relations, constraints);
+	}
+	
 	public static void main(String [] args) {
-		@SuppressWarnings("unused")
+	/*	@SuppressWarnings("unused")
 		BinCSP csp = importFromXML("test.xml");
 		System.out.println("");
+		
+		String strVariables = " x[9] x[13] ";
+		strVariables = strVariables.replaceAll(Pattern.quote(" "), "");
+		strVariables = strVariables.replaceAll(Pattern.quote("]x["), " ");
+		strVariables = strVariables.replaceAll(Pattern.quote("x["), "");
+		strVariables = strVariables.replaceAll(Pattern.quote("]"), "");
+		System.out.println(strVariables);*/
+		
+		BinCSP csp = importFromXCSP3Rand("testcsp3.xml");
+	//	System.out.println("");
+		SatFNC sat = CSPToSat.directEncoding(csp);
+		System.out.println(sat.toString());
+		
 	}
 }

@@ -7,6 +7,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Graph {
 	
@@ -36,8 +40,6 @@ public class Graph {
 	public int getNbVertex() {
 		return nbVertex;
 	}
-
-
 
 	public int getNbEdges() {
 		return nbEdges;
@@ -103,6 +105,60 @@ public class Graph {
 			e.printStackTrace();
 		}
 	}
+
+	public static Graph generateCompleteGraph(int nbVertex) {
+		ArrayList<Edge> edges = new ArrayList<Edge>();
+		
+		for (int i = 1 ; i <= nbVertex ; i++) {
+			for (int j = i+1 ; j <= nbVertex ; j++) {
+				edges.add(new Edge(i,j));
+			}
+		}
+		
+		return new Graph(nbVertex, edges.size(), edges);
+	}
+	
+	public static Graph generate(int nbVertex, int nbEdges) {
+	
+		ArrayList<Edge> edges = new ArrayList<Edge>();
+		
+		for (int i = 0 ; i < nbEdges ; i++ ) {	
+			int vertex1 = ThreadLocalRandom.current().nextInt(1, nbVertex + 1);
+			int vertex2 = ThreadLocalRandom.current().nextInt(1, nbVertex + 1);
+			
+			if (vertex1 != vertex2) {
+				edges.add(new Edge(vertex1, vertex2));
+			} else {
+				i --;
+			}
+		}
+		
+		Set<Edge> hs = new TreeSet<Edge>();
+		hs.addAll(edges);
+		edges.clear();
+		edges.addAll(hs);
+		
+		while (edges.size() < nbEdges) {
+			int n = nbEdges - edges.size();
+			for (int i = 0 ; i < n ; i++) {
+				int vertex1 = ThreadLocalRandom.current().nextInt(1, nbVertex + 1);
+				int vertex2 = ThreadLocalRandom.current().nextInt(1, nbVertex + 1);
+				
+				if (vertex1 != vertex2) {
+					edges.add(new Edge(vertex1, vertex2));
+				} else {
+					i --;
+				}
+			}
+			
+			hs = new TreeSet<Edge>();
+			hs.addAll(edges);
+			edges.clear();
+			edges.addAll(hs);
+		}
+		
+		return new Graph(nbVertex, edges.size(), edges);
+	}
 	
 	public String toString() {
 		String str = "c k = " + k + "[-1 : undefined]\n";
@@ -111,5 +167,10 @@ public class Graph {
 			str += "e " + edge.getVertex1() + " " + edge.getVertex2() + "\n";
 		}
 		return str;
+	}
+	
+	public static void main (String [] args) {
+		Graph g = generateCompleteGraph(4);
+		System.out.println(g.toString());
 	}
 }

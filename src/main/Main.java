@@ -95,6 +95,12 @@ public class Main {
 				encoding = args[4];
 			}
 			
+			
+			String benchmark = new String("");
+			if (args.length > 5) {
+				benchmark = args[5];
+			}
+			
 			if (inputFormat.equals("SAT") && outputFormat.equals("3SAT")) {
 				SatFNC sat = SatFNC.importFromDimacs(inputFile);
 				SatFNC Tsat = SatTo3Sat.convert(sat);
@@ -103,7 +109,7 @@ public class Main {
 				System.out.println("# input "  + inputFile.getAbsolutePath());
 				displaySATInfos(sat);
 				System.out.println("# output " + outputFile.getAbsolutePath());
-				displaySATInfos(sat);
+				displaySATInfos(Tsat);
 				
 			} else if (inputFormat.equals("3COL") && outputFormat.equals("SAT")) {
 				Graph graph = Graph.importFromDimacs(inputFile);
@@ -170,6 +176,16 @@ public class Main {
 				SatFNC sat = CSPToSat.supportEncoding(csp);
 				sat.exportToDimacs(outputFile);
 				System.out.println("# CSP to SAT réduction [SUPPORT_ENCODING]");
+				System.out.println("# input "  + inputFile.getAbsolutePath());
+				displayCSPInfos(csp);
+				System.out.println("# output " + outputFile.getAbsolutePath());
+				displaySATInfos(sat);
+			
+			} else if (inputFormat.equals("CSP3") && outputFormat.equals("SAT") && encoding.equals("DIRECT") && benchmark.equals("RANDOM")) {
+				BinCSP csp = BinCSP.importFromXCSP3Rand(inputFile.getAbsolutePath());
+				SatFNC sat = CSPToSat.directEncoding(csp);
+				sat.exportToDimacs(outputFile);
+				System.out.println("# CSP to SAT réduction [DIRECT_ENCODING]");
 				System.out.println("# input "  + inputFile.getAbsolutePath());
 				displayCSPInfos(csp);
 				System.out.println("# output " + outputFile.getAbsolutePath());

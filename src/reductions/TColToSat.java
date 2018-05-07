@@ -24,10 +24,10 @@ public class TColToSat {
 			int var2 = (i+1)+1;
 			int var3 = (i+2)+1;
 			
-			sat.addClause(new String (var1 + " " + var2 + " " + var3));
-			sat.addClause(new String (-var1 + " " + -var2));
-			sat.addClause(new String (-var1 + " " + -var3));
-			sat.addClause(new String (-var2 + " " + -var3));
+			sat.addClause(new String (var1 + " " + var2 + " " + var3 + " 0"));
+			sat.addClause(new String (-var1 + " " + -var2 + " 0"));
+			sat.addClause(new String (-var1 + " " + -var3 + " 0"));
+			sat.addClause(new String (-var2 + " " + -var3 + " 0"));
 		}
 	}
 	
