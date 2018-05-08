@@ -106,6 +106,22 @@ public class Graph {
 		}
 	}
 
+	public void exportToDimacsSafe(File f) {
+		try {
+			FileWriter writer = new FileWriter(f);
+			
+			writer.write("p edges " + nbVertex + " " + nbEdges + "\n");
+			
+			for (Edge edge : edges) {
+				writer.write("e " + edge.getVertex1() + " " + edge.getVertex2() + "\n");
+			}
+			
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static Graph generateCompleteGraph(int nbVertex) {
 		ArrayList<Edge> edges = new ArrayList<Edge>();
 		

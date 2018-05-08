@@ -1,6 +1,7 @@
 package main;
 
 import java.io.File;
+import java.io.IOException;
 
 import reductions.CSPToSat;
 import reductions.SatTo3Sat;
@@ -80,7 +81,7 @@ public class Main {
 		System.out.println("# @nb_relations : "   + csp.getNbRelations());
 	}
 	
-	public static void main (String [] args) {
+	public static void main (String [] args) throws IOException {
 
 		displayStart();
 		
@@ -111,6 +112,16 @@ public class Main {
 				System.out.println("# output " + outputFile.getAbsolutePath());
 				displaySATInfos(Tsat);
 				
+			} else if (inputFormat.equals("SAT") && outputFormat.equals("3SATBIS")) {
+				SatFNC sat = SatFNC.importFromDimacs(inputFile);
+				SatFNC Tsat = SatTo3Sat.convertBis(sat);
+				Tsat.exportToDimacs(outputFile);
+				System.out.println("# SAT to 3-SAT réduction");
+				System.out.println("# input "  + inputFile.getAbsolutePath());
+				displaySATInfos(sat);
+				System.out.println("# output " + outputFile.getAbsolutePath());
+				displaySATInfos(Tsat);
+				
 			} else if (inputFormat.equals("3COL") && outputFormat.equals("SAT")) {
 				Graph graph = Graph.importFromDimacs(inputFile);
 				SatFNC sat  = TColToSat.convert(graph);
@@ -123,11 +134,22 @@ public class Main {
 				
 			} else if (inputFormat.equals("3SAT") && outputFormat.equals("3COL")) {
 				SatFNC Tsat = SatFNC.importFromDimacs(inputFile);
-				Graph graph = TSatTo3Col.convert(Tsat);
-				graph.exportToDimacs(outputFile);
+				Graph graph = TSatTo3Col.convert(Tsat, outputFile);
+				//graph.exportToDimacs(outputFile);
 				System.out.println("# 3-SAT to 3-COL réduction");
 				System.out.println("# input "  + inputFile.getAbsolutePath());
 				displaySATInfos(Tsat);
+				System.out.println("# output " + outputFile.getAbsolutePath());
+				displayGraphInfos(graph);
+				
+			} else if (inputFormat.equals("SAT") && outputFormat.equals("3COL")) {
+				SatFNC sat = SatFNC.importFromDimacs(inputFile);
+				SatFNC TSat = SatTo3Sat.convert(sat);
+				Graph graph = TSatTo3Col.convert(TSat, outputFile);
+				//graph.exportToDimacs(outputFile);
+				System.out.println("# SAT to 3-SAT to 3-COL reduction");
+				System.out.println("# input "  + inputFile.getAbsolutePath());
+				displaySATInfos(sat);
 				System.out.println("# output " + outputFile.getAbsolutePath());
 				displayGraphInfos(graph);
 				
