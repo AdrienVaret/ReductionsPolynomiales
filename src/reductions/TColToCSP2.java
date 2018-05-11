@@ -63,10 +63,18 @@ public class TColToCSP2 {
 	
 	private static void appendConflics(FileWriter writer, BufferedReader reader) throws Exception{
 		
-		writer.append("\t\t\t<conflics>(0,0) (1,1) (2,2)");
+		writer.append("\t\t\t<supports>(0,0) (1,1) (2,2)");
 	
 			
-		writer.append("</conflics>\r\n");
+		writer.append("</supports>\r\n");
+	}
+	
+	private static void appendSupports(FileWriter writer, BufferedReader reader) throws Exception{
+		
+		writer.append("\t\t\t<supports>(0,1) (0,2) (1,0) (1,2) (2,0) (2,1)");
+	
+			
+		writer.append("</supports>\r\n");
 	}
 	
 	private static void appendExtension(FileWriter writer, BufferedReader reader, String currentLine) throws Exception{
@@ -76,7 +84,7 @@ public class TColToCSP2 {
 		writer.append("\t\t<extension>\r\n");
 		int[] vertices = getVertices(currentLine);
 		appendList(writer, reader, vertices);
-		appendConflics(writer, reader);
+		appendSupports(writer, reader);
 		writer.append("\t\t</extension>\r\n");
 	}
 	
