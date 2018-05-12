@@ -19,7 +19,7 @@ public class StatsWindow {
 	public JFrame frame;
 	public ArrayList<Data> datas;
 	public ArrayList<Data> initialsData;
-	/**
+	/**   
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
