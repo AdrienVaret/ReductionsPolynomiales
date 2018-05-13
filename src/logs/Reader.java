@@ -91,12 +91,16 @@ public class Reader {
 			}
 			
 			if (isInfo(splittedLine)) {
-				nbInitialVar            = Integer.parseInt(splittedLine[1]);
-				nbInitialClauses        = Integer.parseInt(splittedLine[2]);
-				nbInitialUnitaryClauses = Integer.parseInt(splittedLine[3]);
-				nbInitialBinaryClauses  = Integer.parseInt(splittedLine[4]);
-				nbInitialTernaryClauses = Integer.parseInt(splittedLine[5]);
-				nbInitialLongClauses    = Integer.parseInt(splittedLine[6]);
+				try {
+					nbInitialVar            = Integer.parseInt(splittedLine[1]);
+					nbInitialClauses        = Integer.parseInt(splittedLine[2]);
+					nbInitialUnitaryClauses = Integer.parseInt(splittedLine[3]);
+					nbInitialBinaryClauses  = Integer.parseInt(splittedLine[4]);
+					nbInitialTernaryClauses = Integer.parseInt(splittedLine[5]);
+					nbInitialLongClauses    = Integer.parseInt(splittedLine[6]);
+				} catch (ArrayIndexOutOfBoundsException e) {
+					System.out.println("ERROR : line " + (i+1));
+				}
 				
 				i += 1;
 				splittedLine = lines.get(i).split(" ");
@@ -113,12 +117,24 @@ public class Reader {
 					splittedLine = lines.get(i).split(" ");
 						
 					while (isResult(splittedLine)) {
-							
-						String solverName  = splittedLine[1];
-						double initialTime = Double.parseDouble(splittedLine[2]);
-						double finalTime   = Double.parseDouble(splittedLine[3]);
-							
-						ResultSolver result = new ResultSolver(solverName, initialTime, finalTime);
+						
+						String initialSolverName = "";
+						String finalSolverName = "";
+						double initialTime = -1, finalTime = -1;
+						
+						try {
+							try {
+								initialSolverName  = splittedLine[1];
+								finalSolverName = splittedLine[2];
+								initialTime = Double.parseDouble(splittedLine[3]);
+								finalTime   = Double.parseDouble(splittedLine[4]);
+							} catch (ArrayIndexOutOfBoundsException e) {
+								System.out.println("ERROR : line " + (i+1));
+							}
+						} catch (NumberFormatException e) {
+							System.out.println("Error : line " + (i+1));
+						}
+						ResultSolver result = new ResultSolver(initialSolverName, finalSolverName, initialTime, finalTime);
 						
 						datas.add(new Data(competitionName, reductionName, satisfiability, initialFile,
 							      finalFile, nbInitialVar, nbInitialClauses, nbInitialUnitaryClauses,

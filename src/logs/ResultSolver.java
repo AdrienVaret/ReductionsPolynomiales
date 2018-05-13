@@ -2,21 +2,29 @@ package logs;
 
 public class ResultSolver {
 
-	private String solverName;
+	private String initialSolverName;
+	private String finalSolverName;
 	private double initialTime;
 	private double finalTime;
 	private double ratio;
 	
-	public ResultSolver(String solverName, double initialTime, double finalTime) {
+	public ResultSolver(String initalSolverName, String finalSolverName, double initialTime, double finalTime) {
 		super();
-		this.solverName = solverName;
+		this.initialSolverName = initialSolverName;
+		this.finalSolverName = finalSolverName;
 		this.initialTime = initialTime;
 		this.finalTime = finalTime;
 		this.ratio = initialTime / finalTime;
 	}
 
+	
+	public String getFinalSolverName() {
+		return finalSolverName;
+	}
+
+
 	public String getSolverName() {
-		return solverName;
+		return initialSolverName;
 	}
 
 	public double getInitialTime() {

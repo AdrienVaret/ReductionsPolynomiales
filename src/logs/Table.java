@@ -20,7 +20,7 @@ public class Table extends JPanel{
 								"Initial file", "I_Variables", "I_Clauses",    "I_UClauses", 
 								"I_BClauses",   "I_TClauses",  "I_LClauses",   "I_Ratio_CX", "Final file",   
 								"F_Variables",  "F_Clauses",   "F_UClauses",   "F_BClauses",   
-								"F_TClauses",   "F_LClauses",  "F_Ratio_CX",   "Solver",      
+								"F_TClauses",   "F_LClauses",  "F_Ratio_CX",   "Initial Solver", "Final Solver",      
 								"Initial time", "Final time",  "Ratio"};
 	private String [] [] data;
 	
@@ -94,9 +94,10 @@ public class Table extends JPanel{
 			data [i][19] = Double.toString(d.getFinalRatio());
 		
 			data [i][20] = d.getResult().getSolverName();
-			data [i][21] = Double.toString(d.getResult().getInitialTime());
-			data [i][22] = Double.toString(d.getResult().getFinalTime());
-			data [i][23] = Double.toString(d.getResult().getRatio());
+			data [i][21] = d.getResult().getFinalSolverName();
+			data [i][22] = Double.toString(d.getResult().getInitialTime());
+			data [i][23] = Double.toString(d.getResult().getFinalTime());
+			data [i][24] = Double.toString(d.getResult().getRatio());
 			
 			i += 1;
 		}

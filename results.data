@@ -957,9 +957,61 @@ r color6 lingeling 96.170 0.552
 r color6 minisat 96.170 36.478
 r color6 cadical 96.170 0.551
 d NULL random 3COL_TO_SAT UNSAT rand-1000-09.graph rand-1000-09.cnf
-i 999 449550 0 0 0
+i 999 449550 0 0 0 0
 i 2997 1352646 0 1351647 999 0
-r color6 glucose 120.630
-r color6 lingeling 120.630
-r color6 minisat 120.630
-r color6 cadical 120.630
+r color6 glucose 120.630 55.641
+r color6 lingeling 120.630 0.633
+r color6 minisat 120.630 42.904
+r color6 cadical 120.630 0.981
+d NULL random 3_COL_TO_CSP UNSAT comp10.graph comp10.xml
+i 10 45 0 0 0 0
+i 10 45 1 1 0 0
+r color6 btd 0.001 0.070
+d NULL random 3_COL_TO_CSP UNSAT comp25.graph comp25.xml
+i 25 300 0 0 0 0
+i 25 300 1 1 0 0
+r color6 btd 0.001 0.023
+d NULL random 3_COL_TO_CSP UNSAT comp50.graph comp50.xml
+i 50 1225 0 0 0 0
+i 50 1225 1 1 0 0
+r color6 btd 0.002 0.062
+d NULL random 3_COL_TO_CSP UNSAT comp100.graph comp100.xml
+i 100 4950 0 0 0 0
+i 100 4950 1 1 0 0
+r color6 btd 0.015 0.310
+d NULL random 3_COL_TO_CSP UNSAT comp150.graph comp150.xml
+i 150 11175 0 0 0 0
+i 150 11175 1 1 0 0
+r color6 btd 0.060 1.569
+d NULL random 3_COL_TO_CSP UNSAT comp200.graph comp200.xml
+i 200 19900 0 0 0 0
+i 200 19900 1 1 0 0
+r color6 btd 0.117 6.105
+d NULL random 3_COL_TO_CSP UNSAT comp250.graph comp250.xml
+i 250 31125 0 0 0 0
+i 250 31125 1 1 0 0
+r color6 btd 0.282 16.926
+d NULL random 3_COL_TO_CSP UNSAT comp300.graph comp300.xml
+i 300 44850 0 0 0 0
+i 300 44850 1 1 0 0
+r color6 btd 0.621 40.888
+d NULL random 3_COL_TO_CSP UNSAT comp350.graph comp350.xml
+i 350 61075 0 0 0 0
+i 350 61075 1 1 0 0
+r color6 btd 0.621 72.650
+d NULL random 3_COL_TO_CSP UNSAT comp400.graph comp400.xml
+i 400 79800 0 0 0 0
+i 400 79800 1 1 0 0
+r color6 btd 2.028 132.976
+d NULL random 3_COL_TO_CSP UNSAT comp450.graph comp450.xml
+i 450 101025 0 0 0 0
+i 450 101025 1 1 0 0
+r color6 btd 3.281 226.952
+d NULL random 3_COL_TO_CSP UNSAT comp500.graph comp500.xml
+i 500 124750 0 0 0 0
+i 500 124750 1 1 0 0
+r color6 btd 5.024 300.17
+d NULL random 3_COL_TO_CSP UNSAT comp1000.graph comp1000.xml
+i 1000 449500 0 0 0 0
+i 1000 449500 1 1 0 0
+r color6 btd 52.836 900.0
