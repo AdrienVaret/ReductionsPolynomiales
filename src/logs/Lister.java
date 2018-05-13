@@ -10,7 +10,7 @@ public class Lister {
 		COMPETITION, BENCHMARK, SAT, I_FILE, F_FILE, REDUCTION, I_VARS, F_VARS,
 		I_CLAUSES, I_UCLAUSES, I_BCLAUSES, I_TCLAUSES, I_LCLAUSES, I_RATIO_CX, I_TIME, I_RATIO, F_RATIO_CX,
 		F_CLAUSES, F_UCLAUSES, F_BCLAUSES, F_TCLAUSES, F_LCLAUSES, F_RATIO, F_TIME, 
-		RATIO_TIME, SOLVER_NAME, INST_CSP, INST_SAT;
+		RATIO_TIME, SOLVER_NAME, INST_CSP, INST_SAT, INST_GRAPH, INST_SAT_CSP, INST_SAT_GRAPH, INST_CSP_GRAPH;
 	}
 	
 	public enum Sorter {
@@ -50,6 +50,40 @@ public class Lister {
 				}
 				return newDatas;
 				
+			case INST_GRAPH : 
+				for (Data data : oldDatas) {
+					String [] splittedReduction = data.getReductionName().split("_");
+					if (splittedReduction[0].equals("3COL") || splittedReduction[0].equals("CLIQUE") ||
+						splittedReduction[0].equals("COVER")) 
+						newDatas.add(data);
+				}
+				return newDatas;
+				
+			case INST_SAT_CSP : 
+				for (Data data : oldDatas) {
+					String [] splittedReduction = data.getReductionName().split("_");
+					if (splittedReduction[0].equals("SAT") || splittedReduction[0].equals("CSP")) 
+						newDatas.add(data);
+				}
+				return newDatas;
+				
+			case INST_SAT_GRAPH : 
+				for (Data data : oldDatas) {
+					String [] splittedReduction = data.getReductionName().split("_");
+					if (splittedReduction[0].equals("SAT") || splittedReduction[0].equals("3COL") ||
+						splittedReduction[0].equals("CLIQUE") || splittedReduction[0].equals("COVER")) 
+						newDatas.add(data);
+				}
+				return newDatas;
+				
+			case INST_CSP_GRAPH : 
+				for (Data data : oldDatas) {
+					String [] splittedReduction = data.getReductionName().split("_");
+					if (splittedReduction[0].equals("CSP") || splittedReduction[0].equals("3COL") ||
+						splittedReduction[0].equals("CLIQUE") || splittedReduction[0].equals("COVER")) 
+						newDatas.add(data);
+				}
+				return newDatas;
 			/*
 			 * maxValue ignored
 			 */

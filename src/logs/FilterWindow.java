@@ -95,6 +95,7 @@ public class FilterWindow {
 	private JLabel lblInstancesTypes;
 	private JCheckBox chckbxSat;
 	private JCheckBox chckbxCsp;
+	private JCheckBox chckbxGraph;
 
 	/**
 	 * Create the application.
@@ -104,6 +105,7 @@ public class FilterWindow {
 		initialize();
 		chckbxSat.setSelected(true);
 		chckbxCsp.setSelected(true);
+		chckbxGraph.setSelected(true);
 	}
 
 	
@@ -111,12 +113,24 @@ public class FilterWindow {
 		
 		ArrayList<Data> newDatas = oldFrame.datas;
 		
-		if (chckbxCsp.isSelected() && !chckbxSat.isSelected())
-			newDatas = Lister.filter(newDatas, Filter.INST_CSP, null, null);
-		
-		if (chckbxSat.isSelected() && !chckbxCsp.isSelected())
+		if (chckbxSat.isSelected() && !chckbxCsp.isSelected() && !chckbxGraph.isSelected())
 			newDatas = Lister.filter(newDatas, Filter.INST_SAT, null, null);
 		
+		else if (!chckbxSat.isSelected() && chckbxCsp.isSelected() && !chckbxGraph.isSelected())
+			newDatas = Lister.filter(newDatas, Filter.INST_CSP, null, null);
+		
+		else if (!chckbxSat.isSelected() && !chckbxCsp.isSelected() && chckbxGraph.isSelected())
+			newDatas = Lister.filter(newDatas, Filter.INST_GRAPH, null, null);
+		
+		else if (chckbxSat.isSelected() && chckbxCsp.isSelected() && !chckbxGraph.isSelected())
+			newDatas = Lister.filter(newDatas, Filter.INST_SAT_CSP, null, null);
+		
+		else if (chckbxSat.isSelected() && !chckbxCsp.isSelected() && chckbxGraph.isSelected())
+			newDatas = Lister.filter(newDatas, Filter.INST_SAT_GRAPH, null, null);
+		
+		else if (!chckbxSat.isSelected() && chckbxCsp.isSelected() && chckbxGraph.isSelected())
+			newDatas = Lister.filter(newDatas, Filter.INST_CSP_GRAPH, null, null);
+				
 		if (bCompetition.isSelected())
 			newDatas = Lister.filter(newDatas, Filter.COMPETITION, fCompetition.getText(), null);
 	
@@ -141,8 +155,6 @@ public class FilterWindow {
 		
 		if (bFinalVariables.isSelected())
 			newDatas = Lister.filter(newDatas, Filter.F_VARS, fNbVarsMin.getText(), fNbVarsMax.getText());
-		
-		
 		
 		if (bInitialClauses.isSelected())
 			newDatas = Lister.filter(newDatas, Filter.I_CLAUSES, iNbClausesMin.getText(), iNbClausesMax.getText());
@@ -375,6 +387,9 @@ public class FilterWindow {
 		iBClausesMax = new JTextField();
 		iBClausesMax.setColumns(10);
 		frame.getContentPane().add(iBClausesMax, "cell 2 7,growx");
+		
+		chckbxGraph = new JCheckBox("Graph");
+		frame.getContentPane().add(chckbxGraph, "cell 3 7");
 		
 		bFinalBClauses = new JCheckBox("Final nb B Clauses");
 		frame.getContentPane().add(bFinalBClauses, "cell 5 7");
