@@ -963,55 +963,127 @@ r color6 glucose 120.630 55.641
 r color6 lingeling 120.630 0.633
 r color6 minisat 120.630 42.904
 r color6 cadical 120.630 0.981
-d NULL random 3_COL_TO_CSP UNSAT comp10.graph comp10.xml
+d NULL random 3COL_TO_CSP UNSAT comp10.graph comp10.xml
 i 10 45 0 0 0 0
 i 10 45 1 1 0 0
 r color6 btd 0.001 0.070
-d NULL random 3_COL_TO_CSP UNSAT comp25.graph comp25.xml
+d NULL random 3COL_TO_CSP UNSAT comp25.graph comp25.xml
 i 25 300 0 0 0 0
 i 25 300 1 1 0 0
 r color6 btd 0.001 0.023
-d NULL random 3_COL_TO_CSP UNSAT comp50.graph comp50.xml
+d NULL random 3COL_TO_CSP UNSAT comp50.graph comp50.xml
 i 50 1225 0 0 0 0
 i 50 1225 1 1 0 0
 r color6 btd 0.002 0.062
-d NULL random 3_COL_TO_CSP UNSAT comp100.graph comp100.xml
+d NULL random 3COL_TO_CSP UNSAT comp100.graph comp100.xml
 i 100 4950 0 0 0 0
 i 100 4950 1 1 0 0
 r color6 btd 0.015 0.310
-d NULL random 3_COL_TO_CSP UNSAT comp150.graph comp150.xml
+d NULL random 3COL_TO_CSP UNSAT comp150.graph comp150.xml
 i 150 11175 0 0 0 0
 i 150 11175 1 1 0 0
 r color6 btd 0.060 1.569
-d NULL random 3_COL_TO_CSP UNSAT comp200.graph comp200.xml
+d NULL random 3COL_TO_CSP UNSAT comp200.graph comp200.xml
 i 200 19900 0 0 0 0
 i 200 19900 1 1 0 0
 r color6 btd 0.117 6.105
-d NULL random 3_COL_TO_CSP UNSAT comp250.graph comp250.xml
+d NULL random 3COL_TO_CSP UNSAT comp250.graph comp250.xml
 i 250 31125 0 0 0 0
 i 250 31125 1 1 0 0
 r color6 btd 0.282 16.926
-d NULL random 3_COL_TO_CSP UNSAT comp300.graph comp300.xml
+d NULL random 3COL_TO_CSP UNSAT comp300.graph comp300.xml
 i 300 44850 0 0 0 0
 i 300 44850 1 1 0 0
 r color6 btd 0.621 40.888
-d NULL random 3_COL_TO_CSP UNSAT comp350.graph comp350.xml
+d NULL random 3COL_TO_CSP UNSAT comp350.graph comp350.xml
 i 350 61075 0 0 0 0
 i 350 61075 1 1 0 0
 r color6 btd 0.621 72.650
-d NULL random 3_COL_TO_CSP UNSAT comp400.graph comp400.xml
+d NULL random 3COL_TO_CSP UNSAT comp400.graph comp400.xml
 i 400 79800 0 0 0 0
 i 400 79800 1 1 0 0
 r color6 btd 2.028 132.976
-d NULL random 3_COL_TO_CSP UNSAT comp450.graph comp450.xml
+d NULL random 3COL_TO_CSP UNSAT comp450.graph comp450.xml
 i 450 101025 0 0 0 0
 i 450 101025 1 1 0 0
 r color6 btd 3.281 226.952
-d NULL random 3_COL_TO_CSP UNSAT comp500.graph comp500.xml
+d NULL random 3COL_TO_CSP UNSAT comp500.graph comp500.xml
 i 500 124750 0 0 0 0
 i 500 124750 1 1 0 0
 r color6 btd 5.024 300.17
-d NULL random 3_COL_TO_CSP UNSAT comp1000.graph comp1000.xml
+d NULL random 3COL_TO_CSP UNSAT comp1000.graph comp1000.xml
 i 1000 449500 0 0 0 0
 i 1000 449500 1 1 0 0
 r color6 btd 52.836 900.0
+d NULL random 3COL_TO_CSP UNSAT rand-300-01.graph rand-300-01.xml
+i 300 4485 0 0 0 0
+i 300 4485 1 1 0 0
+r color6 btd 0.046 0.360
+d NULL random 3COL_TO_CSP UNSAT rand-300-02.graph rand-300-02.xml
+i 300 8970 0 0 0 0
+i 300 8970 1 1 0 0
+r color6 btd 0.031 0.859
+d NULL random 3COL_TO_CSP UNSAT rand-300-03.graph rand-300-03.xml
+i 300 13455 0 0 0 0
+i 300 13455 1 1 0 0
+r color6 btd 0.050 1.898
+d NULL random 3COL_TO_CSP UNSAT rand-300-04.graph rand-300-04.xml
+i 300 17940 0 0 0 0
+i 300 17940 1 1 0 0
+r color6 btd 0.080 3.671
+d NULL random 3COL_TO_CSP UNSAT rand-300-05.graph rand-300-05.xml
+i 300 22425 0 0 0 0
+i 300 22425 1 1 0 0
+r color6 btd 0.126 5.319
+d NULL random 3COL_TO_CSP UNSAT rand-300-06.graph rand-300-06.xml
+i 300 26910 0 0 0 0
+i 300 26910 1 1 0 0
+r color6 btd 0.168 7.867
+d NULL random 3COL_TO_CSP UNSAT rand-300-07.graph rand-300-07.xml
+i 300 31394 0 0 0 0
+i 300 31394 1 1 0 0
+r color6 btd 0.222 9.905
+d NULL random 3COL_TO_CSP UNSAT rand-300-08.graph rand-300-08.xml
+i 300 35880 0 0 0 0
+i 300 35880 1 1 0 0
+r color6 btd 0.256 13.345
+d NULL random 3COL_TO_CSP UNSAT rand-300-09.graph rand-300-09.xml
+i 300 40365 0 0 0 0
+i 300 40365 1 1 0 0
+r color6 btd 0.310 16.534
+d NULL random 3COL_TO_CSP UNSAT rand-400-01.graph rand-400-01.graph
+i 400 7980 0 0 0 0
+i 400 7980 1 1 0 0
+r color6 btd 0.043 0.738
+d NULL random 3COL_TO_CSP UNSAT rand-400-02.graph rand-400-02.graph
+i 400 15960 0 0 0 0
+i 400 15960 1 1 0 0
+r color6 btd 0.083 3.251
+d NULL random 3COL_TO_CSP UNSAT rand-400-03.graph rand-400-03.graph
+i 400 23940 0 0 0 0
+i 400 23940 1 1 0 0
+r color6 btd 0.146 7.638
+d NULL random 3COL_TO_CSP UNSAT rand-400-04.graph rand-400-04.graph
+i 400 31920 0 0 0 0
+i 400 31920 1 1 0 0
+r color6 btd 0.244 13.480
+d NULL random 3COL_TO_CSP UNSAT rand-400-05.graph rand-400-05.graph
+i 400 39900 0 0 0 0
+i 400 39900 1 1 0 0
+r color6 btd 0.382 21.108
+d NULL random 3COL_TO_CSP UNSAT rand-400-06.graph rand-400-06.graph
+i 400 49800 0 0 0 0
+i 400 49800 1 1 0 0
+r color6 btd 0.547 31.170
+d NULL random 3COL_TO_CSP UNSAT rand-400-07.graph rand-400-07.graph
+i 400 55860 0 0 0 0
+i 400 55860 1 1 0 0
+r color6 btd 0.652 38.315
+d NULL random 3COL_TO_CSP UNSAT rand-400-08.graph rand-400-08.graph
+i 400 63840 0 0 0 0
+i 400 63840 1 1 0 0
+r color6 btd 0.809 47.901
+d NULL random 3COL_TO_CSP UNSAT rand-400-09.graph rand-400-09.graph
+i 400 71820 0 0 0 0
+i 400 71820 1 1 0 0
+r color6 btd 0.989 57.648

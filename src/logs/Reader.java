@@ -100,19 +100,24 @@ public class Reader {
 					nbInitialLongClauses    = Integer.parseInt(splittedLine[6]);
 				} catch (ArrayIndexOutOfBoundsException e) {
 					System.out.println("ERROR : line " + (i+1));
+				} catch (NumberFormatException e) {
+					System.out.println("ERROR : line " + (i+1));
 				}
 				
 				i += 1;
 				splittedLine = lines.get(i).split(" ");
 						
 				if (isInfo(splittedLine)) {
-					nbFinalVar            = Integer.parseInt(splittedLine[1]);
-					nbFinalClauses        = Integer.parseInt(splittedLine[2]);
-					nbFinalUnitaryClauses = Integer.parseInt(splittedLine[3]);
-					nbFinalBinaryClauses  = Integer.parseInt(splittedLine[4]);
-					nbFinalTernaryClauses = Integer.parseInt(splittedLine[5]);
-					nbFinalLongClauses    = Integer.parseInt(splittedLine[6]);
-						
+					try {
+						nbFinalVar            = Integer.parseInt(splittedLine[1]);
+						nbFinalClauses        = Integer.parseInt(splittedLine[2]);
+						nbFinalUnitaryClauses = Integer.parseInt(splittedLine[3]);
+						nbFinalBinaryClauses  = Integer.parseInt(splittedLine[4]);
+						nbFinalTernaryClauses = Integer.parseInt(splittedLine[5]);
+						nbFinalLongClauses    = Integer.parseInt(splittedLine[6]);
+					} catch (NumberFormatException e) {
+						System.out.println("ERROR : line" + (i+1));
+					}
 					i += 1;
 					splittedLine = lines.get(i).split(" ");
 						
