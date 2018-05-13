@@ -1087,3 +1087,39 @@ d NULL random 3COL_TO_CSP UNSAT rand-400-09.graph rand-400-09.graph
 i 400 71820 0 0 0 0
 i 400 71820 1 1 0 0
 r color6 btd 0.989 57.648
+d NULL random 3COL_TO_CSP UNSAT rand-500-01.graph rand-500-01.cnf
+i 500 12475 0 0 0 0
+i 500 12475 1 1 0 0
+r color6 btd 0.068 1.970
+d NULL random 3COL_TO_CSP UNSAT rand-500-02.graph rand-500-02.cnf
+i 500 24950 0 0 0 0
+i 500 24950 1 1 0 0
+r color6 btd 0.168 8.873
+d NULL random 3COL_TO_CSP UNSAT rand-500-03.graph rand-500-03.cnf
+i 500 37425 0 0 0 0
+i 500 37425 1 1 0 0
+r color6 btd 0.354 20.919
+d NULL random 3COL_TO_CSP UNSAT rand-500-04.graph rand-500-04.cnf
+i 500 49900 0 0 0 0
+i 500 49900 1 1 0 0
+r color6 btd 0.603 35.912
+d NULL random 3COL_TO_CSP UNSAT rand-500-05.graph rand-500-05.cnf
+i 500 63375 0 0 0 0
+i 500 63375 1 1 0 0
+r color6 btd 0.951 57.190
+d NULL random 3COL_TO_CSP UNSAT rand-500-06.graph rand-500-06.cnf
+i 500 74850 0 0 0 0
+i 500 74850 1 1 0 0
+r color6 btd 1.256 75.745
+d NULL random 3COL_TO_CSP UNSAT rand-500-07.graph rand-500-07.cnf
+i 500 87325 0 0 0 0
+i 500 87325 1 1 0 0
+r color6 btd 1.627 98.389
+d NULL random 3COL_TO_CSP UNSAT rand-500-08.graph rand-500-08.cnf
+i 500 99800 0 0 0 0
+i 500 99800 1 1 0 0
+r color6 btd 2.066 123.920
+d NULL random 3COL_TO_CSP UNSAT rand-500-09.graph rand-500-09.cnf
+i 500 112275 0 0 0 0
+i 500 112275 1 1 0 0
+r color6 btd 2.488 148.507
