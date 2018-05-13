@@ -1,57 +1,965 @@
 b results.data 5 1 1
-d SAT_COMPETITION_2009 bioinfo SAT_TO_3SAT UNSAT q_query_2_L324_coli.cnf q_query_2_L324_coli_3sat.cnf
-i 617854 2745225 63819 860549 1288709 1456516
-i 1260013 3387384 0 0 3387384 0
-r glucose 16.332 28.632
-r lingeling 11.226 11.557
-r minisat 18.456 32.67
-r picosat 3.493 5.718
-r cadical 16.332 27.614
 d CPAI08 coloring CSP_TO_SAT_DIRECT UNSAT normalized-myciel-5g-5-ext.xml normalized-myciel-5g-5-ext.cnf
 i 47 236 1 1 0 0
 i 235 1697 0 1650 0 47
-r glucose 14.316 24.876
-r lingeling 14.316 56.50
-r minisat 14.316 16.824
-r picosat 14.316 115.508
-r cadical 14.316 27.863
+r choco glucose 14.316 24.876
+r choco lingeling 14.316 56.50
+r choco minisat 14.316 16.824
+r choco picosat 14.316 115.508
+r choco cadical 14.316 27.863
 d CPAI08 coloring CSP_TO_SAT_DIRECT SAT normalized-le-450-5a-5-ext.xml normalized-le-450-5a-5-ext.cnf
 i 450 5714 1 1 0 0
 i 2250 33520 0 33070 0 450
-r glucose 8.152 0.34
-r lingeling 8.152 0.33
-r minisat 8.152 0.076
-r picosat 8.152 0.036
-r cadical 8.152 0.057
+r choco glucose 8.152 0.34
+r choco lingeling 8.152 0.33
+r choco minisat 8.152 0.076
+r choco picosat 8.152 0.036
+r choco cadical 8.152 0.057
 d CPAI08 coloring CSP_TO_SAT_DIRECT UNSAT normalized-le-450-5a-4-ext.xml normalized-le-450-5a-4-ext.cnf
 i 450 5714 1 1 0 0
 i 1800 26006 0 25556 0 450
-r glucose 2.096 0.051
-r lingeling 2.096 0.018
-r minisat 2.096 0.042
-r picosat 2.096 0.016
-r cadical 2.096 0.042
+r choco glucose 2.096 0.051
+r choco lingeling 2.096 0.018
+r choco minisat 2.096 0.042
+r choco picosat 2.096 0.016
+r choco cadical 2.096 0.042
 d CPAI08 geom CSP_TO_SAT_DIRECT UNSAT normalized-geo50-20-d4-75-94_ext.xml normalized-geo50-20-d4-75-94_ext.cnf
 i 50 496 1 496 0 0
 i 1000 59157 0 59107 0 50
-r glucose 47.836 343.7
-r lingeling 47.836 900
-r minisat 47.836 857.016
-r picosat 47.836 900
-r cadical 47.836 243.624
+r choco glucose 47.836 343.7
+r choco lingeling 47.836 900
+r choco minisat 47.836 857.016
+r choco picosat 47.836 900
+r choco cadical 47.836 243.624
 d CPAI08 geom CSP_TO_SAT_DIRECT SAT normalized-geo50-20-d4-75-19_ext.xml normalized-geo50-20-d4-75-19_ext.cnf
 i 50 498 1 498 0 0
 i 1000 59246 0 59196 0 50
-r glucose 33.764 78.876
-r lingeling 33.764 108.638
-r minisat 33.764 16.892
-r picosat 33.764 900
-r caldical 33.764 78.252
+r choco glucose 33.764 78.876
+r choco lingeling 33.764 108.638
+r choco minisat 33.764 16.892
+r choco picosat 33.764 900
+r choco caldical 33.764 78.252
 d CPAI08 geom CSP_TO_SAT_DIRECT SAT normalized-geo50-20-d4-75-46_ext.xml normalized-geo50-20-d4-75-46_ext.cnf
 i 50 433 1 433 0 0
 i 1000 52787 0 52737 0 50
-r glucose 3.328 53.025
-r lingeling 3.328 85.552
-r minisat 3.328 17.536
-r picosat 3.328 87.054
-r cadical 3.328 77.600
+r choco glucose 3.328 53.025
+r choco lingeling 3.328 85.552
+r choco minisat 3.328 17.536
+r choco picosat 3.328 87.054
+r choco cadical 3.328 77.600
+d SAT09 aprove09 SAT_TO_3SAT UNSAT AProVE09-20.cnf AProVE09-20_3sat.cnf
+i 33054 108377 2 51324 55013 2038
+i 35920 111243 0 0 111243 0
+r glucose glucose 38.244 33.916
+r glucose lingeling 38.244 22.568
+r glucose minisat 38.244 31.136
+r glucose cadical 38.244 25.096
+r lingeling glucose 28.828 33.916
+r lingeling lingeling 28.828 22.568
+r lingeling minisat 28.828 31.136
+r lingeling cadical 28.828 25.096
+r minisat glucose 39.576 33.916
+r minisat lingeling 39.576 22.568
+r minisat minisat 39.576 31.136
+r minisat cadical 39.576 25.096
+r cadical glucose 42.996 33.916
+r cadical lingeling 42.996 22.568
+r cadical minisat 42.996 31.136
+r cadical cadical 42.996 25.096
+d SAT09 bitverif(countbitsarray) SAT_TO_3SAT UNSAT countbitsarray02_32.cnf countbitsarray02_32_3sat.cnf
+i 4252 12563 2 8374 4187 0
+i 4252 12563 0 0 12563 0
+r glucose glucose 341.950 389.440
+r glucose lingeling 341.950 495.312
+r glucose minisat 341.950 900.0
+r glucose cadical 341.950 44.116
+r lingeling glucose 403.836 389.440
+r lingeling lingeling 403.836 495.312
+r lingeling minisat 403.836 900.0
+r lingeling cadical 403.836 44.116
+r minisat glucose 900 389.440
+r minisat lingeling 900 495.312
+r minisat minisat 900 900.0
+r minisat cadical 900 44.116
+r cadical glucose 43.964 389.440
+r cadical lingeling 43.964 495.312
+r cadical minisat 43.964 900.0
+r cadical cadical 43.964 44.116
+d SAT09 bitverif(icbrt) SAT_TO_3SAT UNSAT icbrt1_32.cnf icbrt1_32_3sat.cnf
+i 11309 33833 2 22554 11277 0
+i 11309 33833 0 0 33833 0
+r glucose glucose 8.164 8.016
+r glucose lingeling 8.164 11.800
+r glucose minisat 8.164 8.240
+r glucose cadical 8.164 9.590
+r lingeling glucose 12.127 8.016
+r lingeling lingeling 12.127 11.800
+r lingeling minisat 12.127 8.240
+r lingeling cadical 12.127 9.590
+r minisat glucose 8.208 8.016
+r minisat lingeling 8.208 11.800
+r minisat minisat 8.208 8.240
+r minisat cadical 8.208 9.590
+r cadical glucose 9.476 8.016
+r cadical lingeling 9.476 11.800
+r cadical minisat 9.476 8.240
+r cadical cadical 9.476 9.590
+d SAT09 bitverif(minxor) SAT_TO_3SAT UNSAT minxor128.cnf minxor128_3sat.cnf
+i 54258 160469 2 106978 53489 0
+i 54258 160469 0 0 160469 0
+r glucose glucose 217.816 216.812
+r glucose lingeling 217.816 326.892
+r glucose minisat 217.816 829.316
+r glucose cadical 217.816 900.0
+r lingeling glucose 323.608 216.812
+r lingeling lingeling 323.608 326.892
+r lingeling minisat 323.608 829.316
+r lingeling cadical 323.608 900.0
+r minisat glucose 786.428 216.812
+r minisat lingeling 786.428 326.892
+r minisat minisat 786.428 829.316
+r minisat cadical 786.428 900.0
+r cadical glucose 845.092 216.812
+r cadical lingeling 845.092 326.892
+r cadical minisat 845.092 829.316
+r cadical cadical 845.092 900.0
+d SAT09 bitverif(minxorminand) SAT_TO_3SAT UNSAT minxorminand064.cnf minxorminand064_3sat.cnf
+i 40042 119357 2 79590 39785 0
+i 40042 119357 0 0 1193570 0
+r glucose glucose 178.784 170.976
+r glucose lingeling 178.784 132.352
+r glucose minisat 178.784 130.688
+r glucose cadical 178.784 74.288
+r lingeling glucose 145.268 170.976
+r lingeling lingeling 145.268 132.352
+r lingeling minisat 145.268 130.688
+r lingeling cadical 145.268 74.288
+r minisat glucose 147.104 170.976
+r minisat lingeling 147.104 132.352
+r minisat minisat 147.104 130.688
+r minisat cadical 147.104 74.288
+r cadical glucose 73.300 170.976
+r cadical lingeling 73.300 132.352
+r cadical minisat 73.300 130.688
+r cadical cadical 73.300 74.288
+d SAT09 bitverif(minandmaxor) SAT_TO_3SAT UNSAT minandmaxor032.cnf minandmaxor032_3sat.cnf
+i 24448 73151 2 48766 24383 0
+i 24448 73151 0 0 73151 0
+r glucose glucose 41.148 43.104
+r glucose lingeling 41.148 255.944
+r glucose minisat 41.148 54.812
+r glucose cadical 41.148 24.148
+r lingeling glucose 254.660 43.104
+r lingeling lingeling 254.660 255.944
+r lingeling minisat 254.660 54.812
+r lingeling cadical 254.660 24.148
+r minisat glucose 51.016 43.104
+r minisat lingeling 51.016 255.944
+r minisat minisat 51.016 54.812
+r minisat cadical 51.016 24.148
+r cadical glucose 22.812 43.104
+r cadical lingeling 22.812 255.944
+r cadical minisat 22.812 54.812
+r cadical cadical 22.812 24.148
+d SAT09 bitverif(smulo) SAT_TO_3SAT UNSAT smulo016.cnf smulo016_3sat.cnf
+i 2945 8738 2 5824 2912 0
+i 2945 8738 0 0 8738 0
+r glucose glucose 5.968 6.424
+r glucose lingeling 5.968 8.560
+r glucose minisat 5.968 14.644
+r glucose cadical 5.968 3.829
+r lingeling glucose 6.022 6.424
+r lingeling lingeling 6.022 8.560
+r lingeling minisat 6.022 14.644
+r lingeling cadical 6.022 3.829
+r minisat glucose 13.984 6.424
+r minisat lingeling 13.984 8.560
+r minisat minisat 13.984 14.644
+r minisat cadical 13.984 3.829
+r cadical glucose 3.560 6.424
+r cadical lingeling 3.560 8.560
+r cadical minisat 3.560 14.644
+r cadical cadical 3.560 3.829
+d SAT09 crypto(desgen) SAT_TO_3SAT SAT gss-13-s100.cnf gss-13-s100_3sat.cnf
+i 30867 92735 64 59830 32841 0
+i 30867 92735 0 0 92735 0
+r glucose glucose 18.248 18.283
+r glucose lingeling 18.248 11.332
+r glucose minisat 18.248 6.221
+r glucose cadical 18.248 26.616
+r lingeling glucose 10.032 18.283
+r lingeling lingeling 10.032 11.332
+r lingeling minisat 10.032 6.221
+r lingeling cadical 10.032 26.616
+r minisat glucose 5.840 18.283
+r minisat lingeling 5.840 11.332
+r minisat minisat 5.840 6.221
+r minisat cadical 5.840 26.616
+r cadical glucose 24.704 18.283
+r cadical lingeling 24.704 11.332
+r cadical minisat 24.704 6.221
+r cadical cadical 24.704 26.616
+d SAT09 crypto(desgen) SAT_TO_3SAT SAT gss-14-s100.cnf gss-14-s100_3sat.cnf
+i 31229 93855 64 60488 33303 0
+i 31229 93855 0 0 93855 0
+r glucose glucose 25.304 27.224
+r glucose lingeling 25.304 15.644
+r glucose minisat 25.304 20.260
+r glucose cadical 25.304 43.292
+r lingeling glucose 15.292 27.224
+r lingeling lingeling 15.292 15.644
+r lingeling minisat 15.292 20.260
+r lingeling cadical 15.292 43.292
+r minisat glucose 19.128 27.224
+r minisat lingeling 19.128 15.644
+r minisat minisat 19.128 20.260
+r minisat cadical 19.128 43.292
+r cadical glucose 37.440 27.224
+r cadical lingeling 37.440 15.644
+r cadical minisat 37.440 20.260
+r cadical cadical 37.440 43.292
+d SAT09 crypto(desgen) SAT_TO_3SAT SAT gss-17-s100.cnf gss-17-s100_3sat.cnf
+i 31318 94116 64 60636 33416 0
+i 31318 94116 0 0 94116 0
+r glucose glucose 52.320 63.264
+r glucose lingeling 52.320 194.564
+r glucose minisat 52.320 58.040
+r glucose cadical 52.320 208.260
+r lingeling glucose 156.144 63.264
+r lingeling lingeling 156.144 194.564
+r lingeling minisat 156.144 58.040
+r lingeling cadical 156.144 208.260
+r minisat glucose 46.096 63.264
+r minisat lingeling 46.096 194.564
+r minisat minisat 46.096 58.040
+r minisat cadical 46.096 208.260
+r cadical glucose 190.008 63.264
+r cadical lingeling 190.008 194.564
+r cadical minisat 190.008 58.040
+r cadical cadical 190.008 208.260
+d SAT09 crypto(md5gen) SAT_TO_3SAT UNSAT gus-md5-06.cnf gus-md5-06_3sat.cnf
+i 68953 224868 129 91550 133189 0
+i 68953 224868 0 0 224868 0
+r glucose glucose 17.852 22.044
+r glucose lingeling 17.852 61.436
+r glucose minisat 17.852 14.188
+r glucose cadical 17.852 33.076
+r lingeling glucose 54.095 22.044
+r lingeling lingeling 54.095 61.436
+r lingeling minisat 54.095 14.188
+r lingeling cadical 54.095 33.076
+r minisat glucose 12.512 22.044
+r minisat lingeling 12.512 61.436
+r minisat minisat 12.512 14.188
+r minisat cadical 12.512 33.076
+r cadical glucose 39.368 22.044
+r cadical lingeling 39.368 61.436
+r cadical minisat 39.368 14.188
+r cadical cadical 39.368 33.076
+d SAT09 crypto(md5gen) SAT_TO_3SAT UNSAT gus-md5-07.cnf gus-md5-07_3sat.cnf
+i 69097 225325 129 91744 133452 0
+i 69097 225325 0 0 225325 0
+r glucose glucose 65.472 70.748
+r glucose lingeling 65.472 143.600
+r glucose minisat 65.472 41.972
+r glucose cadical 65.472 38.456
+r lingeling glucose 135.280 70.748
+r lingeling lingeling 135.280 143.600
+r lingeling minisat 135.280 41.972
+r lingeling cadical 135.280 38.456
+r minisat glucose 41.490 70.748
+r minisat lingeling 41.490 143.600
+r minisat minisat 41.490 41.972
+r minisat cadical 41.490 38.456
+r cadical glucose 37.192 70.748
+r cadical lingeling 37.192 143.600
+r cadical minisat 37.192 41.972
+r cadical cadical 37.192 38.456
+d SAT09 bioinfo SAT_TO_3SAT UNSAT q_query_3_L200_coli.sat.cnf q_query_3_L200_coli.sat_3sat.cnf
+i 670867 3513333 59077 795777 2146608 511871
+i 1304368 4146834 0 0 4146834 0
+r glucose glucose 128.500 101.652
+r glucose lingeling 128.500 293.704
+r glucose minisat 128.500 220.252
+r glucose cadical 128.500 168.316
+r lingeling glucose 204.228 101.652
+r lingeling lingeling 204.228 293.704
+r lingeling minisat 204.228 220.252
+r lingeling cadical 204.228 168.316
+r minisat glucose 417.468 101.652
+r minisat lingeling 417.468 293.704
+r minisat minisat 417.468 220.252
+r minisat cadical 417.468 168.316
+r cadical glucose 186.476 101.652
+r cadical lingeling 186.476 293.704
+r cadical minisat 186.476 220.252
+r cadical cadical 186.476 168.316
+d SAT09 bioinfo SAT_TO_3SAT' UNSAT q_query_3_L200_coli.sat.cnf q_query_3_L200_coli.sat_3satbis.cnf
+i 670867 3513333 59077 795777 2146608 511871
+i 1304368 4146834 59077 795999 3291980 0
+r glucose glucose 128.500 99.893
+r glucose lingeling 128.500 273.704
+r glucose minisat 128.500 212.432
+r glucose cadical 128.500 152.300
+r lingeling glucose 204.228 99.893
+r lingeling lingeling 204.228 273.704
+r lingeling minisat 204.228 212.432
+r lingeling cadical 204.228 152.300
+r minisat glucose 417.468 99.893
+r minisat lingeling 417.468 273.704
+r minisat minisat 417.468 212.432
+r minisat cadical 417.468 152.300
+r cadical glucose 186.476 99.893
+r cadical lingeling 186.476 273.704
+r cadical minisat 186.476 212.432
+r cadical cadical 186.476 152.300
+d SAT09 bioinfo SAT_TO_3SAT UNSAT q_query_3_L150_coli.sat.cnf q_query_3_L150_coli.sat_3sat.cnf
+i 486992 2456708 45577 599727 10431108 380296
+i 954843 2924559 0 0 2924559 0
+r glucose glucose 67.216 71.460
+r glucose lingeling 67.216 496.488
+r glucose minisat 67.216 205.708
+r glucose cadical 67.216 108.632
+r lingeling glucose 495.056 71.460
+r lingeling lingeling 495.056 496.488
+r lingeling minisat 495.056 205.708
+r lingeling cadical 495.056 108.632
+r minisat glucose 126.516 71.460
+r minisat lingeling 126.516 496.488
+r minisat minisat 126.516 205.708
+r minisat cadical 126.516 108.632
+r cadical glucose 97.256 71.460
+r cadical lingeling 97.256 496.488
+r cadical minisat 97.256 205.708
+r cadical cadical 97.256 108.632
+d SAT09 bioinfo SAT_TO_3SAT' UNSAT q_query_3_L150_coli.sat.cnf q_query_3_L150_coli.sat_3satbis.cnf
+i 486992 2456708 45577 599727 10431108 380296
+i 954843 2924559 45577 599727 2279255 0
+r glucose glucose 67.216 61.018
+r glucose lingeling 67.216 281.602
+r glucose minisat 67.216 180.177
+r glucose cadical 67.216 140.766
+r lingeling glucose 495.056 61.018
+r lingeling lingeling 495.056 281.602
+r lingeling minisat 495.056 180.177
+r lingeling cadical 495.056 140.766
+r minisat glucose 126.516 61.018
+r minisat lingeling 126.516 281.602
+r minisat minisat 126.516 180.177
+r minisat cadical 126.516 140.766
+r cadical glucose 97.256 61.018
+r cadical lingeling 97.256 281.602
+r cadical minisat 97.256 180.177
+r cadical cadical 97.256 140.766
+d SAT09 bioinfo SAT_TO_3SAT UNSAT q_query_3_l44_lambda.cnf q_query_3_lambda_3sat.cnf
+i 31540 179264 4112 39373 92004 21775
+i 60591 186315 0 0 186315 0
+r glucose glucose 169.872 158.220
+r glucose lingeling 169.872 148.69
+r glucose minisat 169.872 105.440
+r glucose cadical 169.872 116.320
+r lingeling glucose 166.868 158.220
+r lingeling lingeling 166.868 148.69
+r lingeling minisat 166.868 105.440
+r lingeling cadical 166.868 116.320
+r minisat glucose 105.440 158.220
+r minisat lingeling 105.440 148.69
+r minisat minisat 105.440 105.440
+r minisat cadical 105.440 116.320
+r cadical glucose 116.320 158.220
+r cadical lingeling 116.320 148.69
+r cadical minisat 116.320 105.440
+r cadical cadical 116.320 116.320
+d SAT09 bioinfo SAT_TO_3SAT' UNSAT q_query_3_l44_lambda.cnf q_query_3_l44_lambda_3satbis.cnf
+i 31540 179264 4112 39373 92004 21775
+i 60591 186315 4112 39373 142830 0
+r glucose glucose 169.872 182.117
+r glucose lingeling 169.872 164.636
+r glucose minisat 169.872 136.292
+r glucose cadical 169.872 129.000
+r lingeling glucose 166.868 182.117
+r lingeling lingeling 166.868 164.636
+r lingeling minisat 166.868 136.292
+r lingeling cadical 166.868 129.000
+r minisat glucose 145.952 182.117
+r minisat lingeling 145.952 164.636
+r minisat minisat 145.952 136.292
+r minisat cadical 145.952 129.000
+r cadical glucose 143.968 182.117
+r cadical lingeling 143.968 164.636
+r cadical minisat 143.968 136.292
+r cadical cadical 143.968 129.000
+d SAT09 bioinfo SAT_TO_3SAT UNSAT q_query_3_l45_lambda.cnf q_query_3_l45_lambda_3sat.cnf
+i 32313 161529 4190 40231 94818 22290
+i 62044 191260 0 0 191260 0 
+r glucose glucose 184.212 136.488
+r glucose lingeling 184.212 168.668
+r glucose minisat 184.212 98.296
+r glucose cadical 184.212 98.212
+r lingeling glucose 161.692 136.488
+r lingeling lingeling 161.692 168.668
+r lingeling minisat 161.692 98.296
+r lingeling cadical 161.692 98.212
+r minisat glucose 134.944 136.488
+r minisat lingeling 134.944 168.668
+r minisat minisat 134.944 98.296
+r minisat cadical 134.944 98.212
+r cadical glucose 123.256 136.488
+r cadical lingeling 123.256 168.668
+r cadical minisat 123.256 98.296
+r cadical cadical 123.256 98.212
+d SAT09 bioinfo SAT_TO_3SAT' UNSAT q_query_3_l45_lambda.cnf q_query_3_l45_lambda_3satbis.cnf
+i 32313 161529 4190 40231 94818 22290
+i 62044 191260 4190 40231 146839 0
+r glucose glucose 184.212 150.299
+r glucose lingeling 184.212 204.405
+r glucose minisat 184.212 115.917
+r glucose cadical 184.212 123.584
+r lingeling glucose 161.692 150.299
+r lingeling lingeling 161.692 204.405
+r lingeling minisat 161.692 115.917
+r lingeling cadical 161.692 123.584
+r minisat glucose 134.944 150.299
+r minisat lingeling 134.944 204.405
+r minisat minisat 134.944 115.917
+r minisat cadical 134.944 123.584
+r cadical glucose 123.256 150.299
+r cadical lingeling 123.256 204.405
+r cadical minisat 123.256 115.917
+r cadical cadical 123.256 123.584
+d SAT09 c32sat SAT_TO_3SAT UNSAT post-c32s-col400-16.cnf post-c32s-col400-16_3sat.cnf
+i 286329 839692 1 559794 279897 0
+i 286329 839692 0 0 839692 0 0
+r glucose glucose 38.615 40.253
+r glucose lingeling 38.615 99.032
+r glucose minisat 38.615 21.384
+r glucose cadical 38.615 36.260
+r lingeling glucose 117.980 40.253
+r lingeling lingeling 117.980 99.032
+r lingeling minisat 117.980 21.384
+r lingeling cadical 117.980 36.260
+r minisat glucose 24.844 40.253
+r minisat lingeling 24.844 99.032
+r minisat minisat 24.844 21.384
+r minisat cadical 24.844 36.260
+r cadical glucose 39.960 40.253
+r cadical lingeling 39.960 99.032
+r cadical minisat 39.960 21.384
+r cadical cadical 39.960 36.260
+d SAT09 c32sat SAT_TO_3SAT UNSAT post-c32s-ss-8.cnf post-c32s-ss-8_3sat.cnf
+i 53752 148393 1 98928 49464 0
+i 53752 148393 0 0 148393 0
+r glucose glucose 126.252 45.216
+r glucose lingeling 126.252 125.655
+r glucose minisat 126.252 25.016
+r glucose cadical 126.252 40.656
+r lingeling glucose 165.550 45.216
+r lingeling lingeling 165.550 125.655
+r lingeling minisat 165.550 25.016
+r lingeling cadical 165.550 40.656
+r minisat glucose 900.0 45.216
+r minisat lingeling 900.0 125.655
+r minisat minisat 900.0 25.016
+r minisat cadical 900.0 40.656
+r cadical glucose 53.216 45.216
+r cadical lingeling 53.216 125.655
+r cadical minisat 53.216 25.016
+r cadical cadical 53.216 40.656
+d SAT09 c32sat SAT_TO_3SAT UNSAT post-cbmc-aes-d-r2-noholes.cnf post-cbmc-aes-d-r2-noholes_3sat.cnf
+i 276895 1607567 40271 1154041 332345 80910
+i 1010737 2341409 0 0 2341409 0
+r glucose glucose 121.508 199.276
+r glucose lingeling 121.508 900.0
+r glucose minisat 121.508 900.0
+r glucose cadical 121.508 74.100
+r lingeling glucose 900.0 199.276
+r lingeling lingeling 900.0 900.0
+r lingeling minisat 900.0 900.0
+r lingeling cadical 900.0 74.100
+r minisat glucose 900.0 199.276
+r minisat lingeling 900.0 900.0
+r minisat minisat 900.0 900.0
+r minisat cadical 900.0 74.100
+r cadical glucose 60.065 199.276
+r cadical lingeling 60.065 900.0
+r cadical minisat 60.065 900.0
+r cadical cadical 60.065 74.100
+d SAT09 c32sat SAT_TO_3SAT' UNSAT post-cbmc-aes-d-r2-noholes.cnf post-cbmc-aes-d-r2-noholes_3satbis.cnf
+i 276895 1607567 40271 1154041 332345 80910
+i 1010737 2341409 40271 1154041 1147097 0
+r glucose glucose 121.508 250.312
+r glucose lingeling 121.508 900.0
+r glucose minisat 121.508 900.0
+r glucose cadical 121.508 81.996
+r lingeling glucose 900.0 250.312
+r lingeling lingeling 900.0 900.0
+r lingeling minisat 900.0 900.0
+r lingeling cadical 900.0 81.996
+r minisat glucose 900.0 250.312
+r minisat lingeling 900.0 900.0
+r minisat minisat 900.0 900.0
+r minisat cadical 900.0 81.996
+r cadical glucose 60.065 250.312
+r cadical lingeling 60.065 900.0
+r cadical minisat 60.065 900.0
+r cadical cadical 60.065 81.996
+d SAT09 diagnosis SAT_TO_3SAT UNSAT ACG-10-5p0.cnf ACG-10-5p0_3sat.cnf
+i 123925 539763 5498 437089 69976 27200
+i 205525 621363 0 0 621363 0
+r glucose glucose 15.365 21.517
+r glucose lingeling 15.365 26.800
+r glucose minisat 15.365 45.216
+r glucose cadical 15.365 30.016
+r lingeling glucose 24.838 21.517
+r lingeling lingeling 24.838 26.800
+r lingeling minisat 24.838 45.216
+r lingeling cadical 24.838 30.016
+r minisat glucose 23.848 21.517
+r minisat lingeling 23.848 26.800
+r minisat minisat 23.848 45.216
+r minisat cadical 23.848 30.016
+r cadical glucose 32.635 21.517
+r cadical lingeling 32.635 26.800
+r cadical minisat 32.635 45.216
+r cadical cadical 32.635 30.016
+d NULL complete 3COL_TO_SAT UNSAT comp10.graph comp10.cnf
+i 10 45 0 0 0 0
+i 30 175 0 165 10 0
+r color6 glucose 0.001 0.005
+r color6 lingeling 0.001 0.003
+r color6 minisat 0.001 0.003
+r color6 cadical 0.001 0.003
+d NULL complete 3COL_TO_SAT UNSAT comp25.graph comp25.cnf
+i 25 300 0 0 0 0
+i 75 1000 0 975 25 0
+r color6 glucose 0.001 0.005
+r color6 lingeling 0.001 0.003
+r color6 minisat 0.001 0.007
+r color6 cadical 0.001 0.002
+d NULL complete 3COL_TO_SAT UNSAT comp50.graph comp50.cnf
+i 50 1225 0 0 0 0
+i 150 3875 0 3825 50 0
+r color6 glucose 0.002 0.012
+r color6 lingeling 0.002 0.002
+r color6 minisat 0.002 0.007
+r color6 cadical 0.002 0.003
+d NULL complete 3COL_TO_SAT UNSAT comp100.graph comp100.cnf
+i 150 11175 0 0 0 0
+i 450 34125 0 33975 150 0
+r color6 glucose 0.015 0.055
+r color6 lingeling 0.015 0.008
+r color6 minisat 0.015 0.040
+r color6 cadical 0.015 0.006
+d NULL complete 3COL_TO_SAT UNSAT comp150.graph comp150.cnf
+i 150 11175 0 0 0 0
+i 450 34125 0 33975 150 0
+r color6 glucose 0.060 0.162
+r color6 lingeling 0.060 0.012
+r color6 minisat 0.060 0.119
+r color6 cadical 0.060 0.012
+d NULL complete 3COL_TO_SAT UNSAT comp200.graph comp200.cnf
+i 200 19900 0 0 0 0
+i 600 60500 0 60300 200 0
+r color6 glucose 0.117 0.354
+r color6 lingeling 0.117 0.020
+r color6 minisat 0.117 0.260
+r color6 cadical 0.117 0.018
+d NULL complete 3COL_TO_SAT UNSAT comp250.graph comp250.cnf
+i 250 31125 0 0 0 0
+i 750 94375 0 94125 250 0
+r color6 glucose 0.282 0.701
+r color6 lingeling 0.282 0.032
+r color6 minisat 0.282 0.492
+r color6 cadical 0.282 0.029
+d NULL complete 3COL_TO_SAT UNSAT comp300.graph comp300.cnf
+i 300 44850 0 0 0 0
+i 900 135750 0 135450 300 0
+r color6 glucose 0.621 1.256
+r color6 lingeling 0.621 0.045
+r color6 minisat 0.621 0.836
+r color6 cadical 0.621 0.045
+d NULL complete 3COL_TO_SAT UNSAT comp350.graph comp350.cnf
+i 350 61075 0 0 0 0
+i 1050 184625 0 184275 350 0
+r color6 glucose 0.621 2.035
+r color6 lingeling 0.621 0.057
+r color6 minisat 0.621 1.378
+r color6 cadical 0.621 0.040
+d NULL complete 3COL_TO_SAT UNSAT comp400.graph comp400.cnf
+i 400 79800 0 0 0 0
+i 1200 241000 0 240600 400 0
+r color6 glucose 2.028 2.991
+r color6 lingeling 2.028 0.076
+r color6 minisat 2.028 2.052
+r color6 cadical 2.028 0.052
+d NULL complete 3COL_TO_SAT UNSAT comp450.graph comp450.cnf
+i 450 101025 0 0 0 0
+i 1350 304875 0 304425 450 0
+r color6 glucose 3.281 4.265
+r color6 lingeling 3.281 0.093
+r color6 minisat 3.281 2.952
+r color6 cadical 3.281 0.092
+d NULL complete 3COL_TO_SAT UNSAT comp500.graph comp500.cnf
+i 500 124750 0 0 0 0
+i 1500 376250 0 375750 500 0
+r color6 glucose 5.024 5.784
+r color6 lingeling 5.024 0.117
+r color6 minisat 5.024 4.110
+r color6 cadical 5.024 0.123
+d NULL complete 3COL_TO_SAT UNSAT comp500.graph comp500.cnf
+i 500 124750 0 0 0 0
+i 1500 376250 0 375750 500 0
+r color6 glucose 5.024 5.784
+r color6 lingeling 5.024 0.117
+r color6 minisat 5.024 4.110
+r color6 cadical 5.024 0.123
+d NULL complete 3COL_TO_SAT UNSAT comp1000.graph comp1000.cnf
+i 1000 449500 0 0 0 0
+i 3000 1502500 0 1501500 1000 0
+r color6 glucose 52.836 47.888
+r color6 lingeling 52.836 0.468
+r color6 minisat 52.836 33.124
+r color6 cadical 52.836 0.400
+d NULL random 3COL_TO_SAT UNSAT rand-300-01.graph rand-300-01.cnf
+i 300 4485 0 0 0 0
+i 900 14655 0 14355 300 0
+r color6 glucose 0.046 0.062
+r color6 lingeling 0.046 0.024
+r color6 minisat 0.046 0.050
+r color6 cadical 0.046 0.036
+d NULL random 3COL_TO_SAT UNSAT rand-300-02.graph rand-300-02.cnf
+i 300 8970 0 0 0 0
+i 900 28110 0 27810 300 0
+r color6 glucose 0.031 0.77
+r color6 lingeling 0.031 0.10
+r color6 minisat 0.031 0.064
+r color6 cadical 0.031 0.11
+d NULL random 3COL_TO_SAT UNSAT rand-300-03.graph rand-300-03.cnf
+i 300 13455 0 0 0 0
+i 900 41565 0 41265 300 0
+r color6 glucose 0.050 0.131
+r color6 lingeling 0.050 0.014
+r color6 minisat 0.050 0.109
+r color6 cadical 0.050 0.015
+d NULL random 3COL_TO_SAT UNSAT rand-300-04.graph rand-300-04.cnf
+i 300 17940 0 0 0 0
+i 900 55020 0 54720 300 0
+r color6 glucose 0.080 0.212
+r color6 lingeling 0.080 0.021
+r color6 minisat 0.080 0.159
+r color6 cadical 0.080 	0.022
+d NULL random 3COL_TO_SAT UNSAT rand-300-05.graph rand-300-05.cnf
+i 300 22425 0 0 0 0
+i 900 68475 0 68175 300 0
+r color6 glucose 0.126 0.288
+r color6 lingeling 0.126 0.024
+r color6 minisat 0.126 0.211
+r color6 cadical 0.126 0.026
+d NULL random 3COL_TO_SAT UNSAT rand-300-06.graph rand-300-06.cnf
+i 300 26910 0 0 0 0
+i 900 81930 0 91630 300 0
+r color6 glucose 0.168 0.388
+r color6 lingeling 0.168 0.029
+r color6 minisat 0.168 0.269
+r color6 cadical 0.168 0.031
+d NULL random 3COL_TO_SAT UNSAT rand-300-07.graph rand-300-07.cnf
+i 300 31394 0 0 0 0
+i 900 95382 0 95082 300 0
+r color6 glucose 0.222 0.459
+r color6 lingeling 0.222 0.032
+r color6 minisat 0.222 0.331
+r color6 cadical 0.222 0.033
+d NULL random 3COL_TO_SAT UNSAT rand-300-08.graph rand-300-08.cnf
+i 300 35880 0 0 0 0
+i 900 108840 0 108540 300 0
+r color6 glucose 0.256 0.589
+r color6 lingeling 0.256 0.038
+r color6 minisat 0.256 0.405
+r color6 cadical 0.256 0.039
+d NULL random 3COL_TO_SAT UNSAT rand-300-09.graph rand-300-09.cnf
+i 300 40365 0 0 0 0
+i 900 1222295 0 121995 300 0
+r color6 glucose 0.310 0.692
+r color6 lingeling 0.310 0.043
+r color6 minisat 0.310 0.456
+r color6 cadical 0.310 0.045
+d NULL random 3COL_TO_SAT UNSAT rand-400-01.graph rand-400-01.cnf
+i 400 7980 0 0 0 0
+i 1200 25540 0 25140 400 0
+r color6 glucose 0.043 0.062
+r color6 lingeling 0.043 0.011
+r color6 minisat 0.043 0.054
+r color6 cadical 0.043 0.011
+d NULL random 3COL_TO_SAT UNSAT rand-400-02.graph rand-400-02.cnf
+i 400 7980 0 0 0 0
+i 1200 25540 0 25140 400 0
+r color6 glucose 0.043 0.062
+r color6 lingeling 0.043 0.011
+r color6 minisat 0.043 0.054
+r color6 cadical 0.043 0.011
+d NULL random 3COL_TO_SAT UNSAT rand-400-03.graph rand-400-03.cnf
+i 400 15960 0 0 0 0
+i 1200 49480 0 49080 400 0
+r color6 glucose 0.083 0.155
+r color6 lingeling 0.083 0.018
+r color6 minisat 0.083 0.127
+r color6 cadical 0.083 0.019
+d NULL random 3COL_TO_SAT UNSAT rand-400-04.graph rand-400-04.cnf
+i 400 23940 0 0 0 0
+i 1200 73420 0 73020 400 0
+r color6 glucose 0.244 0.486
+r color6 lingeling 0.244 0.037
+r color6 minisat 0.244 0.353
+r color6 cadical 0.244 0.036
+d NULL random 3COL_TO_SAT UNSAT rand-400-05.graph rand-400-05.cnf
+i 400 39900 0 0 0 0
+i 1200 151000 0 150600 400 0
+r color6 glucose 0.547 1.153
+r color6 lingeling 0.547 0.054
+r color6 minisat 0.547 0.725
+r color6 cadical 0.547 0.055
+d NULL random 3COL_TO_SAT UNSAT rand-400-06.graph rand-400-06.cnf
+i 400 49800 0 0 0 0
+i 1200 151000 0 150600 400 0
+r color6 glucose 0.547 1.153
+r color6 lingeling 0.547 0.054
+r color6 minisat 0.547 0.425
+r color6 cadical 0.547 0.055
+d NULL random 3COL_TO_SAT UNSAT rand-400-07.graph rand-400-07.cnf
+i 400 55860 0 0 0 0
+i 1200 169180 0 168780 400 0
+r color6 glucose 0.652 1.393
+r color6 lingeling 0.652 0.061
+r color6 minisat 0.652 0.927
+r color6 cadical 0.652 0.062
+d NULL random 3COL_TO_SAT UNSAT rand-400-08.graph rand-400-08.cnf
+i 400 63840 0 0 0 0
+i 1200 193120 0 192720 400 0
+r color6 glucose 0.809 1.628
+r color6 lingeling 0.809 0.067
+r color6 minisat 0.809 1.132
+r color6 cadical 0.809 0.069
+d NULL random 3COL_TO_SAT UNSAT rand-400-09.graph rand-400-09.cnf
+i 400 71820 0 0 0 0
+i 1200 21706 0 216660 400 0
+r color6 glucose 0.989 1.946
+r color6 lingeling 0.989 0.073
+r color6 minisat 0.989 1.310
+r color6 cadical 0.989 0.076
+d NULL random 3COL_TO_SAT UNSAT rand-500-01.graph rand-500-01.cnf
+i 500 12475 0 0 0 0
+i 1500 39425 0 38925 500 0
+r color6 glucose 0.068 0.114
+r color6 lingeling 0.068 0.015
+r color6 minisat 0.068 0.088
+r color6 cadical 0.068 0.017
+d NULL random 3COL_TO_SAT UNSAT rand-500-02.graph rand-500-02.cnf
+i 500 24950 0 0 0 0
+i 1500 76850 0 76350 500 0
+r color6 glucose 0.168 0.314
+r color6 lingeling 0.168 0.030
+r color6 minisat 0.168 0.230
+r color6 cadical 0.168 0.030
+d NULL random 3COL_TO_SAT UNSAT rand-500-03.graph rand-500-03.cnf
+i 500 37425 0 0 0 0
+i 1500 114275 0 113775 500 0
+r color6 glucose 0.354 0.657
+r color6 lingeling 0.354 0.042
+r color6 minisat 0.354 0.492
+r color6 cadical 0.354 0.045
+d NULL random 3COL_TO_SAT UNSAT rand-500-04.graph rand-500-04.cnf
+i 500 49900 0 0 0 0
+i 1500 151700 0 151200 500 0
+r color6 glucose 0.603 1.171
+r color6 lingeling 0.603 0.055
+r color6 minisat 0.603 0.755
+r color6 cadical 0.603 0.056
+d NULL random 3COL_TO_SAT UNSAT rand-500-05.graph rand-500-05.cnf
+i 500 63375 0 0 0 0
+i 1500 192125 0 191625 500 0
+r color6 glucose 0.951 1.851
+r color6 lingeling 0.951 0.070
+r color6 minisat 0.951 1.204
+r color6 cadical 0.951 0.070
+d NULL random 3COL_TO_SAT UNSAT rand-500-06.graph rand-500-06.cnf
+i 500 74850 0 0 0 0
+i 1500 226550 0 226050 500 0
+r color6 glucose 1.256 2.384
+r color6 lingeling 1.256 0.082
+r color6 minisat 1.256 1.606
+r color6 cadical 1.256 0.084
+d NULL random 3COL_TO_SAT UNSAT rand-500-07.graph rand-500-07.cnf
+i 500 87325 0 0 0 0
+i 1500 263975 0 263475 500 0
+r color6 glucose 1.627 2.951
+r color6 lingeling 1.627 0.092
+r color6 minisat 1.627 2.032
+r color6 cadical 1.627 0.103
+d NULL random 3COL_TO_SAT UNSAT rand-500-08.graph rand-500-08.cnf
+i 500 99800 0 0 0 0
+i 1500 301400 0 300900 500 0
+r color6 glucose 2.066 3.536
+r color6 lingeling 2.066 0.102
+r color6 minisat 2.066 2.658
+r color6 cadical 2.066 0.103
+d NULL random 3COL_TO_SAT UNSAT rand-500-09.graph rand-500-09.cnf
+i 500 112275 0 0 0 0
+i 1500 338825 0 338325 500 0
+r color6 glucose 2.488 4.255
+r color6 lingeling 2.488 0.113
+r color6 minisat 2.488 2.842
+r color6 cadical 2.488 0.121
+d NULL random 3COL_TO_SAT UNSAT rand-750-001.graph rand-750-001.cnf
+i 750 2008 0 0 0 0
+i 1500 338825 0 338325 500 0
+r color6 glucose 0.020 15.186
+r color6 lingeling 0.020 49.185
+r color6 minisat 0.020 11.516
+r color6 cadical 0.020 25.772
+d NULL random 3COL_TO_SAT UNSAT rand-750-005.graph rand-750-005.cnf
+i 750 10043 0 0 0 0
+i 2250 33129 0 32379 750 0
+r color6 glucose 0.036 0.073
+r color6 lingeling 0.036 0.013
+r color6 minisat 0.036 0.061
+r color6 cadical 0.036 0.015
+d NULL random 3COL_TO_SAT UNSAT rand-750-01.graph rand-750-01.cnf
+i 750 20087 0 0 0 0
+i 2250 63261 0 62511 750 0
+r color6 glucose 0.123 0.191
+r color6 lingeling 0.123 0.029
+r color6 minisat 0.123 0.149
+r color6 cadical 0.123 0.029
+d NULL random 3COL_TO_SAT UNSAT rand-750-02.graph rand-750-02.cnf
+i 750 40175 0 0 0 0
+i 2250 123525 0 122775 750 0
+r color6 glucose 0.446 0.667
+r color6 lingeling 0.446 0.049
+r color6 minisat 0.446 0.433
+r color6 cadical 0.446 0.050
+d NULL random 3COL_TO_SAT UNSAT rand-750-03.graph rand-750-03.cnf
+i 750 60262 0 0 0 0
+i 2250 183786 0 183036 750 0
+r color6 glucose 1.021 1.504
+r color6 lingeling 1.021 0.071
+r color6 minisat 1.021 1.037
+r color6 cadical 1.021 0.072
+d NULL random 3COL_TO_SAT UNSAT rand-750-04.graph rand-750-04.cnf
+i 750 80350 0 0 0 0
+i 2250 244050 0 243300 750 0
+r color6 glucose 1.754 2.980
+r color6 lingeling 1.754 0.111
+r color6 minisat 1.754 2.291
+r color6 cadical 1.754 0.134
+d NULL random 3COL_TO_SAT UNSAT rand-750-05.graph rand-750-05.cnf
+i 750 100437 0 0 0 0
+i 2250 304311 0 303561 750 0
+r color6 glucose 2.662 4.863
+r color6 lingeling 2.662 0.142
+r color6 minisat 2.662 3.273
+r color6 cadical 2.662 0.120
+d NULL random 3COL_TO_SAT UNSAT rand-750-06.graph rand-750-06.cnf
+i 750 120525 0 0 0 0
+i 2250 364575 0 363825 750 0
+r color6 glucose 3.631 4.897
+r color6 lingeling 3.631 0.132
+r color6 minisat 3.631 3.744
+r color6 cadical 3.631 0.131
+d NULL random 3COL_TO_SAT UNSAT rand-750-07.graph rand-750-07.cnf
+i 750 140612 0 0 0 0
+i 2250 424836 0 424086 750 0
+r color6 glucose 4.773 6.453
+r color6 lingeling 4.773 0.148
+r color6 minisat 4.773 4.713
+r color6 cadical 4.773 0.148
+d NULL random 3COL_TO_SAT UNSAT rand-750-08.graph rand-750-08.cnf
+i 750 160700 0 0 0 0
+i 2250 485100 0 484350 750 0
+r color6 glucose 5.996 8.409
+r color6 lingeling 5.996 0.169
+r color6 minisat 5.996 6.102
+r color6 cadical 5.996 0.164
+d NULL random 3COL_TO_SAT UNSAT rand-750-09.graph rand-750-09.cnf
+i 750 180787 0 0 0 0
+i 2250 545361 0 544611 750 0
+r color6 glucose 7.292 10.853
+r color6 lingeling 7.292 0.187
+r color6 minisat 7.292 7.480
+r color6 cadical 7.292 0.190
+d NULL random 3COL_TO_SAT UNSAT rand-1000-001.graph rand-1000-001.cnf
+i 999 4995 0 0 0 0
+i 2997 18981 0 17982 999 0
+r color6 glucose 0.016 0.050
+r color6 lingeling 0.016 0.025
+r color6 minisat 0.016 0.038
+r color6 cadical 0.016 0.012
+d NULL random 3COL_TO_SAT UNSAT rand-1000-005.graph rand-1000-005.cnf
+i 999 24975 0 0 0 0
+i 2997 78921 0 77922 999 0
+r color6 glucose 0.730 0.246
+r color6 lingeling 0.730 0.034
+r color6 minisat 0.730 0.182
+r color6 cadical 0.730 0.034
+d NULL random 3COL_TO_SAT UNSAT rand-1000-01.graph rand-1000-01.cnf
+i 999 49950 0 0 0 0
+i 2997 153846 0 152847 999 0
+r color6 glucose 1.094 0.838
+r color6 lingeling 1.094 0.059
+r color6 minisat 1.094 0.615
+r color6 cadical 1.094 0.056
+d NULL random 3COL_TO_SAT UNSAT rand-1000-02.graph rand-1000-02.cnf
+i 999 99900 0 0 0 0
+i 2997 303696 0 302697 999 0
+r color6 glucose 4.783 3.175
+r color6 lingeling 4.783 0.109
+r color6 minisat 4.783 2.477
+r color6 cadical 4.783 0.111
+d NULL random 3COL_TO_SAT UNSAT rand-1000-03.graph rand-1000-03.cnf
+i 999 149850 0 0 0 0
+i 2997 453546 0 452547 999 0
+r color6 glucose 9.674 6.270
+r color6 lingeling 9.674 0.165
+r color6 minisat 9.674 5.236
+r color6 cadical 9.674 0.168
+d NULL random 3COL_TO_SAT UNSAT rand-1000-04.graph rand-1000-04.cnf
+i 999 199800 0 0 0 0
+i 2997 603396 0 602397 999 0
+r color6 glucose 17.136 10.078
+r color6 lingeling 17.136 0.212
+r color6 minisat 17.136 7.926
+r color6 cadical 17.136 0.211
+d NULL random 3COL_TO_SAT UNSAT rand-1000-05.graph rand-1000-05.cnf
+i 999 249750 0 0 0 0
+i 2997 753246 0 752247 999 0
+r color6 glucose 31.245 18.009
+r color6 lingeling 31.245 0.296
+r color6 minisat 31.245 13.676
+r color6 cadical 31.245 0.290
+d NULL random 3COL_TO_SAT UNSAT rand-1000-06.graph rand-1000-06.cnf
+i 999 299700 0 0 0 0
+i 2997 903096 0 902097 999 0
+r color6 glucose 51.968 22.819
+r color6 lingeling 51.968 0.362
+r color6 minisat 51.968 17.869
+r color6 cadical 51.968 0.361
+d NULL random 3COL_TO_SAT UNSAT rand-1000-07.graph rand-1000-07.cnf
+i 999 349650 0 0 0 0
+i 2997 1052946 0 1051947 999 0
+r color6 glucose 67.361 32.171
+r color6 lingeling 67.361 0.750
+r color6 minisat 67.361 20.879
+r color6 cadical 67.361 0.547
+d NULL random 3COL_TO_SAT UNSAT rand-1000-08.graph rand-1000-08.cnf
+i 999 399600 0 0 0 0
+i 2997 1202796 0 1201797 999 0
+r color6 glucose 96.170 42.148
+r color6 lingeling 96.170 0.552
+r color6 minisat 96.170 36.478
+r color6 cadical 96.170 0.551
+d NULL random 3COL_TO_SAT UNSAT rand-1000-09.graph rand-1000-09.cnf
+i 999 449550 0 0 0
+i 2997 1352646 0 1351647 999 0
+r color6 glucose 120.630
+r color6 lingeling 120.630
+r color6 minisat 120.630
+r color6 cadical 120.630
