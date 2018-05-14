@@ -1087,39 +1087,191 @@ d NULL random 3COL_TO_CSP UNSAT rand-400-09.graph rand-400-09.graph
 i 400 71820 0 0 0 0
 i 400 71820 1 1 0 0
 r color6 btd 0.989 57.648
-d NULL random 3COL_TO_CSP UNSAT rand-500-01.graph rand-500-01.cnf
+d NULL random 3COL_TO_CSP UNSAT rand-500-01.graph rand-500-01.xml
 i 500 12475 0 0 0 0
 i 500 12475 1 1 0 0
 r color6 btd 0.068 1.970
-d NULL random 3COL_TO_CSP UNSAT rand-500-02.graph rand-500-02.cnf
+d NULL random 3COL_TO_CSP UNSAT rand-500-02.graph rand-500-02.xml
 i 500 24950 0 0 0 0
 i 500 24950 1 1 0 0
 r color6 btd 0.168 8.873
-d NULL random 3COL_TO_CSP UNSAT rand-500-03.graph rand-500-03.cnf
+d NULL random 3COL_TO_CSP UNSAT rand-500-03.graph rand-500-03.xml
 i 500 37425 0 0 0 0
 i 500 37425 1 1 0 0
 r color6 btd 0.354 20.919
-d NULL random 3COL_TO_CSP UNSAT rand-500-04.graph rand-500-04.cnf
+d NULL random 3COL_TO_CSP UNSAT rand-500-04.graph rand-500-04.xml
 i 500 49900 0 0 0 0
 i 500 49900 1 1 0 0
 r color6 btd 0.603 35.912
-d NULL random 3COL_TO_CSP UNSAT rand-500-05.graph rand-500-05.cnf
+d NULL random 3COL_TO_CSP UNSAT rand-500-05.graph rand-500-05.xml
 i 500 63375 0 0 0 0
 i 500 63375 1 1 0 0
 r color6 btd 0.951 57.190
-d NULL random 3COL_TO_CSP UNSAT rand-500-06.graph rand-500-06.cnf
+d NULL random 3COL_TO_CSP UNSAT rand-500-06.graph rand-500-06.xml
 i 500 74850 0 0 0 0
 i 500 74850 1 1 0 0
 r color6 btd 1.256 75.745
-d NULL random 3COL_TO_CSP UNSAT rand-500-07.graph rand-500-07.cnf
+d NULL random 3COL_TO_CSP UNSAT rand-500-07.graph rand-500-07.xml
 i 500 87325 0 0 0 0
 i 500 87325 1 1 0 0
 r color6 btd 1.627 98.389
-d NULL random 3COL_TO_CSP UNSAT rand-500-08.graph rand-500-08.cnf
+d NULL random 3COL_TO_CSP UNSAT rand-500-08.graph rand-500-08.xml
 i 500 99800 0 0 0 0
 i 500 99800 1 1 0 0
 r color6 btd 2.066 123.920
-d NULL random 3COL_TO_CSP UNSAT rand-500-09.graph rand-500-09.cnf
+d NULL random 3COL_TO_CSP UNSAT rand-500-09.graph rand-500-09.xml
 i 500 112275 0 0 0 0
 i 500 112275 1 1 0 0
 r color6 btd 2.488 148.507
+d NULL random 3COL_TO_CSP UNSAT rand-750-001.graph rand-750-001.xml
+i 750 2008 0 0 0 0
+i 750 2008 1 1 0 0
+r color6 btd 0.020 744.530
+d NULL random 3COL_TO_CSP UNSAT rand-750-005.graph rand-750-005.xml
+i 750 10043 0 0 0 0
+i 750 10043 1 1 0 0
+r color6 btd 0.036 1.402
+d NULL random 3COL_TO_CSP UNSAT rand-750-01.graph rand-750-01.xml
+i 750 20087 0 0 0 0
+i 750 20087 1 1 0 0
+r color6 btd 0.123 7.315
+d NULL random 3COL_TO_CSP UNSAT rand-750-02.graph rand-750-02.xml
+i 750 40175 0 0 0 0
+i 750 40175 1 1 0 0
+r color6 btd 0.446 28.389
+d NULL random 3COL_TO_CSP UNSAT rand-750-03.graph rand-750-03.xml
+i 750 60262 0 0 0 0
+i 750 60262 1 1 0 0
+r color6 btd 1.021 69.134
+d NULL random 3COL_TO_CSP UNSAT rand-750-04.graph rand-750-04.xml
+i 750 80350 0 0 0 0
+i 750 80350 1 1 0 0
+r color6 btd 1.754 108.380
+d NULL random 3COL_TO_CSP UNSAT rand-750-05.graph rand-750-05.xml
+i 750 100437 0 0 0 0
+i 750 100437 1 1 0 0
+r color6 btd 2.662 181.160
+d NULL random 3COL_TO_CSP UNSAT rand-750-06.graph rand-750-06.xml
+i 750 120525 0 0 0 0
+i 750 120525 1 1 0 0
+r color6 btd 3.631 226.664
+d NULL random 3COL_TO_CSP UNSAT rand-750-07.graph rand-750-07.xml
+i 750 140612 0 0 0 0
+i 750 140612 1 1 0 0
+r color6 btd 4.773 291.306
+d NULL random 3COL_TO_CSP UNSAT rand-750-08.graph rand-750-08.xml
+i 750 160700 0 0 0 0
+i 750 160700 1 1 0 0
+r color6 btd 5.996 367.243
+d NULL random 3COL_TO_CSP UNSAT rand-750-09.graph rand-750-09.xml
+i 750 180787 0 0 0 0
+i 750 180787 1 1 0 0
+r color6 btd 7.292 438.077
+d NULL random 3COL_TO_CSP UNSAT rand-1000-001.graph rand-1000-001.xml
+i 999 4995 0 0 0 0
+i 999 4995 1 1 0 0
+r color6 btd 0.016 0.998
+d NULL random 3COL_TO_CSP UNSAT rand-1000-005.graph rand-1000-005.xml
+i 999 24975 0 0 0 0
+i 999 24975 1 1 0 0
+r color6 btd 0.730 10.313
+d NULL random 3COL_TO_CSP UNSAT rand-1000-01.graph rand-1000-01.xml
+i 999 49950 0 0 0 0
+i 999 49950 1 1 0 0
+r color6 btd 1.094 53.506
+d NULL random 3COL_TO_CSP UNSAT rand-1000-02.graph rand-1000-02.xml
+i 999 99900 0 0 0 0
+i 999 99900 1 1 0 0
+r color6 btd 4.783 204.804
+d NULL random 3COL_TO_CSP UNSAT rand-1000-03.graph rand-1000-03.xml
+i 999 149850 0 0 0 0
+i 999 149850 1 1 0 0
+r color6 btd 9.674 433.810
+d NULL random 3COL_TO_CSP UNSAT rand-1000-04.graph rand-1000-04.xml
+i 999 199800 0 0 0 0
+i 999 199800 1 1 0 0
+r color6 btd 17.136 734.672
+d NULL random 3COL_TO_CSP UNSAT rand-1000-05.graph rand-1000-05.xml
+i 999 249750 0 0 0 0
+i 999 249750 1 1 0 0
+r color6 btd 31.245 900.0
+d NULL random 3COL_TO_CSP UNSAT rand-1000-06.graph rand-1000-06.xml
+i 999 299700 0 0 0 0
+i 999 299700 1 1 0 0
+r color6 btd 51.968 900.0
+d NULL random 3COL_TO_CSP UNSAT rand-1000-07.graph rand-1000-07.xml
+i 999 349650 0 0 0 0
+i 999 349650 1 1 0 0
+r color6 btd 67.361 900.0
+d NULL random 3COL_TO_CSP UNSAT rand-1000-08.graph rand-1000-08.xml
+i 999 399600 0 0 0 0
+i 999 399600 1 1 0 0
+r color6 btd 96.170 900.0
+d NULL random 3COL_TO_CSP UNSAT rand-1000-09.graph rand-1000-09.xml
+i 999 449550 0 0 0 0
+i 999 449550 1 1 0 0
+r color6 btd 120.630 900.0
+d CSP2017 Random-B-2-23-23 SAT_TO_CSP UNSAT rand-2-23-253-131-0.xml rand-2-23-253-131-0.cnf
+i 23 253 1 253 0 0
+i 529 38985 0 38962 0 23
+r btd glucose 73.2 900.0
+r btd lingeling 73.2 900.0
+r btd minisat 73.2 900.0
+r btd cadical 73.2 900.0
+d CSP2017 Random-B-2-23-23 SAT_TO_CSP UNSAT rand-2-23-253-131-1.xml rand-2-23-253-131-1.cnf
+i 23 253 1 253 0 0
+i 529 38985 0 38962 0 23
+r btd glucose 61.254 900.0
+r btd lingeling 61.254 900.0
+r btd minisat 61.254 900.0
+r btd cadical 61.254 900.0
+d CSP2017 Random-B-2-23-23 SAT_TO_CSP UNSAT rand-2-23-253-131-5.xml rand-2-23-253-131-5.cnf
+i 23 253 1 253 0 0
+i 529 38985 0 38962 0 23
+r btd glucose 68.5295 900.0
+r btd lingeling 68.5295 900.0
+r btd minisat 68.5295 900.0
+r btd cadical 68.5295 900.0
+d CSP2017 Random-B-2-23-23 SAT_TO_CSP UNSAT rand-2-23-253-131-6.xml rand-2-23-253-131-6.cnf
+i 23 253 1 253 0 0
+i 529 38985 0 38962 0 23
+r btd glucose 71.7252 900.0
+r btd lingeling 71.7252 900.0
+r btd minisat 71.7252 900.0
+r btd cadical 71.7252 900.0
+d CSP2017 Random-B-2-23-23 SAT_TO_CSP UNSAT rand-2-23-253-131-9.xml rand-2-23-253-131-9.cnf
+i 23 253 1 253 0 0
+i 529 38985 0 38962 0 23
+r btd glucose 77.3368 900.0
+r btd lingeling 77.3368 900.0
+r btd minisat 77.3368 900.0
+r btd cadical 77.3368 900.0
+d CSP2017 Random-D-t010 SAT_TO_CSP UNSAT rand-2-40-8-753-010-01.xml rand-2-40-8-753-010-01.cnf
+i 40 753 1 753 0 0
+i 320 6013 0 5973 0 40
+r btd glucose 10.9388 14.43
+r btd lingeling 10.9388 51.640
+r btd minisat 10.9388 9.292
+r btd cadical 10.9388 13.036
+d CSP2017 Random-D-t010 SAT_TO_CSP UNSAT rand-2-40-8-753-010-03.xml rand-2-40-8-753-010-03.cnf
+i 40 753 1 753 0 0
+i 320 6013 0 5973 0 40
+r btd glucose 11.5232 14.132
+r btd lingeling 11.5232 45.104
+r btd minisat 11.5232 9.488
+r btd cadical 11.5232 13.120
+r btd cadical 11.5232 13.120
+d CSP2017 Random-D-t010 SAT_TO_CSP UNSAT rand-2-40-8-753-010-04.xml rand-2-40-8-753-010-04.cnf
+i 40 753 1 753 0 0
+i 320 6013 0 5973 0 40
+r btd glucose 13.0765 14.334
+r btd lingeling 13.0765 58.908
+r btd minisat 13.0765 11.244
+r btd cadical 13.0765 12.412
+d CSP2017 Random-D-t010 SAT_TO_CSP UNSAT rand-2-40-8-753-010-06.xml rand-2-40-8-753-010-06.cnf
+i 40 753 1 753 0 0
+i 320 6013 0 5973 0 40
+r btd glucose 11.915 14.773
+r btd lingeling 11.915 66.912
+r btd minisat 11.915 9.060
+r btd cadical 11.915 16.512

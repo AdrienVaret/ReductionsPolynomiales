@@ -80,12 +80,16 @@ public class Reader {
 			}
 				
 			if (isData(splittedLine)) {
-				competitionName = splittedLine[1];
-				benchmarkName   = splittedLine[2];
-				reductionName   = splittedLine[3];
-				satisfiability  = splittedLine[4];
-				initialFile     = splittedLine[5];
-				finalFile       = splittedLine[6];
+				try {
+					competitionName = splittedLine[1];
+					benchmarkName   = splittedLine[2];
+					reductionName   = splittedLine[3];
+					satisfiability  = splittedLine[4];
+					initialFile     = splittedLine[5];
+					finalFile       = splittedLine[6];
+				} catch (ArrayIndexOutOfBoundsException e) {
+					System.out.println("ERROR : line" + (i+1));
+				}
 				i += 1;
 				splittedLine = lines.get(i).split(" ");
 			}
