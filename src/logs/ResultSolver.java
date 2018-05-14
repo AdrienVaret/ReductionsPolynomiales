@@ -8,7 +8,7 @@ public class ResultSolver {
 	private double finalTime;
 	private double ratio;
 	
-	public ResultSolver(String initalSolverName, String finalSolverName, double initialTime, double finalTime) {
+	public ResultSolver(String initialSolverName, String finalSolverName, double initialTime, double finalTime) {
 		super();
 		this.initialSolverName = initialSolverName;
 		this.finalSolverName = finalSolverName;
