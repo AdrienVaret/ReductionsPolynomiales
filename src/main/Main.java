@@ -6,6 +6,7 @@ import java.io.IOException;
 import reductions.CSPToSat;
 import reductions.SatTo3Sat;
 import reductions.SatToCliqueBis;
+import reductions.ShuffleSat;
 import reductions.TColToSat;
 import reductions.TSatTo3Col;
 import reductions.TSatToCliqueThread;
@@ -212,6 +213,16 @@ public class Main {
 				displayCSPInfos(csp);
 				System.out.println("# output " + outputFile.getAbsolutePath());
 				displaySATInfos(sat);
+				
+			} else if (inputFormat.equals("SAT") && outputFormat.equals("SHUFFLE")) {
+				SatFNC sat = SatFNC.importFromDimacs(inputFile);
+				SatFNC sat2 = ShuffleSat.shuffle(sat);
+				sat2.exportToDimacs(outputFile);
+				System.out.println("# Shuffle SAT instance");
+				System.out.println("# input "  + inputFile.getAbsolutePath());
+				displaySATInfos(sat);
+				System.out.println("# output " + outputFile.getAbsolutePath());
+				displaySATInfos(sat2);
 				
 			} else {
 				System.out.println("# Invalid command.");
