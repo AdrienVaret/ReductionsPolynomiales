@@ -34,7 +34,6 @@ public class StatsWindow {
 					ArrayList<Data> datas = Reader.getData(new File("results.data"));
 					StatsWindow window = new StatsWindow(datas, datas);
 					window.frame.setVisible(true);
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -121,6 +120,9 @@ public class StatsWindow {
 	}
 
 	public void exportToLaTeX() {
+		
+		int nbLignes = 0;
+		
 		try {
 			FileWriter writer = new FileWriter(new File("array.txt"));
 			int i = 101;
@@ -134,6 +136,7 @@ public class StatsWindow {
 					writer.write("\\hline" + "\n");
 					writer.write("\\textbf{Numéro test} & \\textbf{Solver Init} & \\textbf{Solver Fin} & \\textbf{Initial Time} & \\textbf{Final Time} & \\textbf{Ratio} \\\\" + "\n");
 					writer.write("\\hline" + "\n");
+					nbLignes += 5;
 				}
 				
 				double ratio = d.getResult().getInitialTime() / d.getResult().getFinalTime();
@@ -145,6 +148,7 @@ public class StatsWindow {
 				writer.write("\\hline" + "\n");
 				i += 1;
 				j += 1;
+				nbLignes += 2;
 				
 				if (j == 32) {
 					j = 1;
@@ -156,8 +160,71 @@ public class StatsWindow {
 					writer.write("\\hline" + "\n");
 					writer.write("\\textbf{Numéro test} & \\textbf{Solver Init} & \\textbf{Solver Fin} & \\textbf{Initial Time} & \\textbf{Final Time} & \\textbf{Ratio} \\\\" + "\n");
 					writer.write("\\hline" + "\n");
+					nbLignes += 8;
 				}
 			}
+			
+			System.out.println("Second tableau : " + nbLignes);
+			
+			writer.write("\n" + "\\poubelle{2eme tableau}" + "\n");
+			
+			writer.write("\\begin{tabular}{| c | c | c | c | c | c | c | c | c |}" + "\n");
+			writer.write("\\hline" + "\n");
+			writer.write("\\textbf{Numéro test} & \\textbf{Initial File} & \\textbf{V1} & \\textbf{V2} & \\textbf{V3} & \\textbf{V4} & \\textbf{V5} & \\textbf{V6} & \\textbf{Ratio}\\\\" + "\n");
+			writer.write("\\hline" + "\n");
+			
+			nbLignes += 5;
+			
+			i = 0;
+			int min = i+101, max;
+			String filename = datas.get(0).getInitialFile();
+			for (Data d : datas) {
+				if (d.getInitialFile().equals(filename)) {
+					i++;
+				} else {
+					max = (i-1) + 101;
+					double ratio = d.getResult().getInitialTime() / d.getResult().getFinalTime();
+					writer.write("ID\\_" + min + "-> ID\\_" + max + "& " + filename + "&" + d.getInitialNbVariables() + 
+							"& " + d.getInitialNbClauses() +  "& " + d.getInitialNbUnaryClauses() + "& " + 
+							d.getInitialNbBinaryClauses() + "& " +  d.getInitialNbTernaryClauses() + 
+							"& " + d.getInitialNbLongClauses() + "&" + df.format(ratio) + "\\\\\n" + 
+							"\\hline" + "\n");
+					min = i + 101;
+					filename = datas.get(i).getInitialFile();
+					i ++;
+					nbLignes ++;
+				}
+			}
+			
+			System.out.println("3eme tableau " + nbLignes);
+			
+			writer.write("\n" + "\\poubelle{3eme tableau}" + "\n");
+			
+			writer.write("\\begin{tabular}{| c | c | c | c | c | c | c | c | c |}" + "\n");
+			writer.write("\\hline" + "\n");
+			writer.write("\\textbf{Numéro test} & \\textbf{Final File} & \\textbf{V1'} & \\textbf{V2'} & \\textbf{V3'} & \\textbf{V4'} & \\textbf{V5'} & \\textbf{V6'} & \\textbf{Ratio}\\\\" + "\n");
+			writer.write("\\hline" + "\n");
+	
+			i = 0;
+			min = i+101;
+			filename = datas.get(0).getFinalFile();
+			for (Data d : datas) {
+				if (d.getFinalFile().equals(filename)) {
+					i++;
+				} else {
+					max = (i-1) + 101;
+					double ratio = d.getResult().getInitialTime() / d.getResult().getFinalTime();
+					writer.write("ID\\_" + min + "-> ID\\_" + max + "& " + filename + "&" + d.getFinalNbVariables() + 
+							"& " + d.getFinalNbClauses() +  "& " + d.getFinalNbUnaryClauses() + "& " + 
+							d.getFinalNbBinaryClauses() + "& " +  d.getFinalNbTernaryClauses() + 
+							"& " + d.getFinalNbLongClauses() + "&" + df.format(ratio) + "\\\\\n" + 
+							"\\hline" + "\n");
+					min = i + 101;
+					filename = datas.get(i).getFinalFile();
+					i ++;
+				}
+			}
+			
 			writer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
