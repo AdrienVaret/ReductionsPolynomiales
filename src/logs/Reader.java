@@ -121,6 +121,8 @@ public class Reader {
 						nbFinalLongClauses    = Integer.parseInt(splittedLine[6]);
 					} catch (NumberFormatException e) {
 						System.out.println("ERROR : line" + (i+1));
+					} catch (ArrayIndexOutOfBoundsException e) {
+						System.out.println("ERROR : line" + (i+1));
 					}
 					i += 1;
 					splittedLine = lines.get(i).split(" ");

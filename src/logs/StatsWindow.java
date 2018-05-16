@@ -6,6 +6,9 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
@@ -13,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import net.miginfocom.swing.MigLayout;
+import javax.swing.JButton;
 
 public class StatsWindow {
 	
@@ -106,6 +110,58 @@ public class StatsWindow {
 		Table table = new Table(datas);
 		frame.getContentPane().add(table, "cell 0 0,grow");
 		
+		JButton btnExport = new JButton("Export to array LaTeX");
+		btnExport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				exportToLaTeX();
+			}
+		});
+		table.add(btnExport);
+		
 	}
 
+	public void exportToLaTeX() {
+		try {
+			FileWriter writer = new FileWriter(new File("array.txt"));
+			int i = 101;
+			int j = 1;
+			DecimalFormat df = new DecimalFormat("#.###");
+			for (Data d : datas) {
+				
+				if (i == 101) {
+					writer.write("\\begin{center}" + "\n");
+					writer.write("\\begin{tabular}{|c|c|c|c|c|c|}" + "\n");
+					writer.write("\\hline" + "\n");
+					writer.write("\\textbf{Numéro test} & \\textbf{Solver Init} & \\textbf{Solver Fin} & \\textbf{Initial Time} & \\textbf{Final Time} & \\textbf{Ratio} \\\\" + "\n");
+					writer.write("\\hline" + "\n");
+				}
+				
+				double ratio = d.getResult().getInitialTime() / d.getResult().getFinalTime();
+				writer.write("ID\\_" + i + "&" + d.getResult().getSolverName() + "&" + 
+			                               d.getResult().getFinalSolverName()  + "&" +
+			                               d.getResult().getInitialTime()      + "&" +
+			                               d.getResult().getFinalTime()        + "&" +
+			                               df.format(ratio) + "\\\\" + "\n");
+				writer.write("\\hline" + "\n");
+				i += 1;
+				j += 1;
+				
+				if (j == 32) {
+					j = 1;
+					writer.write("\\end{tabular}" + "\n");
+					writer.write("\\end{center}" + "\n");
+					writer.write("\\newpage" + "\n");
+					writer.write("\\begin{center}" + "\n");
+					writer.write("\\begin{tabular}{|c|c|c|c|c|c|}" + "\n");
+					writer.write("\\hline" + "\n");
+					writer.write("\\textbf{Numéro test} & \\textbf{Solver Init} & \\textbf{Solver Fin} & \\textbf{Initial Time} & \\textbf{Final Time} & \\textbf{Ratio} \\\\" + "\n");
+					writer.write("\\hline" + "\n");
+				}
+			}
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
